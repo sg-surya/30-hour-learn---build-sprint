@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
-import { Trophy, Users, FileCheck, Zap, ChevronDown, Clock, ShieldCheck, Rocket, Scale, Library, Star, Award, Layout, CheckCircle, Globe, Stethoscope, Leaf, ShoppingBag, Truck, Lock, Heart, Video, Cpu, Building2, X, BookOpen, Briefcase, Gift } from 'lucide-react';
+import { Trophy, Users, FileCheck, Zap, ChevronDown, Clock, ShieldCheck, Rocket, Scale, Library, Star, Award, Layout, CheckCircle, Globe, Stethoscope, Leaf, ShoppingBag, Truck, Lock, Heart, Video, Cpu, Building2, X, BookOpen, Briefcase, Gift, Code, PenTool, Megaphone } from 'lucide-react';
 
 const PROBLEM_STATEMENTS = [
   {
@@ -790,6 +790,63 @@ const JudgingMindset = () => (
   </section>
 );
 
+const MentorSessions = () => (
+  <section className="py-20 px-8 max-w-[1280px] mx-auto border-t border-white/5">
+    <Reveal>
+      <div className="mb-16">
+        <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Live Learning</h2>
+        <h3 className="section-headline text-4xl md:text-5xl font-medium text-white mb-6">Mentor Sessions</h3>
+        <p className="text-muted max-w-2xl">Interactive sessions across categories during the sprint to help you unblock and accelerate.</p>
+      </div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          {
+            category: "Development",
+            icon: <Code className="w-6 h-6 text-blue-400" />,
+            mentors: "Aman, Ashutosh, Surya, Bishwajit",
+            color: "from-blue-500/20 to-blue-900/10",
+            border: "border-blue-500/20"
+          },
+          {
+            category: "Design",
+            icon: <PenTool className="w-6 h-6 text-purple-400" />,
+            mentors: "Bishwajeet, Surya",
+            color: "from-purple-500/20 to-purple-900/10",
+            border: "border-purple-500/20"
+          },
+          {
+            category: "Marketing",
+            icon: <Megaphone className="w-6 h-6 text-pink-400" />,
+            mentors: "Svetlana Hanover",
+            color: "from-pink-500/20 to-pink-900/10",
+            border: "border-pink-500/20"
+          },
+          {
+            category: "Business",
+            icon: <Briefcase className="w-6 h-6 text-amber-400" />,
+            mentors: "Agrim Gupta, Svetlana",
+            color: "from-amber-500/20 to-amber-900/10",
+            border: "border-amber-500/20"
+          }
+        ].map((session, i) => (
+          <div key={i} className={`p-8 rounded-3xl bg-gradient-to-br ${session.color} border ${session.border} hover:scale-[1.02] transition-transform`}>
+            <div className="mb-6 bg-black/20 w-12 h-12 rounded-xl flex items-center justify-center backdrop-blur-sm">
+              {session.icon}
+            </div>
+            <h4 className="text-xl font-bold text-white mb-2">{session.category}</h4>
+            <p className="text-sm text-white/60 mb-6 leading-relaxed">Mentored by {session.mentors}</p>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/20 border border-white/5 text-[10px] font-bold uppercase tracking-widest text-white/50">
+              <Clock className="w-3 h-3" />
+              <span>TBD</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Reveal>
+  </section>
+)
+
 const JudgesSection = () => (
   <section className="py-[160px] px-8 max-w-[1280px] mx-auto relative cursor-default">
     {/* Background Gradients */}
@@ -806,10 +863,10 @@ const JudgesSection = () => (
 
       <div className="flex flex-wrap justify-center gap-6">
         {[
-          { name: "Surya Pratap Singh", role: "Mentor", title: "Founder, Vasudev AI", focus: "AI & Product Strategy" },
+          { name: "Surya Pratap Singh", role: "Jury", title: "Founder, Vasudev AI", focus: "AI & Product Strategy" },
           { name: "Aman Dangi", role: "Jury", title: "Tech Lead", focus: "Scalability & Systems" },
           { name: "Ashutosh K. Tripathi", role: "Mentor", title: "Product Leader", focus: "User Experience" },
-          { name: "Biswajeet", role: "Mentor", title: "Senior Engineer", focus: "Full Stack Architecture" },
+          { name: "Bishwajeet Singh", role: "Mentor", title: "Senior Engineer", focus: "Design & Architecture" },
           {
             name: "Udayy Sharma",
             role: "Jury",
@@ -817,9 +874,11 @@ const JudgesSection = () => (
             focus: "Business Viability",
             image: "https://indiancreators.com/wp-content/uploads/2025/02/Untitled-design.webp",
             linkedin: "https://in.linkedin.com/in/udaydotai"
-          }
+          },
+          { name: "Agrim Gupta", role: "Jury", title: "Founder", focus: "Product Market Fit" },
+          { name: "Svetlana Hanover", role: "Mentor", title: "Marketing Expert", focus: "Growth & Branding" }
         ].map((person, i) => (
-          <div key={i} className="group relative p-1 rounded-[2rem] bg-gradient-to-b from-white/10 to-transparent hover:from-primary/40 hover:to-primary/5 transition-all duration-500 w-full md:w-[calc(50%-12px)] lg:w-[calc(20%-20px)] min-w-[240px]">
+          <div key={i} className="group relative p-1 rounded-[2rem] bg-gradient-to-b from-white/10 to-transparent hover:from-primary/40 hover:to-primary/5 transition-all duration-500 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-20px)] min-w-[240px]">
             <div className="relative h-full p-8 rounded-[1.8rem] bg-[#0A0A0A] border border-white/5 overflow-hidden flex flex-col items-center text-center">
 
               {/* Hover Effect Background */}

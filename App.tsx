@@ -294,32 +294,81 @@ const WhatIsSprint = () => (
 const HowItWorks = () => (
   <section className="py-32 px-8 max-w-[1120px] mx-auto">
     <Reveal>
-      <div className="mb-20 text-center">
-        <h2 className="text-sm font-bold text-accentPurple uppercase tracking-[0.4em] mb-6">Process</h2>
-        <h3 className="text-3xl md:text-5xl font-heading font-medium text-white">How It Works</h3>
+      <div className="mb-24 text-center">
+        <h2 className="text-sm font-bold text-accentPurple uppercase tracking-[0.4em] mb-4">Process</h2>
+        <h3 className="text-4xl md:text-5xl font-heading font-medium text-white">How It Works</h3>
       </div>
 
-      <div className="grid md:grid-cols-4 gap-8 relative">
-        <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-border to-transparent -z-10" />
+      <div className="grid md:grid-cols-4 gap-8 relative mb-20">
+        {/* Connector Line */}
+        <div className="hidden md:block absolute top-[2.5rem] left-0 w-full h-px border-t-2 border-dashed border-white/10 -z-10" />
 
         {[
-          { icon: <Layout className="w-6 h-6" />, title: "1. Choose Domain", desc: "Pick one real-world problem domain." },
-          { icon: <Users className="w-6 h-6" />, title: "2. Validate", desc: "Talk to 1-2 real users. Understand the pain." },
-          { icon: <Zap className="w-6 h-6" />, title: "3. Build", desc: "Spend ~30 hours building the solution." },
-          { icon: <Rocket className="w-6 h-6" />, title: "4. Submit", desc: "Show what you built and how it scales." }
-        ].map((step, i) => (
-          <div key={i} className="relative bg-background pt-4 md:pt-0">
-            <div className="w-16 h-16 mx-auto bg-surface border border-border rounded-2xl flex items-center justify-center text-primary mb-6 relative z-10 shadow-lg">
-              {step.icon}
+          { icon: <Layout className="w-6 h-6" />, step: "01", title: "Choose Domain", desc: "Pick a real-world problem people actually struggle with." },
+          { icon: <Users className="w-6 h-6" />, step: "02", title: "Validate", desc: "Talk to 1-2 real users. Understand the pain first." },
+          { icon: <Zap className="w-6 h-6" />, step: "03", title: "Build", desc: "Spend ~30 hours building a simple, usable solution." },
+          { icon: <Rocket className="w-6 h-6" />, step: "04", title: "Submit", desc: "Show what you built, why it matters, and how it scales." }
+        ].map((item, i) => (
+          <div key={i} className="relative grid place-items-center text-center group">
+            <div className="w-20 h-20 bg-background border border-border rounded-3xl flex items-center justify-center text-muted group-hover:text-primary group-hover:border-primary/50 group-hover:shadow-[0_0_30px_-10px_rgba(109,124,255,0.3)] transition-all duration-500 mb-6 bg-gradient-to-br from-surface/50 to-background z-10 box-border">
+              {item.icon}
             </div>
-            <div className="text-center">
-              <h4 className="text-lg font-bold text-white mb-2">{step.title}</h4>
-              <p className="text-sm text-muted font-light">{step.desc}</p>
+
+            <div className="space-y-3">
+              <div className="text-[10px] font-bold text-accentPurple uppercase tracking-[0.2em] opacity-80">Step {item.step}</div>
+              <h4 className="text-xl font-bold text-white">{item.title}</h4>
+              <p className="text-sm text-muted font-light leading-relaxed max-w-[200px] mx-auto">{item.desc}</p>
             </div>
           </div>
         ))}
       </div>
+
+      <div className="text-center">
+        <div className="inline-flex flex-col md:flex-row items-center gap-6 px-8 py-4 rounded-full bg-surface/10 border border-white/5 backdrop-blur-sm">
+          <p className="text-lg text-white font-medium">We care about progress, not perfection.</p>
+          <div className="hidden md:block h-4 w-px bg-white/10"></div>
+          <button onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })} className="text-sm font-bold text-primary hover:text-white transition-colors uppercase tracking-widest">
+            Start Building →
+          </button>
+        </div>
+      </div>
     </Reveal>
+  </section>
+);
+
+const Protocol5030 = () => (
+  <section className="relative py-24 bg-surface/5 border-y border-white/5">
+    <div className="px-8 max-w-[1120px] mx-auto">
+      <Reveal x={-20}>
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 className="text-sm font-bold text-primary uppercase tracking-[0.4em] mb-6">The 50:30 Protocol</h2>
+            <h3 className="text-4xl font-heading font-medium text-white mb-8">Built for real builders with real lives.</h3>
+            <div className="space-y-4 text-lg text-muted font-light">
+              <p>Flexible slots. Honest progress. High stakes delivery.</p>
+              <p className="opacity-80">We don't track your minutes with a stopwatch. We judge your commitment through daily check-ins and the quality of what you ship.</p>
+            </div>
+          </div>
+          <div className="p-8 border border-border bg-surface/10 rounded-[2.5rem] relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-8 opacity-5"><Clock className="w-32 h-32" /></div>
+            <h4 className="text-xs font-bold text-white/50 uppercase tracking-[0.2em] mb-8">The Balance</h4>
+            <div className="space-y-8">
+              <div className="flex justify-between items-end border-b border-white/5 pb-4">
+                <span className="text-muted text-sm uppercase tracking-widest">Total Sprint Window</span>
+                <span className="text-white text-4xl font-heading font-bold">50H</span>
+              </div>
+              <div className="flex justify-between items-end border-b border-white/5 pb-4">
+                <span className="text-muted text-sm uppercase tracking-widest">Recommended Effort</span>
+                <span className="text-primary text-4xl font-heading font-bold">~30H</span>
+              </div>
+              <p className="text-xs text-muted/60 italic">
+                *We don't track hours. We evaluate output.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </div>
   </section>
 );
 
@@ -725,11 +774,13 @@ export default function App() {
       <Hero />
       <WhatIsSprint />
       <HowItWorks />
+      <Protocol5030 />
       <ProblemExplorer />
       <JudgingMindset />
       <BeyondHackathon />
       <JudgesSection />
       <FAQ />
+      <Community />
       <Footer />
     </div>
   );

@@ -1,132 +1,319 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
-import { Trophy, Users, FileCheck, Zap, ChevronDown, Clock, ShieldCheck, Rocket, Scale, Library, Star, Award, Layout, CheckCircle, Globe, Stethoscope, Leaf, ShoppingBag, Truck, Lock, Heart, Video, Cpu, Building2, X, BookOpen, Briefcase } from 'lucide-react';
+import { Trophy, Users, FileCheck, Zap, ChevronDown, Clock, ShieldCheck, Rocket, Scale, Library, Star, Award, Layout, CheckCircle, Globe, Stethoscope, Leaf, ShoppingBag, Truck, Lock, Heart, Video, Cpu, Building2, X, BookOpen, Briefcase, Gift } from 'lucide-react';
 
 const PROBLEM_STATEMENTS = [
   {
     domain: "EdTech",
     icon: <BookOpen className="w-6 h-6" />,
+    desc: "Learning, skills, access",
+    isPriority: true,
     problems: [
-      { title: "High Dropout Rates", desc: "1.42 crore dropouts. Build low-cost intervention tools (SMS/Chatbot) to identify at-risk students." },
-      { title: "Workforce Skills Mismatch", desc: "2.3M AI jobs but only 1.2M pros. Build specific skill-matching or adaptive learning paths." },
-      { title: "Teachers Overwhelmed", desc: "Teachers lack training/tools. Build AI cheating detection or micro-lesson training platforms." }
+      {
+        title: "High Dropout Rates",
+        desc: "1.42 crore students drop out annually in India. Schools lack real-time data to identify at-risk students before it's too late.",
+        solution: "Build a low-cost SMS/WhatsApp chatbot that tracks attendance/grades and triggers auto-alerts to parents & mentors."
+      },
+      {
+        title: "Workforce Skills Mismatch",
+        desc: "Universities teach theory, but industry demands execution. 48% of graduates are deemed unemployable.",
+        solution: "Build a 'micro-internship' platform that converts real company backlogs into student-sized projects."
+      },
+      {
+        title: "Teachers Overwhelmed",
+        desc: "Teachers spend 40% of their time on admin work (grading, roll calls) instead of actual teaching.",
+        solution: "Build an AI grading assistant that scans handwritten sheets or a voice-based lesson planner."
+      }
     ]
   },
   {
     domain: "FinTech",
     icon: <Scale className="w-6 h-6" />,
+    desc: "Fraud, payments, inclusion",
+    isPriority: true,
     problems: [
-      { title: "Synthetic Identity Fraud", desc: "450% rise in fraud. Build continuous KYC monitoring or behavioral biometrics." },
-      { title: "Phishing & UPI Fraud", desc: "38% of frauds are phishing. Build SMS scam detection or UPI fraud reversal bots." },
-      { title: "Rural Trust Gap", desc: "<50% rural digital literacy. Build vernacular chatbots or USSD banking apps." }
+      {
+        title: "Synthetic Identity Fraud",
+        desc: "Fraudsters combine real and fake data to create new identities. Standard KYC fails to catch this.",
+        solution: "Build a behavioral biometrics tool that analyzes typing speed/mouse movement to distinguish humans from bots."
+      },
+      {
+        title: "Phishing & UPI Fraud",
+        desc: "UPI scams are rising, targeting the elderly and less tech-savvy. Recovery is nearly impossible.",
+        solution: "Build a 'Check-Before-Pay' overlay app that scans phone numbers against a crowdsourced scammer database."
+      },
+      {
+        title: "Rural Trust Gap",
+        desc: "Rural users avoid digital payments due to language barriers and UI complexity.",
+        solution: "Build a voice-first vernacular banking interface that works entirely through audio commands."
+      }
     ]
   },
   {
     domain: "MedTech",
     icon: <Stethoscope className="w-6 h-6" />,
+    desc: "Healthcare access, data",
+    isPriority: true,
     problems: [
-      { title: "Rural Healthcare Access", desc: "73% lack access. Build low-bandwidth telemedicine or offline diagnostic guides." },
-      { title: "Maternal Health", desc: "High mortality. Build low-tech prenatal tracking (SMS-based) or emergency transport recall." },
-      { title: "Data Fragmentation", desc: "Records scattered. Build patient data aggregation (ABHA) or health record wallets." }
+      {
+        title: "Rural Healthcare Access",
+        desc: "70% of India's population has limited access to specialized doctors and diagnostics.",
+        solution: "Build an offline-first diagnostic guide that helps ASHA workers triage symptoms."
+      },
+      {
+        title: "Maternal Health",
+        desc: "High maternal mortality due to lack of timely nutritional and medical tracking.",
+        solution: "Build a low-tech SMS tracker for prenatal checkups, nutrition reminders, and emergency transport."
+      },
+      {
+        title: "Data Fragmentation",
+        desc: "Medical records are scattered on paper across random clinics, leading to poor diagnosis.",
+        solution: "Build a privacy-preserving 'Health Wallet' allowing patients to store records via simple QR scans."
+      }
     ]
   },
   {
     domain: "AgriTech",
     icon: <Leaf className="w-6 h-6" />,
+    desc: "Small farmers, climate risk",
+    isPriority: true,
     problems: [
-      { title: "Small Farmer Tech", desc: "Farmers can't afford sensors. Build ₹500 sensors or SMS-based advisory." },
-      { title: "Debt & Middlemen", desc: "Exploitative interest. Build cooperative lending or direct-to-buyer marketplaces." },
-      { title: "Climate Risk", desc: "Harvest failures. Build crowdsourced weather prediction or drought early warning." }
+      {
+        title: "Small Farmer Tech",
+        desc: "Advanced IoT sensors are too expensive for farmers with <2 acres of land.",
+        solution: "Build a ₹500 soil moisture alert system using basic electronics and GSM modules."
+      },
+      {
+        title: "Debt & Middlemen",
+        desc: "Farmers lose 30-40% of value to intermediaries and lack access to fair credit.",
+        solution: "Build a direct-to-buyer Whatsapp marketplace or a cooperative lending circle manager."
+      },
+      {
+        title: "Climate Risk",
+        desc: "Unpredictable micro-climates destroy harvest. Generic weather apps are too broad.",
+        solution: "Build a crowdsourced micro-weather network where farmers validate local conditions for rewards."
+      }
     ]
   },
   {
     domain: "AI & DeepTech",
     icon: <Cpu className="w-6 h-6" />,
+    desc: "Deepfakes, trust, agents",
+    isPriority: true,
     problems: [
-      { title: "Deepfake Misinformation", desc: "Spreads 70% faster. Build real-time deepfake detection or blockchain auth." },
-      { title: "AI Fraud & Impersonation", desc: "Voice cloning scams. Build voice-call MFA or scam detection chatbots." },
-      { title: "AI Literacy Gap", desc: "Workers distrust AI. Build interactive AI literacy tools or risk assessment platforms." }
+      {
+        title: "Deepfake Misinformation",
+        desc: "AI-generated fake content spreads 6x faster than truth, causing social unrest.",
+        solution: "Build a browser extension or API that flags AI-generated faces/audio in real-time."
+      },
+      {
+        title: "AI Fraud & Impersonation",
+        desc: "Voice cloning is being used to scam families by impersonating distress calls.",
+        solution: "Build a 'Family Safe-Word' authenticator that validates caller identity via encrypted tokens."
+      },
+      {
+        title: "AI Literacy Gap",
+        desc: "Non-tech employees fear AI will replace them, leading to resistance.",
+        solution: "Build a gamified AI literacy benchmarking tool to help teams understand and adopt LLMs."
+      }
     ]
   },
   {
     domain: "DevTools",
     icon: <Zap className="w-6 h-6" />,
+    desc: "Productivity, automation",
     problems: [
-      { title: "Context Switching", desc: "Devs lose 2.5h/day. Build a context aggregator or AI copilot for docs." },
-      { title: "AI Code Quality", desc: "AI code is buggy. Build hallucination detectors or auto-test generators." },
-      { title: "Developer Burnout", desc: "Bad metrics. Build DORA dashboards or flow-state detectors." }
+      {
+        title: "Context Switching",
+        desc: "Developers lose hours switching between Jira, GitHub, Slack, and IDEs.",
+        solution: "Build a unified 'Dev-Stream' that aggregates diverse notifications into a single timeline."
+      },
+      {
+        title: "AI Code Quality",
+        desc: "AI writes code fast, but often introduces subtle bugs and security holes.",
+        solution: "Build a 'Hallucination Checker' that validates LLM-generated code against security standards."
+      },
+      {
+        title: "Developer Burnout",
+        desc: "DORA metrics measure speed but ignore developer well-being and flow state.",
+        solution: "Build a privacy-first 'Flow State' tracker that blocks interruptions during deep work sessions."
+      }
     ]
   },
   {
     domain: "Smart Cities",
     icon: <Building2 className="w-6 h-6" />,
+    desc: "Urban infra, sanitation",
     problems: [
-      { title: "Sewage Crisis", desc: "72k MLD untreated. Build leak detection or decentralized treatment design tools." },
-      { title: "Urban Flooding", desc: "Monsoons paralyze cities. Build hyperlocal flood prediction or smart drainage." },
-      { title: "Fragmented Systems", desc: "Silos in services. Build a unified city data API or command dashboard." }
+      {
+        title: "Sewage Crisis",
+        desc: "72k MLD of sewage is generated, but treatment capacity is low. Leaks go undetected.",
+        solution: "Build a leak detection system using flow rate analysis or IoT pressure sensors."
+      },
+      {
+        title: "Urban Flooding",
+        desc: "Annual monsoons paralyze cities. Forecasting is not hyper-local enough.",
+        solution: "Build a crowdsourced street-level flood map for real-time safe route navigation."
+      },
+      {
+        title: "Fragmented Systems",
+        desc: "City departments (Roads, Water, Power) operate in silos.",
+        solution: "Build a unified 'City Dashboard' API that aggregates grievance data for better planning."
+      }
     ]
   },
   {
     domain: "ClimateTech",
     icon: <Globe className="w-6 h-6" />,
+    desc: "Carbon, energy, waste",
     problems: [
-      { title: "SME Carbon Accounting", desc: "Too expensive. Build plug-and-play carbon calculators for SMEs." },
-      { title: "Industrial Emissions", desc: "Hard to abate. Build AI digital twins for factory efficiency." },
-      { title: "Grid Instability", desc: "Renewables intermittent. Build AI demand forecasting or P2P energy trading." }
+      {
+        title: "SME Carbon Accounting",
+        desc: "Small businesses can't afford expensive carbon audit consultants.",
+        solution: "Build an invoice-based carbon calculator that estimates footprint from spending data."
+      },
+      {
+        title: "Industrial Emissions",
+        desc: "Factories waste energy due to inefficient machine scheduling.",
+        solution: "Build a peak-load optimizer that suggests optimal run-times for heavy machinery."
+      },
+      {
+        title: "Grid Instability",
+        desc: "Renewable energy is intermittent, causing grid stress.",
+        solution: "Build a P2P energy trading ledger for rooftop solar owners to share excess power."
+      }
     ]
   },
   {
     domain: "E-Commerce",
     icon: <ShoppingBag className="w-6 h-6" />,
+    desc: "Retail, logistics, payment",
     problems: [
-      { title: "Payment Failures", desc: "Gateways crash. Build payment aggregators with auto-failover." },
-      { title: "Last-Mile Bottleneck", desc: "High costs. Build route optimization or address standardization." },
-      { title: "Small Retailer Digitization", desc: "Kiranas need tech. Build simple inventory apps (barcode + SMS)." }
+      {
+        title: "Payment Failures",
+        desc: "Payment gateway downtimes kill conversion rates for small merchants.",
+        solution: "Build a smart-router that automatically switches between different payment gateways on failure."
+      },
+      {
+        title: "Last-Mile Bottleneck",
+        desc: "Addresses in India are unstructured, leading to failed deliveries.",
+        solution: "Build a 'Landmark-Based' address standardizer that visualizes delivery locations."
+      },
+      {
+        title: "Small Retailer Digitization",
+        desc: "Kirana stores rely on manual notebooks and fear complex ERPs.",
+        solution: "Build a voice-ledger apps that records inventory/sales via simple speech commands."
+      }
     ]
   },
   {
     domain: "Logistics",
     icon: <Truck className="w-6 h-6" />,
+    desc: "Supply chain, tracking",
     problems: [
-      { title: "Invisible Supply Chain", desc: "Manual tracking errors. Build IoT tracking or blockchain ledgers." },
-      { title: "Address Accuracy", desc: "Failed deliveries. Build address verification or dynamic ETA systems." },
-      { title: "Warehouse Inefficiency", desc: "Space wasted. Build layout optimization or healthy-inventory algos." }
+      {
+        title: "Invisible Supply Chain",
+        desc: "Small fleet owners rely on phone calls to track trucks, leading to delays.",
+        solution: "Build a SIM-based triangulation tracker that works without expensive GPS hardware."
+      },
+      {
+        title: "Address Accuracy",
+        desc: "Delivery agents waste time finding correct doors.",
+        solution: "Build a photo-based proof-of-delivery validator with geo-tagging."
+      },
+      {
+        title: "Warehouse Inefficiency",
+        desc: "Warehouse space is often underutilized or overbooked.",
+        solution: "Build an 'Airbnb for Warehousing' to aggregate and rent out spare storage capacity."
+      }
     ]
   },
   {
     domain: "Cybersecurity",
     icon: <Lock className="w-6 h-6" />,
+    desc: "Safety, privacy, fraud",
     problems: [
-      { title: "Supply Chain Ransomware", desc: "Suppliers targeted. Build vendor risk assessment or early detection." },
-      { title: "Phishing at Scale", desc: "AI phishing. Build AI-resistant MFA or email verification." },
-      { title: "Cloud Misconfigs", desc: "Data exposure. Build auto-scan tools for misconfigurations." }
+      {
+        title: "Supply Chain Ransomware",
+        desc: "Small vendors are the weakest link, often used to attack larger partners.",
+        solution: "Build a simplified automated vendor risk scorecard for SMEs."
+      },
+      {
+        title: "Phishing at Scale",
+        desc: "AI can generate perfect phishing emails at scale.",
+        solution: "Build a stylistic analysis tool that flags email patterns typical of LLMs."
+      },
+      {
+        title: "Cloud Misconfigs",
+        desc: "Developers accidentally leave S3 buckets and databases open.",
+        solution: "Build a 'One-Click' security scanner for AWS/GCP setups."
+      }
     ]
   },
   {
     domain: "Social Impact",
     icon: <Heart className="w-6 h-6" />,
+    desc: "Inclusion, livelihood",
     problems: [
-      { title: "Banking the Unbanked", desc: "200M+ excluded. Build USSD banking or alternative credit scoring." },
-      { title: "Rural Maternal Health", desc: "No monitoring. Build community health worker apps." },
-      { title: "Youth Unemployment", desc: "Skill gap. Build micro-credential platforms or job matching." }
+      {
+        title: "Banking the Unbanked",
+        desc: "Millions lack a credit score and cannot get loans.",
+        solution: "Build a credit score proxy based on utility bill payments and mobile recharge history."
+      },
+      {
+        title: "Rural Maternal Health",
+        desc: "Community health workers rely on paper forms, leading to data loss.",
+        solution: "Build a voice-form app for ASHA workers to digitally record health stats."
+      },
+      {
+        title: "Youth Unemployment",
+        desc: "Youth lack formal degrees but have practical skills.",
+        solution: "Build a skill-verification platform for gig workers (plumbers, electricians)."
+      }
     ]
   },
   {
     domain: "Media & Creator",
     icon: <Video className="w-6 h-6" />,
+    desc: "IP rights, misinformation",
     problems: [
-      { title: "AI Misinformation", desc: "Fake news. Build fact-check APIs or media literacy games." },
-      { title: "Creator IP Theft", desc: "AI scraping. Build royalty tracking or content watermarking." },
-      { title: "Influencer Fraud", desc: "Fake advice. Build credential verification for finance/health influencers." }
+      {
+        title: "AI Misinformation",
+        desc: "Fake news travels fast on private messaging channels.",
+        solution: "Build a 'Source-Checker' plugin for chat apps."
+      },
+      {
+        title: "Creator IP Theft",
+        desc: "Artists' work is scraped by AI training models without consent.",
+        solution: "Build a watermark generator that poisons image data for AI scrapers."
+      },
+      {
+        title: "Influencer Fraud",
+        desc: "Fake gurus give dangerous financial/health advice.",
+        solution: "Build a verification badge system that validates qualifications of influencers."
+      }
     ]
   },
   {
     domain: "Open Innovation",
     icon: <Rocket className="w-6 h-6" />,
+    desc: "Heritage, governance",
     problems: [
-      { title: "Heritage Industries", desc: "Weavers dying out. Build DTC marketplaces or AI design tools." },
-      { title: "Corp-Startup Mismatch", desc: "PoCs fail. Build matching platforms or IP governance templates." },
-      { title: "Privacy Collaboration", desc: "Data silos. Build federated learning or privacy-preserving compute." }
+      {
+        title: "Heritage Industries",
+        desc: "Traditional weavers and artisans are losing to mass production.",
+        solution: "Build an AI pattern generator that helps artisans create modern designs."
+      },
+      {
+        title: "Corp-Startup Mismatch",
+        desc: "Corporate-Startup pilots often fail due to legal complexity.",
+        solution: "Build a standardized MOU generator for quick Proof-of-Concept agreements."
+      },
+      {
+        title: "Privacy Collaboration",
+        desc: "Companies cannot share data due to privacy laws.",
+        solution: "Build a synthetic data generator that creates safe, shareable datasets."
+      }
     ]
   }
 ];
@@ -383,54 +570,141 @@ const ProblemExplorer = () => {
   const [selectedDomain, setSelectedDomain] = useState<number | null>(null);
 
   return (
-    <section className="relative py-[160px] px-8 max-w-[1120px] mx-auto">
+    <section className="relative py-[160px] px-8 max-w-[1400px] mx-auto min-h-screen">
       <Reveal>
         <div className="mb-20 text-center">
-          <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Real Worl Problems</h2>
+          <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Real World Problems</h2>
           <h3 className="section-headline text-4xl md:text-6xl font-medium text-white mb-8">14 Tech Domains</h3>
           <p className="text-muted max-w-2xl mx-auto">Click on a domain to view detailed problem statements.</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {PROBLEM_STATEMENTS.map((item, i) => (
-            <button
-              key={i}
-              onClick={() => setSelectedDomain(selectedDomain === i ? null : i)}
-              className={`p-6 text-left rounded-2xl border transition-all duration-300 hover:scale-105 ${selectedDomain === i ? 'border-primary bg-primary/20' : 'border-border bg-surface/5 hover:border-primary/50'}`}
-            >
-              <div className={`mb-3 ${selectedDomain === i ? 'text-primary' : 'text-muted'}`}>{item.icon}</div>
-              <div className="font-bold text-sm text-white">{item.domain}</div>
-            </button>
-          ))}
-        </div>
+        <div className="flex flex-col lg:flex-row gap-8 items-start relative transition-all duration-500">
 
-        <AnimatePresence>
-          {selectedDomain !== null && (
-            <motion.div
-              initial={{ opacity: 0, y: 20, height: 0 }}
-              animate={{ opacity: 1, y: 0, height: 'auto' }}
-              exit={{ opacity: 0, y: 20, height: 0 }}
-              className="overflow-hidden mt-8"
-            >
-              <div className="bg-surface/10 border border-border rounded-3xl p-8 md:p-12 relative">
-                <button onClick={() => setSelectedDomain(null)} className="absolute top-6 right-6 p-2 text-muted hover:text-white"><X className="w-6 h-6" /></button>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="text-primary">{PROBLEM_STATEMENTS[selectedDomain].icon}</div>
-                  <h3 className="text-3xl font-heading font-medium text-white">{PROBLEM_STATEMENTS[selectedDomain].domain} Problems</h3>
-                </div>
-                <div className="grid md:grid-cols-3 gap-8">
-                  {PROBLEM_STATEMENTS[selectedDomain].problems.map((prob, k) => (
-                    <div key={k} className="p-6 bg-background/50 rounded-2xl border border-white/5">
-                      <div className="text-xs font-bold text-primary mb-2 uppercase tracking-widest">Problem {k + 1}</div>
-                      <h4 className="text-lg font-bold text-white mb-3">{prob.title}</h4>
-                      <p className="text-sm text-muted font-light leading-relaxed">{prob.desc}</p>
+          {/* Domain List / Sidebar */}
+          <div className={`transition-all duration-500 ease-in-out ${selectedDomain !== null ? 'w-full lg:w-[320px] shrink-0' : 'w-full'}`}>
+            <div className={`grid gap-4 transition-all duration-500 ${selectedDomain !== null ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-1' : 'grid-cols-2 md:grid-cols-4 lg:grid-cols-5'}`}>
+              {PROBLEM_STATEMENTS.map((item, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedDomain(selectedDomain === i ? null : i)}
+                  className={`group relative text-left rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl w-full
+                    ${selectedDomain === i
+                      ? 'border-primary bg-primary/20 shadow-[0_0_30px_rgba(109,124,255,0.2)] p-6 z-10 scale-105 lg:scale-100'
+                      : selectedDomain !== null
+                        ? 'p-4 border-white/5 bg-white/[0.02] hover:bg-white/[0.05] grayscale hover:grayscale-0 opacity-60 hover:opacity-100'
+                        : 'p-6 border-border bg-surface/5 hover:border-primary/30'
+                    }
+                    ${ // @ts-ignore
+                    item.isPriority && selectedDomain !== i ? 'border-primary/20' : ''
+                    }
+                  `}
+                >
+                  <div className={`flex items-center gap-4 ${selectedDomain !== i && selectedDomain !== null ? 'mb-0' : 'mb-3 gap-0 justify-between items-start'}`}>
+                    {/* @ts-ignore */}
+                    <div className={`${selectedDomain === i ? 'text-primary' : item.isPriority ? 'text-white' : 'text-muted'} group-hover:text-primary transition-colors duration-300`}>
+                      {item.icon}
                     </div>
-                  ))}
+                    {/* @ts-ignore */}
+                    {item.isPriority && (
+                      <div className={`w-1.5 h-1.5 rounded-full bg-accentPurple shadow-[0_0_8px_#A020F0] ${selectedDomain !== null && selectedDomain !== i ? 'hidden' : ''}`} title="High Priority" />
+                    )}
+
+                    {selectedDomain !== null && selectedDomain !== i && (
+                      <div className="font-bold text-sm text-white group-hover:text-primary transition-colors">{item.domain}</div>
+                    )}
+                  </div>
+
+                  {(selectedDomain === null || selectedDomain === i) && (
+                    <>
+                      <div className="font-bold text-sm text-white mb-1 group-hover:text-white transition-colors">{item.domain}</div>
+                      <div className="text-[10px] text-muted uppercase tracking-wide font-medium leading-tight opacity-70 group-hover:opacity-100 transition-opacity">
+                        {/* @ts-ignore */}
+                        {item.desc}
+                      </div>
+                    </>
+                  )}
+
+                  {/* Hover Overlay Hint (Only in Grid Mode) */}
+                  {selectedDomain === null && (
+                    <div className="hidden md:flex absolute inset-0 bg-background/90 backdrop-blur-sm items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl border border-primary/20">
+                      <span className="text-xs font-bold text-primary flex items-center gap-1">
+                        View Problems <span className="text-[10px]">→</span>
+                      </span>
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Expanded Content Area */}
+          <AnimatePresence mode="wait">
+            {selectedDomain !== null && (
+              <motion.div
+                id="problems-view"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="flex-1 w-full overflow-hidden"
+              >
+                <div className="relative rounded-[2rem] p-1 bg-gradient-to-br from-primary/30 to-transparent sticky top-8">
+                  <div className="bg-background border border-white/5 rounded-[1.8rem] p-8 md:p-12 relative overflow-hidden min-h-[600px] flex flex-col">
+                    {/* Background decoration */}
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[100px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2" />
+
+                    <div className="flex flex-col md:flex-row md:items-center gap-6 mb-12 relative z-10 border-b border-white/5 pb-8">
+                      <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center shadow-[0_0_40px_-10px_rgba(109,124,255,0.3)] shrink-0">
+                        <div className="text-primary scale-150">{PROBLEM_STATEMENTS[selectedDomain].icon}</div>
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2">Selected Domain</div>
+                        <h3 className="text-3xl md:text-5xl font-heading font-medium text-white">{PROBLEM_STATEMENTS[selectedDomain].domain}</h3>
+                        {/* @ts-ignore */}
+                        <p className="text-muted mt-2 max-w-xl">{PROBLEM_STATEMENTS[selectedDomain].desc}</p>
+                      </div>
+
+                      <button onClick={() => setSelectedDomain(null)} className="md:ml-auto p-3 text-white/40 hover:text-white hover:bg-white/10 rounded-full transition-all z-10"><X className="w-6 h-6" /></button>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6 relative z-10 content-start">
+                      {PROBLEM_STATEMENTS[selectedDomain].problems.map((prob, k) => (
+                        <div key={k} className="group relative p-8 bg-white/[0.02] hover:bg-white/[0.04] rounded-2xl border border-white/5 hover:border-primary/30 transition-all duration-300 flex flex-col h-full hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1">
+                          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                          <div className="mb-6 flex justify-between items-start">
+                            <div className="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary uppercase tracking-widest">
+                              Problem 0{k + 1}
+                            </div>
+                          </div>
+
+                          <h4 className="text-xl font-bold text-white mb-6 leading-tight group-hover:text-primary/90 transition-colors">{prob.title}</h4>
+
+                          <div className="flex-grow space-y-6">
+                            <div>
+                              <div className="text-[10px] uppercase tracking-widest text-muted/50 font-bold mb-2">The Pain Point</div>
+                              <p className="text-sm text-muted font-light leading-relaxed opacity-90 group-hover:opacity-100 transition-opacity">
+                                {prob.desc}
+                              </p>
+                            </div>
+
+                            <div className="pt-6 border-t border-white/5">
+                              <div className="text-[10px] uppercase tracking-widest text-primary/70 font-bold mb-2">Build This</div>
+                              {/* @ts-ignore */}
+                              <p className="text-sm text-white/90 font-medium leading-relaxed">
+                                {prob.solution}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </Reveal>
     </section>
   );
@@ -527,24 +801,34 @@ const JudgesSection = () => (
         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-4 gap-6">
         {[
-          { name: "Startup Builders", role: "Jury", focus: "Can this realistically become a startup?", icon: <Rocket className="w-6 h-6" /> },
-          { name: "Domain Experts", role: "Mentors", focus: "Does this solve the real problem?", icon: <Briefcase className="w-6 h-6" /> },
-          { name: "Product Leaders", role: "Jury", focus: "Would users actually use this?", icon: <Users className="w-6 h-6" /> }
+          { name: "Surya Pratap Singh", role: "Mentor", title: "Founder, Vasudev AI", focus: "AI & Product Strategy" },
+          { name: "Aditya Kumar", role: "Jury", title: "CTO, TechCorp", focus: "Scalability & Architecture" },
+          { name: "Priya Sharma", role: "Mentor", title: "Product Lead, Innovate", focus: "User Experience" },
+          { name: "Rahul Verma", role: "Jury", title: "Angel Investor", focus: "Business Viability" }
         ].map((person, i) => (
-          <div key={i} className="p-8 border border-border bg-surface/10 rounded-3xl hover:border-primary/40 transition-all duration-300">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
-              {person.icon}
+          <div key={i} className="p-6 border border-border bg-surface/5 rounded-3xl hover:border-primary/40 transition-all duration-300 group">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 mb-6 flex items-center justify-center text-2xl font-bold text-white/20 border border-white/10 group-hover:border-primary/50 group-hover:text-primary transition-colors">
+              {person.name[0]}
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full border ${person.role === 'Jury' ? 'bg-amber-500/10 border-amber-500/20 text-amber-500' : 'bg-primary/10 border-primary/20 text-primary'}`}>
+                {person.role}
+              </span>
             </div>
             <h4 className="text-xl font-heading font-medium text-white mb-1">{person.name}</h4>
-            <div className="text-primary text-xs font-bold uppercase tracking-wider mb-4">{person.role}</div>
-            <div className="text-muted text-sm font-light">{person.focus}</div>
+            <div className="text-sm text-muted mb-4">{person.title}</div>
+
+            <div className="pt-4 border-t border-white/5">
+              <div className="text-[10px] text-muted/60 uppercase tracking-widest mb-1">Focus Area</div>
+              <div className="text-sm text-white/80">{person.focus}</div>
+            </div>
           </div>
         ))}
       </div>
-    </Reveal>
-  </section>
+    </Reveal >
+  </section >
 );
 
 const RubricItem = ({ title, pts, criteria }: { title: string, pts: number, criteria: string[] }) => (
@@ -600,34 +884,156 @@ const JudgingSection = () => (
   </section>
 );
 
-const BeyondHackathon = () => {
+const AwardsSection = () => {
   return (
     <section className="py-[160px] px-8 max-w-[1120px] mx-auto">
       <Reveal x={-20}>
-        <div className="mb-24 text-center md:text-left">
-          <h2 className="section-headline text-4xl md:text-6xl font-medium text-white mb-8">Beyond The Hackathon</h2>
-          <p className="text-xl text-muted font-light max-w-2xl leading-relaxed">
-            This sprint doesn't end at submission. It starts something bigger.
+        <div className="mb-24 text-center">
+          <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Recognition & Rewards</h2>
+          <h3 className="section-headline text-4xl md:text-6xl font-medium text-white mb-8">We reward builders who ship.</h3>
+          <p className="text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
+            This sprint is not about prize money. It’s about building something that deserves to exist.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="p-8 border border-border bg-surface/5 rounded-3xl">
-            <Rocket className="w-10 h-10 text-primary mb-6" />
-            <h3 className="text-2xl font-bold text-white mb-4">Mentorship Support</h3>
-            <p className="text-muted">guidance to continue building post-event.</p>
+        <div className="grid md:grid-cols-3 gap-4 md:gap-8 items-end mb-24 max-w-5xl mx-auto">
+
+          {/* 1st Runner Up Card (Silver) - Left */}
+          <div className="order-2 md:order-1 p-8 border border-slate-400/30 bg-gradient-to-br from-slate-400/5 to-transparent rounded-[2rem] relative overflow-hidden group hover:border-slate-400/50 transition-all duration-500">
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Award className="w-24 h-24 text-slate-300 rotate-12" />
+            </div>
+
+            <div className="relative z-10 flex flex-col h-full">
+              <div className="inline-block px-3 py-1 rounded-full bg-slate-400/10 border border-slate-400/20 text-slate-300 text-[10px] font-bold uppercase tracking-widest mb-6 w-fit">
+                2nd Place
+              </div>
+              <h4 className="text-2xl font-heading font-medium text-slate-100 mb-6">1st Runner Up</h4>
+
+              <ul className="space-y-4 mb-8">
+                <li className="flex gap-2 items-start text-muted text-sm">
+                  <CheckCircle className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                  <span>Certificate of Excellence</span>
+                </li>
+                <li className="flex gap-2 items-start text-muted text-sm">
+                  <Gift className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                  <span><strong>Swags & Vasudev AI Tools Early Access</strong></span>
+                </li>
+                <li className="flex gap-2 items-start text-muted text-sm">
+                  <Users className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                  <span>Group Mentorship Session</span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="p-8 border border-border bg-surface/5 rounded-3xl">
-            <Briefcase className="w-10 h-10 text-primary mb-6" />
-            <h3 className="text-2xl font-bold text-white mb-4">Incubation</h3>
-            <p className="text-muted">Startup incubation discussions for top teams.</p>
+
+          {/* Winner Card (Gold) - Center, Elevated */}
+          <div className="order-1 md:order-2 md:-translate-y-12 p-8 md:p-10 border border-amber-400/40 bg-gradient-to-b from-amber-400/10 to-transparent rounded-[2.5rem] relative overflow-hidden group hover:shadow-[0_0_60px_-10px_rgba(251,191,36,0.2)] transition-all duration-500 z-10">
+            <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-40 transition-opacity">
+              <Trophy className="w-32 h-32 text-amber-400 rotate-12" />
+            </div>
+
+            <div className="relative z-10 flex flex-col h-full">
+              <div className="inline-block px-4 py-1.5 rounded-full bg-amber-400/20 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-widest mb-6 w-fit shadow-[0_0_15px_rgba(251,191,36,0.3)]">
+                1st Place
+              </div>
+              <h4 className="text-3xl font-heading font-medium text-white mb-6">Sprint Winner</h4>
+
+              <ul className="space-y-4 mb-8 flex-grow">
+                <li className="flex gap-3 items-start text-white/90 text-sm">
+                  <Award className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <span><strong>Digitally Verifiable Certificate</strong></span>
+                </li>
+                <li className="flex gap-3 items-start text-white/90 text-sm">
+                  <Gift className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <span><strong>Swags & Vasudev AI Tools Early Access</strong></span>
+                </li>
+                <li className="flex gap-3 items-start text-white/90 text-sm">
+                  <Rocket className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <span><strong>1:1 Mentorship</strong> (Product & Tech)</span>
+                </li>
+                <li className="flex gap-3 items-start text-white/90 text-sm">
+                  <Globe className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <span>Featured on Vasudev AI site</span>
+                </li>
+              </ul>
+
+              <div className="text-xs text-amber-200/80 font-medium italic mt-auto flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                This is not a trophy. It’s momentum.
+              </div>
+            </div>
           </div>
-          <div className="p-8 border border-border bg-surface/5 rounded-3xl">
-            <Users className="w-10 h-10 text-primary mb-6" />
-            <h3 className="text-2xl font-bold text-white mb-4">Community</h3>
-            <p className="text-muted">Long-term ecosystem backing & networking.</p>
+
+          {/* 2nd Runner Up Card (Bronze) - Right */}
+          <div className="order-3 md:order-3 p-8 border border-orange-700/30 bg-gradient-to-br from-orange-700/5 to-transparent rounded-[2rem] relative overflow-hidden group hover:border-orange-600/40 transition-colors duration-500">
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Award className="w-24 h-24 text-orange-400 rotate-12" />
+            </div>
+
+            <div className="relative z-10 flex flex-col h-full">
+              <div className="inline-block px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-bold uppercase tracking-widest mb-6 w-fit">
+                3rd Place
+              </div>
+              <h4 className="text-2xl font-heading font-medium text-white mb-6">2nd Runner Up</h4>
+
+              <ul className="space-y-4 mb-8">
+                <li className="flex gap-2 items-start text-muted text-sm">
+                  <CheckCircle className="w-4 h-4 text-orange-600/60 shrink-0 mt-0.5" />
+                  <span>Certificate of Merit</span>
+                </li>
+                <li className="flex gap-2 items-start text-muted text-sm">
+                  <Gift className="w-4 h-4 text-orange-600/60 shrink-0 mt-0.5" />
+                  <span><strong>Swags & Vasudev AI Tools Early Access</strong></span>
+                </li>
+                <li className="flex gap-2 items-start text-muted text-sm">
+                  <FileCheck className="w-4 h-4 text-orange-600/60 shrink-0 mt-0.5" />
+                  <span>Judges Feedback Report</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
+
+        {/* Special Categories */}
+        <div className="mb-24">
+          <h4 className="text-xl font-heading font-medium text-white mb-8 text-center">Special Category Awards</h4>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {[
+              { title: "Best Real-World Impact", icon: <Globe className="w-5 h-5" /> },
+              { title: "Best Simple Solution", icon: <Zap className="w-5 h-5" /> },
+              { title: "Best India-First Product", icon: <Leaf className="w-5 h-5" /> },
+              { title: "Best Problem Validation", icon: <CheckCircle className="w-5 h-5" /> },
+              { title: "Best Solo Builder", icon: <Users className="w-5 h-5" /> },
+            ].map((cat, i) => (
+              <div key={i} className="p-6 border border-border bg-surface/5 rounded-2xl flex flex-col items-center text-center hover:border-primary/40 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-primary mb-3">
+                  {cat.icon}
+                </div>
+                <span className="text-sm font-bold text-white/90">{cat.title}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* All Participants */}
+        <div className="p-8 border border-dashed border-white/20 rounded-3xl bg-white/[0.02] text-center">
+          <h4 className="text-lg font-bold text-white mb-4">🎁 For Every Participant</h4>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-sm text-muted">
+            <span className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Participation Certificate</span>
+            <span className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Community Badge</span>
+            <span className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Access to Future Sprints</span>
+            <span className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Learning & Feedback</span>
+          </div>
+          <p className="mt-4 text-xs text-muted/60 uppercase tracking-widest font-bold">You don't leave empty-handed.</p>
+        </div>
+
+        <div className="mt-16 text-center">
+          <button onClick={() => window.open('https://forms.gle/your-form-link', '_blank')} className="text-sm font-bold text-white hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-0.5 uppercase tracking-widest">
+            Start Your Entry →
+          </button>
+        </div>
+
       </Reveal>
     </section>
   );
@@ -753,31 +1159,106 @@ const Sponsors = () => {
 }
 
 const Community = () => (
-  <section className="py-[120px] px-8">
-    <div className="max-w-4xl mx-auto p-12 rounded-[3rem] bg-gradient-to-br from-[#5865F2] to-[#404EED] text-center relative overflow-hidden group">
-      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://assets-global.website-files.com/6257adef93867e56f84d3109/636e0a6a49cf127bf92de1e2_icon_clyde_blur_white_RGB.png')] bg-cover opacity-10 mix-blend-overlay"></div>
-      <Reveal>
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Don't Build Alone.</h2>
-        <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">Join 500+ builders in the exclusive discord. Find teammates, get mentor feedback, and just vibe.</p>
-        <button onClick={() => window.open('https://discord.gg/your-link', '_blank')} className="bg-white text-[#5865F2] px-10 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:scale-105 transition-all">
-          Join the Discord
-        </button>
-      </Reveal>
+  <section className="py-[120px] px-8 relative overflow-hidden">
+    <div className="max-w-[1120px] mx-auto relative z-10">
+      <div className="relative p-12 md:p-24 rounded-[3rem] bg-[#5865F2] overflow-hidden group">
+        {/* Background Decoration */}
+        <div className="absolute inset-0 bg-[url('https://assets-global.website-files.com/6257adef93867e56f84d3109/636e0a6a49cf127bf92de1e2_icon_clyde_blur_white_RGB.png')] bg-cover opacity-10 mix-blend-overlay scale-150 group-hover:scale-125 transition-transform duration-1000"></div>
+
+        {/* Huge Background Text */}
+        <div className="absolute -bottom-10 -right-10 text-[150px] md:text-[200px] font-black text-white/5 rotate-[-10deg] pointer-events-none select-none whitespace-nowrap">
+          Vasudev AI
+        </div>
+
+        <div className="relative z-10 flex flex-col items-center text-center">
+          <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mb-8 shadow-2xl rotate-3 group-hover:rotate-6 transition-transform">
+            {/* Simple Discord-like Shape (Since we don't have the icon imported, using a custom SVG or similar representation is best, but for now using a placeholder or available icon) */}
+            <svg width="40" height="40" viewBox="0 0 127 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M107.701 8.16C99.271 4.293 90.381 1.487 81.161 0C80.001 2.053 78.681 4.867 77.741 7.08C68.321 5.68 58.941 5.68 49.521 7.08C48.581 4.867 47.251 2.053 46.091 0C36.871 1.487 27.981 4.293 19.551 8.16C2.551 33.32 -2.059 57.88 0.991 82.267C12.351 90.627 23.361 95.707 34.221 95.707C36.931 92.013 39.371 88.08 41.521 83.947C37.561 82.453 33.801 80.613 30.221 78.48C31.181 77.813 32.121 77.107 33.021 76.387C53.251 85.693 74.201 85.693 94.131 76.387C95.041 77.107 95.991 77.8 96.961 78.48C93.381 80.613 89.611 82.44 85.641 83.947C87.791 88.08 90.231 92.013 92.941 95.707C103.801 95.707 114.811 90.627 126.171 82.267C129.671 57.213 124.631 33.32 107.701 8.16ZM42.481 65.52C36.211 65.52 31.101 59.76 31.101 52.667C31.101 45.573 36.061 39.813 42.481 39.813C48.961 39.813 53.991 45.64 53.841 52.667C53.841 59.76 48.811 65.52 42.481 65.52ZM84.781 65.52C78.511 65.52 73.401 59.76 73.401 52.667C73.401 45.573 78.361 39.813 84.781 39.813C91.261 39.813 96.291 45.64 96.141 52.667C96.141 59.76 91.261 65.52 84.781 65.52Z" fill="#5865F2" />
+            </svg>
+          </div>
+
+          <h2 className="text-4xl md:text-7xl font-bold text-white mb-6 tracking-tight">Don't Build Alone.</h2>
+          <p className="text-white/90 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+            Join <span className="font-bold border-b-2 border-white/20">500+ builders</span> in the exclusive sprint server.
+            Find teammates, get real-time mentor feedback, and just vibe.
+          </p>
+
+          <div className="flex flex-col md:flex-row gap-6 items-center">
+            <button onClick={() => window.open('https://discord.gg/your-link', '_blank')} className="bg-white text-[#5865F2] px-10 py-5 rounded-full font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center gap-3">
+              <span>Join the Discord</span>
+              <span className="bg-[#5865F2]/10 p-1 rounded-full"><ChevronDown className="-rotate-90 text-[#5865F2] w-5 h-5" /></span>
+            </button>
+            <div className="flex -space-x-4">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="w-12 h-12 rounded-full border-2 border-[#5865F2] bg-white flex items-center justify-center text-[#5865F2] font-bold text-xs relative z-0 hover:z-10 hover:scale-110 transition-transform cursor-default">
+                  <Users className="w-5 h-5 opacity-60" />
+                </div>
+              ))}
+              <div className="w-12 h-12 rounded-full border-2 border-[#5865F2] bg-white text-[#5865F2] flex items-center justify-center font-bold text-xs relative z-10">
+                +500
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 )
+
+const MarqueeSection = () => {
+  return (
+    <section className="relative py-10 overflow-hidden border-y border-white/5 bg-background">
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[100px] pointer-events-none" />
+
+      {/* Gradient Masks */}
+      <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-background to-transparent z-10" />
+      <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-background to-transparent z-10" />
+
+      <div className="flex relative z-0">
+        <motion.div
+          className="flex gap-16 md:gap-32 items-center whitespace-nowrap"
+          animate={{ x: "-50%" }}
+          transition={{ duration: 60, ease: "linear", repeat: Infinity }}
+        >
+          {[...Array(2)].map((_, i) => (
+            <div key={i} className="flex gap-16 md:gap-32 items-center">
+              {[
+                "VASUDEV AI", "BUILD HARD", "SHIP FAST", "SOLVE PROBLEMS",
+                "JUST CODE", "NO FLUFF", "REAL IMPACT", "50 HOURS SPRINT"
+              ].map((text, j) => (
+                <div key={j} className="flex items-center gap-16 md:gap-32">
+                  <span className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 select-none hover:to-primary transition-all duration-500 cursor-default">
+                    {text}
+                  </span>
+                  {/* Decorative Divider */}
+                  <div className="relative w-12 h-12 flex items-center justify-center">
+                    <div className="absolute w-full h-full border border-white/10 rounded-full animate-[spin_10s_linear_infinite]" />
+                    <div className="w-2 h-2 bg-primary rounded-full shadow-[0_0_10px_#6D7CFF]" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
 
 export default function App() {
   return (
     <div className="relative selection:bg-primary/25 bg-background min-h-screen text-white">
       <Navbar />
       <Hero />
+      <MarqueeSection />
       <WhatIsSprint />
       <HowItWorks />
       <Protocol5030 />
       <ProblemExplorer />
       <JudgingMindset />
-      <BeyondHackathon />
+      <AwardsSection />
       <JudgesSection />
       <FAQ />
       <Community />

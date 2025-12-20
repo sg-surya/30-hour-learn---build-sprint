@@ -791,13 +791,16 @@ const JudgingMindset = () => (
 );
 
 const JudgesSection = () => (
-  <section className="py-[160px] px-8 max-w-[1120px] mx-auto">
+  <section className="py-[160px] px-8 max-w-[1280px] mx-auto relative cursor-default">
+    {/* Background Gradients */}
+    <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2" />
+
     <Reveal x={-20}>
-      <div className="mb-20">
-        <h2 className="text-[11px] font-bold text-primary uppercase tracking-[0.6em] mb-10">Mentors & Jury</h2>
-        <h3 className="section-headline text-4xl md:text-6xl font-medium text-white mb-10">Built by Builders.</h3>
-        <p className="text-xl text-muted font-light max-w-2xl leading-relaxed">
-          Our judges are startup builders, domain experts, and product leaders. They prioritize usefulness over complexity.
+      <div className="mb-24 text-center">
+        <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Mentors & Jury</h2>
+        <h3 className="section-headline text-5xl md:text-7xl font-medium text-white mb-8">Built by Builders.</h3>
+        <p className="text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
+          Our judges are startup builders, domain experts, and product leaders. They prioritize <span className="text-white font-medium">usefulness</span> over complexity.
         </p>
       </div>
 
@@ -808,27 +811,48 @@ const JudgesSection = () => (
           { name: "Priya Sharma", role: "Mentor", title: "Product Lead, Innovate", focus: "User Experience" },
           { name: "Rahul Verma", role: "Jury", title: "Angel Investor", focus: "Business Viability" }
         ].map((person, i) => (
-          <div key={i} className="p-6 border border-border bg-surface/5 rounded-3xl hover:border-primary/40 transition-all duration-300 group">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 mb-6 flex items-center justify-center text-2xl font-bold text-white/20 border border-white/10 group-hover:border-primary/50 group-hover:text-primary transition-colors">
-              {person.name[0]}
-            </div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full border ${person.role === 'Jury' ? 'bg-amber-500/10 border-amber-500/20 text-amber-500' : 'bg-primary/10 border-primary/20 text-primary'}`}>
-                {person.role}
-              </span>
-            </div>
-            <h4 className="text-xl font-heading font-medium text-white mb-1">{person.name}</h4>
-            <div className="text-sm text-muted mb-4">{person.title}</div>
+          <div key={i} className="group relative p-1 rounded-[2rem] bg-gradient-to-b from-white/10 to-transparent hover:from-primary/40 hover:to-primary/5 transition-all duration-500">
+            <div className="relative h-full p-8 rounded-[1.8rem] bg-[#0A0A0A] border border-white/5 overflow-hidden flex flex-col items-center text-center">
 
-            <div className="pt-4 border-t border-white/5">
-              <div className="text-[10px] text-muted/60 uppercase tracking-widest mb-1">Focus Area</div>
-              <div className="text-sm text-white/80">{person.focus}</div>
+              {/* Hover Effect Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Avatar */}
+              <div className="relative mb-8">
+                <div className="w-24 h-24 rounded-full bg-surface border border-white/10 flex items-center justify-center text-3xl font-bold text-white/20 group-hover:text-white group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(109,124,255,0.3)] transition-all duration-500 z-10 relative">
+                  {person.name[0]}
+                </div>
+                {/* Decorative Rings */}
+                <div className="absolute inset-0 rounded-full border border-white/5 scale-110 group-hover:scale-125 transition-transform duration-700" />
+                <div className="absolute inset-0 rounded-full border border-dashed border-white/5 scale-125 group-hover:scale-150 transition-transform duration-700 delay-75" />
+              </div>
+
+              <div className="relative z-10 w-full flex-grow flex flex-col items-center">
+                <div className={`mb-4 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border ${person.role === 'Jury' ? 'bg-amber-500/10 border-amber-500/20 text-amber-500' : 'bg-primary/10 border-primary/20 text-primary'}`}>
+                  {person.role}
+                </div>
+
+                <h4 className="text-xl font-heading font-medium text-white mb-2 group-hover:text-primary transition-colors">{person.name}</h4>
+                <div className="text-sm text-muted mb-6 font-light">{person.title}</div>
+
+                <div className="mt-auto w-full pt-6 border-t border-white/5 group-hover:border-white/10 transition-colors">
+                  <div className="text-[10px] text-muted/50 uppercase tracking-widest mb-2 font-bold">Focus Area</div>
+                  <div className="text-sm text-white/80">{person.focus}</div>
+                </div>
+              </div>
+
+              {/* Social Icon Float */}
+              <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                <div className="w-8 h-8 rounded-full bg-white/5 hover:bg-white flex items-center justify-center text-white hover:text-black transition-colors cursor-pointer">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
+                </div>
+              </div>
             </div>
           </div>
         ))}
       </div>
-    </Reveal >
-  </section >
+    </Reveal>
+  </section>
 );
 
 const RubricItem = ({ title, pts, criteria }: { title: string, pts: number, criteria: string[] }) => (
@@ -1185,7 +1209,7 @@ const Community = () => (
           </p>
 
           <div className="flex flex-col md:flex-row gap-6 items-center">
-            <button onClick={() => window.open('https://discord.gg/your-link', '_blank')} className="bg-white text-[#5865F2] px-10 py-5 rounded-full font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center gap-3">
+            <button onClick={() => window.open('https://discord.gg/e5uPQDXSSk', '_blank')} className="bg-white text-[#5865F2] px-10 py-5 rounded-full font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center gap-3">
               <span>Join the Discord</span>
               <span className="bg-[#5865F2]/10 p-1 rounded-full"><ChevronDown className="-rotate-90 text-[#5865F2] w-5 h-5" /></span>
             </button>

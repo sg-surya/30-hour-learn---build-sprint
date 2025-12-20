@@ -804,14 +804,22 @@ const JudgesSection = () => (
         </p>
       </div>
 
-      <div className="grid md:grid-cols-4 gap-6">
+      <div className="flex flex-wrap justify-center gap-6">
         {[
           { name: "Surya Pratap Singh", role: "Mentor", title: "Founder, Vasudev AI", focus: "AI & Product Strategy" },
-          { name: "Aditya Kumar", role: "Jury", title: "CTO, TechCorp", focus: "Scalability & Architecture" },
-          { name: "Priya Sharma", role: "Mentor", title: "Product Lead, Innovate", focus: "User Experience" },
-          { name: "Rahul Verma", role: "Jury", title: "Angel Investor", focus: "Business Viability" }
+          { name: "Aman Dangi", role: "Jury", title: "Tech Lead", focus: "Scalability & Systems" },
+          { name: "Ashutosh K. Tripathi", role: "Mentor", title: "Product Leader", focus: "User Experience" },
+          { name: "Biswajeet", role: "Mentor", title: "Senior Engineer", focus: "Full Stack Architecture" },
+          {
+            name: "Udayy Sharma",
+            role: "Jury",
+            title: "Angel Investor",
+            focus: "Business Viability",
+            image: "https://indiancreators.com/wp-content/uploads/2025/02/Untitled-design.webp",
+            linkedin: "https://in.linkedin.com/in/udaydotai"
+          }
         ].map((person, i) => (
-          <div key={i} className="group relative p-1 rounded-[2rem] bg-gradient-to-b from-white/10 to-transparent hover:from-primary/40 hover:to-primary/5 transition-all duration-500">
+          <div key={i} className="group relative p-1 rounded-[2rem] bg-gradient-to-b from-white/10 to-transparent hover:from-primary/40 hover:to-primary/5 transition-all duration-500 w-full md:w-[calc(50%-12px)] lg:w-[calc(20%-20px)] min-w-[240px]">
             <div className="relative h-full p-8 rounded-[1.8rem] bg-[#0A0A0A] border border-white/5 overflow-hidden flex flex-col items-center text-center">
 
               {/* Hover Effect Background */}
@@ -819,8 +827,14 @@ const JudgesSection = () => (
 
               {/* Avatar */}
               <div className="relative mb-8">
-                <div className="w-24 h-24 rounded-full bg-surface border border-white/10 flex items-center justify-center text-3xl font-bold text-white/20 group-hover:text-white group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(109,124,255,0.3)] transition-all duration-500 z-10 relative">
-                  {person.name[0]}
+                <div className="w-24 h-24 rounded-full bg-surface border border-white/10 flex items-center justify-center text-3xl font-bold text-white/20 group-hover:text-white group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(109,124,255,0.3)] transition-all duration-500 z-10 relative overflow-hidden">
+                  {/* @ts-ignore */}
+                  {person.image ? (
+                    /* @ts-ignore */
+                    <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
+                  ) : (
+                    person.name[0]
+                  )}
                 </div>
                 {/* Decorative Rings */}
                 <div className="absolute inset-0 rounded-full border border-white/5 scale-110 group-hover:scale-125 transition-transform duration-700" />
@@ -842,11 +856,15 @@ const JudgesSection = () => (
               </div>
 
               {/* Social Icon Float */}
-              <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                <div className="w-8 h-8 rounded-full bg-white/5 hover:bg-white flex items-center justify-center text-white hover:text-black transition-colors cursor-pointer">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
+              {/* @ts-ignore */}
+              {person.linkedin && (
+                <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-20">
+                  {/* @ts-ignore */}
+                  <div onClick={() => window.open(person.linkedin, '_blank')} className="w-8 h-8 rounded-full bg-white/5 hover:bg-[#0077b5] flex items-center justify-center text-white transition-colors cursor-pointer border border-white/10 hover:border-transparent">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         ))}
@@ -1184,45 +1202,113 @@ const Sponsors = () => {
 
 const Community = () => (
   <section className="py-[120px] px-8 relative overflow-hidden">
-    <div className="max-w-[1120px] mx-auto relative z-10">
-      <div className="relative p-12 md:p-24 rounded-[3rem] bg-[#5865F2] overflow-hidden group">
-        {/* Background Decoration */}
-        <div className="absolute inset-0 bg-[url('https://assets-global.website-files.com/6257adef93867e56f84d3109/636e0a6a49cf127bf92de1e2_icon_clyde_blur_white_RGB.png')] bg-cover opacity-10 mix-blend-overlay scale-150 group-hover:scale-125 transition-transform duration-1000"></div>
+    <div className="max-w-[1200px] mx-auto relative z-10">
+      <div className="relative rounded-[3rem] bg-[#5865F2] overflow-hidden group">
 
-        {/* Huge Background Text */}
-        <div className="absolute -bottom-10 -right-10 text-[150px] md:text-[200px] font-black text-white/5 rotate-[-10deg] pointer-events-none select-none whitespace-nowrap">
-          Vasudev AI
-        </div>
+        {/* Background Assets */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/10 blur-[120px] rounded-full pointer-events-none mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('https://assets-global.website-files.com/6257adef93867e56f84d3109/636e0a6a49cf127bf92de1e2_icon_clyde_blur_white_RGB.png')] bg-cover opacity-5 mix-blend-overlay"></div>
 
-        <div className="relative z-10 flex flex-col items-center text-center">
-          <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mb-8 shadow-2xl rotate-3 group-hover:rotate-6 transition-transform">
-            {/* Simple Discord-like Shape (Since we don't have the icon imported, using a custom SVG or similar representation is best, but for now using a placeholder or available icon) */}
-            <svg width="40" height="40" viewBox="0 0 127 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M107.701 8.16C99.271 4.293 90.381 1.487 81.161 0C80.001 2.053 78.681 4.867 77.741 7.08C68.321 5.68 58.941 5.68 49.521 7.08C48.581 4.867 47.251 2.053 46.091 0C36.871 1.487 27.981 4.293 19.551 8.16C2.551 33.32 -2.059 57.88 0.991 82.267C12.351 90.627 23.361 95.707 34.221 95.707C36.931 92.013 39.371 88.08 41.521 83.947C37.561 82.453 33.801 80.613 30.221 78.48C31.181 77.813 32.121 77.107 33.021 76.387C53.251 85.693 74.201 85.693 94.131 76.387C95.041 77.107 95.991 77.8 96.961 78.48C93.381 80.613 89.611 82.44 85.641 83.947C87.791 88.08 90.231 92.013 92.941 95.707C103.801 95.707 114.811 90.627 126.171 82.267C129.671 57.213 124.631 33.32 107.701 8.16ZM42.481 65.52C36.211 65.52 31.101 59.76 31.101 52.667C31.101 45.573 36.061 39.813 42.481 39.813C48.961 39.813 53.991 45.64 53.841 52.667C53.841 59.76 48.811 65.52 42.481 65.52ZM84.781 65.52C78.511 65.52 73.401 59.76 73.401 52.667C73.401 45.573 78.361 39.813 84.781 39.813C91.261 39.813 96.291 45.64 96.141 52.667C96.141 59.76 91.261 65.52 84.781 65.52Z" fill="#5865F2" />
-            </svg>
-          </div>
+        <div className="grid lg:grid-cols-2 gap-12 p-12 md:p-20 items-center relative z-10">
 
-          <h2 className="text-4xl md:text-7xl font-bold text-white mb-6 tracking-tight">Don't Build Alone.</h2>
-          <p className="text-white/90 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-            Join <span className="font-bold border-b-2 border-white/20">500+ builders</span> in the exclusive sprint server.
-            Find teammates, get real-time mentor feedback, and just vibe.
-          </p>
+          {/* Content Left */}
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white font-bold text-xs uppercase tracking-widest mb-8 backdrop-blur-sm">
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span>124 Builders Online</span>
+            </div>
 
-          <div className="flex flex-col md:flex-row gap-6 items-center">
-            <button onClick={() => window.open('https://discord.gg/e5uPQDXSSk', '_blank')} className="bg-white text-[#5865F2] px-10 py-5 rounded-full font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center gap-3">
-              <span>Join the Discord</span>
-              <span className="bg-[#5865F2]/10 p-1 rounded-full"><ChevronDown className="-rotate-90 text-[#5865F2] w-5 h-5" /></span>
-            </button>
-            <div className="flex -space-x-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-12 h-12 rounded-full border-2 border-[#5865F2] bg-white flex items-center justify-center text-[#5865F2] font-bold text-xs relative z-0 hover:z-10 hover:scale-110 transition-transform cursor-default">
-                  <Users className="w-5 h-5 opacity-60" />
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
+              Don't Build <br />
+              <span className="text-white/40">In Silos.</span>
+            </h2>
+
+            <p className="text-white/90 text-lg md:text-xl mb-10 max-w-xl font-medium leading-relaxed">
+              Join the exclusive sprint server. Find teammates, get specific mentor feedback, and debug at 3 AM with 500+ builders.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 items-center lg:justify-start justify-center">
+              <button onClick={() => window.open('https://discord.gg/e5uPQDXSSk', '_blank')} className="bg-white text-[#5865F2] pl-8 pr-2 py-2 rounded-full font-black text-lg hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:scale-105 transition-all flex items-center gap-6 group/btn">
+                <span>JOIN DISCORD</span>
+                <div className="w-12 h-12 rounded-full bg-[#5865F2] text-white flex items-center justify-center -rotate-45 group-hover/btn:rotate-0 transition-transform">
+                  <Rocket className="w-5 h-5" />
                 </div>
-              ))}
-              <div className="w-12 h-12 rounded-full border-2 border-[#5865F2] bg-white text-[#5865F2] flex items-center justify-center font-bold text-xs relative z-10">
-                +500
+              </button>
+
+              {/* Avatar Stake */}
+              <div className="flex -space-x-3">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-[#5865F2] bg-indigo-900/50 backdrop-blur-md flex items-center justify-center text-white text-[10px] font-bold">
+                    <Users className="w-4 h-4 opacity-70" />
+                  </div>
+                ))}
               </div>
             </div>
+          </div>
+
+          {/* Visual Right: 3D Mock Interface */}
+          <div className="relative hidden lg:block perspective-1000">
+            {/* Huge Background Text Adjusted */}
+            <div className="absolute -top-20 -right-20 text-[180px] font-black text-black/10 -rotate-12 pointer-events-none select-none whitespace-nowrap z-0">
+              Vasudev AI
+            </div>
+
+            <motion.div
+              className="relative z-10 bg-[#36393f] rounded-xl border border-white/10 shadow-2xl overflow-hidden max-w-md ml-auto rotate-y-[-10deg] rotate-x-[5deg] hover:rotate-0 transition-all duration-700"
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* Fake Header */}
+              <div className="h-4 bg-[#202225] flex items-center px-4 gap-1.5 border-b border-black/20">
+                <div className="w-2 h-2 rounded-full bg-red-500" />
+                <div className="w-2 h-2 rounded-full bg-yellow-500" />
+                <div className="w-2 h-2 rounded-full bg-green-500" />
+              </div>
+
+              {/* Mock Chat Content */}
+              <div className="p-6 space-y-4">
+                <div className="flex gap-4">
+                  <div className="w-10 h-10 rounded-full bg-primary flex-shrink-0" />
+                  <div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-white font-bold text-sm">sgsurya</span>
+                      <span className="text-xs text-muted">Today at 2:30 AM</span>
+                    </div>
+                    <div className="text-white/80 text-xs mt-1 bg-[#2f3136] p-2 rounded-r-lg rounded-bl-lg">
+                      Just pushed the deployed link! The mentorship session yesterday really helped clarify the user flow. 🚀
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="w-10 h-10 rounded-full bg-green-500 flex-shrink-0" />
+                  <div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-white font-bold text-sm">rahul_dev</span>
+                      <span className="text-xs text-muted">Today at 2:32 AM</span>
+                    </div>
+                    <div className="text-white/80 text-xs mt-1 bg-[#2f3136] p-2 rounded-r-lg rounded-bl-lg">
+                      Whoa, that UI is clean! simple tool ??
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 opacity-50">
+                  <div className="w-10 h-10 rounded-full bg-purple-500 flex-shrink-0" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-3 bg-white/10 rounded w-1/4" />
+                    <div className="h-10 bg-white/10 rounded w-full" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Reaction */}
+              <div className="absolute bottom-10 right-10 bg-[#5865F2] text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1 animate-bounce">
+                <Star className="w-3 h-3 fill-current" />
+                Great work!
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -853,7 +853,7 @@ export const MarqueeSection = () => {
                                 "JUST CODE", "NO FLUFF", "REAL IMPACT", "50 HOURS SPRINT"
                             ].map((text, j) => (
                                 <div key={j} className="flex items-center gap-16 md:gap-32">
-                                    <span className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 select-none hover:to-primary transition-all duration-500 cursor-default">
+                                    <span className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 select-none hover:to-primary transition-all duration-500 cursor-default pr-4">
                                         {text}
                                     </span>
                                     {/* Decorative Divider */}

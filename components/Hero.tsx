@@ -65,6 +65,10 @@ export const Hero = ({ onRegister }: { onRegister: () => void }) => {
                             <span className="inline-block transition-transform group-hover:translate-x-2 ml-3">→</span>
                         </motion.button>
 
+                        <div className="mt-4 inline-block px-4 py-1.5 rounded-full border border-accentPurple/30 bg-accentPurple/10 text-accentPurple text-[11px] font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(160,32,240,0.15)] animate-pulse">
+                            Date: TBA (To Be Announced)
+                        </div>
+
                         <span className="text-[10px] text-muted/50 font-medium tracking-widest uppercase">Takes less than 2 minutes</span>
 
                         <div className="flex flex-col md:flex-row items-center gap-6 mt-6">

@@ -430,6 +430,13 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
                             Finish in 5 minutes. Build for 50 hours.
                         </p>
 
+                        <div className="mb-8 inline-block px-4 py-2 rounded-lg bg-white/5 border border-white/10">
+                            <div className="flex items-center gap-3 text-white/80">
+                                <Clock className="w-4 h-4 text-accentPurple" />
+                                <span className="text-xs font-bold uppercase tracking-widest">Date: TBA (To Be Announced)</span>
+                            </div>
+                        </div>
+
                         <div className="space-y-6">
                             {steps.map((s, i) => (
                                 <div key={i} className={`flex items-center gap-4 text-sm transition-colors ${i === step ? 'text-white font-bold' : i < step ? 'text-primary' : 'text-white/30'}`}>

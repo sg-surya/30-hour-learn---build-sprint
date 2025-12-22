@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar } from './components/Navbar';
+
 import { Hero } from './components/Hero';
 import { ProblemExplorer } from './components/ProblemExplorer';
 import { WhatIsSprint, HowItWorks, Protocol5030, JudgingMindset, MentorSessions, JudgesSection, JudgingSection, AwardsSection, FAQ, Community, MarqueeSection } from './components/LandingSections';
@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     <div className="relative selection:bg-primary/25 bg-background min-h-screen text-white">
-      <Navbar onRegister={() => setShowRegistration(true)} />
+
       <Hero onRegister={() => setShowRegistration(true)} />
       <MarqueeSection />
       <WhatIsSprint />

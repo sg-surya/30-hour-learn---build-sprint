@@ -671,9 +671,10 @@ export const FAQ = () => {
 export const Community = () => (
     <section className="py-12 md:py-[120px] px-4 md:px-8 relative overflow-hidden">
         <div className="max-w-[1200px] mx-auto relative z-10">
-            <div className="relative rounded-[2rem] md:rounded-[3rem] bg-[#5865F2] overflow-hidden group">
+            <div className="relative rounded-[2rem] md:rounded-[3rem] bg-[#5865F2] overflow-hidden group shadow-2xl">
 
-                {/* Background Assets */}
+                {/* Background Assets - darker vignette added */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),rgba(0,0,0,0.4))] pointer-events-none" />
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/10 blur-[120px] rounded-full pointer-events-none mix-blend-overlay" />
                 <div className="absolute inset-0 bg-[url('https://assets-global.website-files.com/6257adef93867e56f84d3109/636e0a6a49cf127bf92de1e2_icon_clyde_blur_white_RGB.png')] bg-cover opacity-5 mix-blend-overlay"></div>
 
@@ -681,108 +682,79 @@ export const Community = () => (
 
                     {/* Content Left */}
                     <div className="text-center lg:text-left">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white font-bold text-xs uppercase tracking-widest mb-6 md:mb-8 backdrop-blur-sm">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/20 border border-white/10 text-white font-bold text-xs uppercase tracking-widest mb-6 md:mb-8 backdrop-blur-sm">
                             <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                            <span>124 Builders Online</span>
+                            <span>Live Sprint: 124 Builders Online</span>
                         </div>
 
-                        <h2 className="text-4xl md:text-6xl font-black text-white mb-6 md:mb-6 tracking-tight leading-tight">
-                            Don't Build <br />
-                            <span className="text-white/40">In Silos.</span>
+                        <h2 className="text-4xl md:text-6xl font-black text-white mb-6 md:mb-8 tracking-tight leading-tight">
+                            Build Together.<br />
+                            <span className="text-white/60">Ship Faster.</span>
                         </h2>
 
                         <p className="hidden md:block text-white/90 text-lg md:text-xl mb-10 max-w-xl font-medium leading-relaxed">
-                            Join the exclusive sprint server. Find teammates, get specific mentor feedback, and debug at 3 AM with 500+ builders.
+                            Find teammates, ship fast, and debug at 3 AM with serious builders.
                         </p>
                         <p className="md:hidden text-white/80 text-base mb-8 font-medium">
-                            Join the exclusive 500+ builders sprint server.
+                            Find teammates, ship fast, and debug at 3 AM.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-6 items-center lg:justify-start justify-center">
-                            <button onClick={() => window.open('https://discord.gg/t9S8fznbpn', '_blank')} className="bg-white text-[#5865F2] pl-8 pr-2 py-2 rounded-full font-black text-lg hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:scale-105 transition-all flex items-center gap-6 group/btn w-full md:w-auto justify-between md:justify-start">
-                                <span>JOIN DISCORD</span>
+                        <div className="flex flex-col items-center lg:items-start gap-4">
+                            <button onClick={() => window.open('https://discord.gg/t9S8fznbpn', '_blank')} className="bg-white text-[#5865F2] pl-8 pr-2 py-3 rounded-full font-black text-lg hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:scale-105 transition-all flex items-center gap-6 group/btn w-full md:w-auto justify-between md:justify-start">
+                                <span>ENTER THE SPRINT</span>
                                 <div className="w-12 h-12 rounded-full bg-[#5865F2] text-white flex items-center justify-center -rotate-45 group-hover/btn:rotate-0 transition-transform md:ml-0">
                                     <svg width="24" height="24" viewBox="0 0 127 96" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
                                         <path d="M107.7 8.07001C99.08 4.11001 90.03 1.25001 80.6 0.050009C80.46 0.030009 80.32 0.090009 80.24 0.210009C79.05 2.37001 77.7 5.25001 76.77 7.42001C66.56 5.90001 56.4 5.90001 46.33 7.42001C45.39 5.24001 44.03 2.37001 42.86 0.200009C42.78 0.080009 42.64 0.020009 42.5 0.050009C33.06 1.25001 24.02 4.11001 15.39 8.07001C15.3 8.11001 15.24 8.18001 15.2 8.27001C-2.29004 39.2901 -2.71004 69.4601 5.93996 98.7101C6.00996 98.9301 6.22996 99.0801 6.45996 99.0801C17.93 107.5 29.04 107.5 39.99 107.5H40.04C40.24 107.49 40.42 107.38 40.54 107.21C43.25 103.5 45.69 99.5801 47.78 95.4201C47.92 95.1401 47.78 94.8101 47.48 94.7001C43.49 93.1801 39.7 91.2901 36.1 89.1401C35.8 88.9601 35.77 88.5401 36.05 88.3101C36.85 87.7101 37.63 87.0801 38.39 86.4301C38.56 86.2901 38.8 86.2601 38.99 86.3501C61.46 96.6501 84.7 96.6501 106.87 86.3501C107.06 86.2601 107.3 86.2901 107.47 86.4301C108.23 87.0801 109.02 87.7101 109.81 88.3101C110.09 88.5401 110.07 88.9601 109.76 89.1401C106.16 91.2901 102.36 93.1801 98.37 94.7001C98.07 94.8101 97.94 95.1401 98.07 95.4201C100.16 99.5801 102.61 103.5 105.31 107.21C105.43 107.38 105.62 107.49 105.81 107.5H105.86C116.82 107.5 127.93 107.5 139.4 99.0801C139.63 99.0801 139.85 98.9301 139.92 98.7101C149.37 65.9101 146.43 35.8201 127.86 8.27001C127.82 8.18001 127.76 8.11001 127.67 8.07001ZM42.45 78.4301C35.91 78.4301 30.52 72.4301 30.52 65.0701C30.52 57.7101 35.79 51.7101 42.45 51.7101C49.16 51.7101 54.55 57.7701 54.43 65.0701C54.43 72.4301 49.1 78.4301 42.45 78.4301ZM83.4 78.4301C76.86 78.4301 71.47 72.4301 71.47 65.0701C71.47 57.7101 76.74 51.7101 83.4 51.7101C90.11 51.7101 95.5 57.7701 95.38 65.0701C95.38 72.4301 90.05 78.4301 83.4 78.4301Z" fill="white" />
                                     </svg>
                                 </div>
                             </button>
-
-                            {/* Avatar Stake */}
-                            <div className="hidden md:flex -space-x-3">
-                                {[1, 2, 3, 4].map((i) => (
-                                    <div key={i} className="w-10 h-10 rounded-full border-2 border-[#5865F2] bg-indigo-900/50 backdrop-blur-md flex items-center justify-center text-white text-[10px] font-bold">
-                                        <Users className="w-4 h-4 opacity-70" />
-                                    </div>
-                                ))}
-                            </div>
+                            <p className="text-[10px] uppercase tracking-widest text-white/50 font-bold">No pitches · No fluff · Just building</p>
                         </div>
                     </div>
 
-                    {/* Visual Right: Community Constellation */}
+                    {/* Visual Right: Live Activity Feed */}
                     <div className="hidden lg:flex relative items-center justify-center lg:h-full py-12 lg:py-0">
-                        {/* Glowing Backdrop */}
-                        <div className="absolute inset-0 bg-[#5865F2] blur-[100px] opacity-20 rounded-full" />
-
-                        {/* Animated System */}
-                        <div className="relative w-[400px] h-[400px] flex items-center justify-center">
-                            {/* Orbits */}
-                            {[1, 2, 3].map((i) => (
-                                <div key={i} className={`absolute inset-0 border border-white/5 rounded-full animate-[spin_10s_linear_infinite] border-dashed`} style={{ padding: `${i * 30}px`, animationDuration: `${20 + i * 10}s` }} />
-                            ))}
-
-                            {/* Center */}
-                            <motion.div
-                                initial={{ scale: 0.8, opacity: 0 }}
-                                whileInView={{ scale: 1, opacity: 1 }}
-                                className="w-32 h-32 bg-white/10 backdrop-blur-2xl px-6 rounded-3xl border border-white/20 flex flex-col items-center justify-center gap-2 z-20 shadow-2xl"
-                            >
-                                <span className="text-4xl font-black text-white">500+</span>
-                                <span className="text-xs font-bold text-white/50 uppercase tracking-widest">Builders</span>
-                            </motion.div>
-
-                            {/* Floating Cards */}
-                            <motion.div
-                                animate={{ y: [-10, 10, -10] }}
-                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute top-10 right-10 bg-[#0F0F0F] p-4 rounded-xl border border-white/10 flex items-center gap-3 shadow-xl z-20"
-                            >
-                                <div className="w-10 h-10 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center">
-                                    <Code className="w-5 h-5" />
+                        <div className="relative w-full max-w-sm">
+                            <div className="bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 p-6 shadow-2xl">
+                                <div className="flex justify-between items-center mb-6 pb-4 border-b border-white/5">
+                                    <span className="text-sm font-bold text-white flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> Live Activity</span>
+                                    <span className="text-[10px] font-mono text-white/40">LAST 24 HOURS</span>
                                 </div>
-                                <div>
-                                    <div className="text-sm font-bold text-white">Dev Help</div>
-                                    <div className="text-xs text-muted">#development</div>
+                                <div className="space-y-4">
+                                    <div className="flex gap-4 items-start animate-fade-in transition-all">
+                                        <div className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 border border-blue-500/30">
+                                            <Code className="w-4 h-4" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm text-white/90 font-medium">Ayush deployed sprint-v1</p>
+                                            <p className="text-xs text-white/40 mt-0.5">2 mins ago · #shipping</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 items-start">
+                                        <div className="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 border border-purple-500/30">
+                                            <PenTool className="w-4 h-4" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm text-white/90 font-medium">Team 7 shared MVP demo</p>
+                                            <p className="text-xs text-white/40 mt-0.5">15 mins ago · #showcase</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 items-start">
+                                        <div className="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/30">
+                                            <Users className="w-4 h-4" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm text-white/90 font-medium">Mentor Feedback: "Solid UX"</p>
+                                            <p className="text-xs text-white/40 mt-0.5">42 mins ago · #design</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </motion.div>
-
-                            <motion.div
-                                animate={{ y: [10, -10, 10] }}
-                                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                                className="absolute bottom-20 left-0 bg-[#0F0F0F] p-4 rounded-xl border border-white/10 flex items-center gap-3 shadow-xl z-20"
-                            >
-                                <div className="w-10 h-10 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center">
-                                    <PenTool className="w-5 h-5" />
+                                <div className="mt-6 pt-4 border-t border-white/5 text-center">
+                                    <div className="inline-block px-3 py-1 rounded-full bg-white/5 text-[10px] text-white/50 uppercase tracking-widest border border-white/5">
+                                        Last Sprint: 18 Projects Shipped
+                                    </div>
                                 </div>
-                                <div>
-                                    <div className="text-sm font-bold text-white">Design Critiques</div>
-                                    <div className="text-xs text-muted">#design</div>
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                animate={{ y: [-15, 15, -15] }}
-                                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                                className="absolute -bottom-5 right-20 bg-[#0F0F0F] p-4 rounded-xl border border-white/10 flex items-center gap-3 shadow-xl z-20"
-                            >
-                                <div className="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center">
-                                    <Rocket className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <div className="text-sm font-bold text-white">Showcase</div>
-                                    <div className="text-xs text-muted">#shipping</div>
-                                </div>
-                            </motion.div>
+                            </div>
                         </div>
                     </div>
                 </div>

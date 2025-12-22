@@ -252,10 +252,38 @@ export const MentorSessions = () => (
 );
 
 const JUDGES = [
-    { name: "Surya Pratap Singh", role: "Jury", title: "Founder, Vasudev AI", focus: "AI & Product Strategy" },
-    { name: "Aman Dangi", role: "Jury", title: "Tech Lead", focus: "Scalability & Systems" },
-    { name: "Ashutosh K. Tripathi", role: "Mentor", title: "Product Leader", focus: "User Experience" },
-    { name: "Bishwajeet Singh", role: "Mentor", title: "Senior Engineer", focus: "Design & Architecture" },
+    {
+        name: "Surya Pratap Singh",
+        role: "Jury",
+        title: "Founder, Vasudev AI",
+        focus: "AI & Product Strategy",
+        image: "https://media.licdn.com/dms/image/v2/D5603AQH-YdkYsVqu0g/profile-displayphoto-scale_400_400/B56ZiWrmgjH0Ag-/0/1754874671600?e=1767830400&v=beta&t=4ihc1AXgz0Z4Kl4p-M2wIPHE-Gt-fTu7wTTIgnYhWpo",
+        linkedin: "https://www.linkedin.com/in/sgsurya/"
+    },
+    {
+        name: "Aman Dangi",
+        role: "Jury",
+        title: "Tech Lead",
+        focus: "Scalability & Systems",
+        image: "https://media.licdn.com/dms/image/v2/D4D03AQGRXv8guRVRnA/profile-displayphoto-scale_400_400/B4DZpuYCvoHwBo-/0/1762788470044?e=1767830400&v=beta&t=Dk7Wu7cB6TMFVTJ-0seG_ePkxxDFLYRPAYo0bCGeUmg",
+        linkedin: "https://www.linkedin.com/in/aman-dangi26/"
+    },
+    {
+        name: "Ashutosh K. Tripathi",
+        role: "Mentor",
+        title: "Product Leader",
+        focus: "User Experience",
+        image: "https://media.licdn.com/dms/image/v2/D5603AQGYCLuK_w70vw/profile-displayphoto-shrink_100_100/B56ZcI0d7jGoAY-/0/1748199662481?e=1767830400&v=beta&t=nRCNMdWNuSAlgguEMKExrSSrSFDItgDDM8-BhR5Jmos",
+        linkedin: "https://www.linkedin.com/in/ashutosh-kumar-tripathi-926308237/"
+    },
+    {
+        name: "Biswajit Kumar",
+        role: "Mentor",
+        title: "Senior Engineer",
+        focus: "Design & Architecture",
+        image: "https://media.licdn.com/dms/image/v2/D5603AQHVB2Ar2a4kjg/profile-displayphoto-scale_400_400/B56Zn2cyFgHIAk-/0/1760776366788?e=1767830400&v=beta&t=YQN9A6Yzg52lOdcr8qmF-8bL8ffAhskT1o50JeBbfdg",
+        linkedin: "https://www.linkedin.com/in/biswajit-exe20/"
+    },
     {
         name: "Udayy Sharma",
         role: "Jury",
@@ -264,8 +292,14 @@ const JUDGES = [
         image: "https://indiancreators.com/wp-content/uploads/2025/02/Untitled-design.webp",
         linkedin: "https://in.linkedin.com/in/udaydotai"
     },
-    { name: "Agrim Gupta", role: "Jury", title: "Founder", focus: "Product Market Fit" },
-    { name: "Svetlana Hanover", role: "Mentor", title: "Marketing Expert", focus: "Growth & Branding" }
+    {
+        name: "Agrim Gupta",
+        role: "Jury",
+        title: "Founder",
+        focus: "Product Market Fit",
+        image: "https://media.licdn.com/dms/image/v2/D5635AQFmfw24J0Vcaw/profile-framedphoto-shrink_400_400/B56Zq6JN_0KsAc-/0/1764059570401?e=1767031200&v=beta&t=ONWZmnoVXvlKDzgTsiuBjcRI7cEWbp83SMGpir5c-1c",
+        linkedin: "https://www.linkedin.com/in/agrim-choudhary-gupta-626807245/"
+    }
 ];
 
 export const JudgesSection = () => (

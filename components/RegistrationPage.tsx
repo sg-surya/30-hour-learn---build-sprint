@@ -230,6 +230,25 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
         }
         setIsSubmitting(true);
         try {
+            // Check if email already exists
+            const { data: existingUser, error: checkError } = await supabase
+                .from('registrations')
+                .select('id')
+                .eq('email', data.email)
+                .maybeSingle();
+
+            if (checkError) {
+                console.error("Error checking email:", checkError);
+                // We continue to try inserting if check fails, or you could stop. 
+                // Usually better to fail safe or alert. Let's alert for now if critical.
+            }
+
+            if (existingUser) {
+                alert("This email is already registered. Please use a different email or contact support.");
+                setIsSubmitting(false);
+                return;
+            }
+
             const { error } = await supabase
                 .from('registrations')
                 .insert([

@@ -4,17 +4,33 @@ import { Trophy, Users, FileCheck, Zap, ChevronDown, Clock, Rocket, Star, Award,
 import { Reveal } from './Reveal';
 
 export const WhatIsSprint = () => (
-    <section className="relative py-32 bg-surface/5">
-        <div className="px-8 max-w-[800px] mx-auto text-center">
+    <section className="relative py-16 md:py-32 bg-surface/5">
+        <div className="px-8 max-w-[800px] mx-auto text-center md:text-left">
             <Reveal>
-                <h2 className="text-sm font-bold text-primary uppercase tracking-[0.4em] mb-8">What is this?</h2>
-                <h3 className="text-3xl md:text-5xl font-heading font-medium text-white mb-8 leading-tight">
-                    A startup-first build sprint.
-                </h3>
-                <p className="text-xl text-muted font-light leading-relaxed mb-12">
-                    Identify a real-world problem, validate it with users, and build a working solution in 50 hours — without quitting your job or college.
-                </p>
-                <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-sm font-medium text-white/80">
+                <div className="md:text-center">
+                    <h2 className="text-sm font-bold text-primary uppercase tracking-[0.4em] mb-6">WHAT IS THIS?</h2>
+                    <h3 className="text-3xl md:text-5xl font-heading font-medium text-white mb-8 leading-tight">
+                        <span className="md:hidden">A startup-first build sprint.<br />No pitching. No fluff.</span>
+                        <span className="hidden md:inline">A startup-first build sprint.</span>
+                    </h3>
+                    <div className="space-y-4 text-xl text-muted font-light leading-relaxed mb-12">
+                        <p className="hidden md:block">
+                            Identify a real-world problem, validate it with users, and build a working solution in 50 hours — without quitting your job or college.
+                        </p>
+
+                        {/* Mobile Bullets */}
+                        <div className="md:hidden space-y-4 text-left max-w-[280px] mx-auto">
+                            <p className="text-white/90 text-lg">A startup-first build sprint where you identify a real problem and ship a solution.</p>
+                            <div className="space-y-3 pt-4">
+                                <div className="flex items-center gap-3 text-white font-medium"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />Real problems</div>
+                                <div className="flex items-center gap-3 text-white font-medium"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />Real builds</div>
+                                <div className="flex items-center gap-3 text-white font-medium"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />Real progress</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="hidden md:flex flex-wrap justify-center gap-6 md:gap-12 text-sm font-medium text-white/80">
                     <div className="flex items-center gap-3"><Clock className="w-5 h-5 text-primary" /> 50h Window · ~30h Effort</div>
                     <div className="flex items-center gap-3"><Users className="w-5 h-5 text-primary" /> Solo or Small Teams</div>
                     <div className="flex items-center gap-3"><Rocket className="w-5 h-5 text-primary" /> Build for Impact</div>
@@ -25,14 +41,14 @@ export const WhatIsSprint = () => (
 );
 
 export const HowItWorks = ({ onRegister }: { onRegister: () => void }) => (
-    <section className="py-32 px-8 max-w-[1120px] mx-auto">
+    <section className="py-16 md:py-32 px-6 md:px-8 max-w-[1120px] mx-auto">
         <Reveal>
             <div className="mb-24 text-center">
                 <h2 className="text-sm font-bold text-accentPurple uppercase tracking-[0.4em] mb-4">Process</h2>
                 <h3 className="text-4xl md:text-5xl font-heading font-medium text-white">How It Works</h3>
             </div>
 
-            <div className="grid md:grid-cols-4 gap-8 relative mb-20">
+            <div className="flex md:grid md:grid-cols-4 gap-4 md:gap-8 relative mb-20 overflow-x-auto pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-6 md:mx-0 no-scrollbar">
                 <div className="hidden md:block absolute top-[2.5rem] left-0 w-full h-px border-t-2 border-dashed border-white/10 -z-10" />
 
                 {[
@@ -41,7 +57,7 @@ export const HowItWorks = ({ onRegister }: { onRegister: () => void }) => (
                     { icon: <Zap className="w-6 h-6" />, step: "03", title: "Build", desc: "Spend ~30 hours building a simple, usable solution." },
                     { icon: <Rocket className="w-6 h-6" />, step: "04", title: "Submit", desc: "Show what you built, why it matters, and how it scales." }
                 ].map((item, i) => (
-                    <div key={i} className="relative grid place-items-center text-center group">
+                    <div key={i} className="relative grid place-items-center text-center group min-w-[80vw] md:min-w-0 snap-center">
                         <div className="w-20 h-20 bg-background border border-border rounded-3xl flex items-center justify-center text-muted group-hover:text-primary group-hover:border-primary/50 group-hover:shadow-[0_0_30px_-10px_rgba(109,124,255,0.3)] transition-all duration-500 mb-6 bg-gradient-to-br from-surface/50 to-background z-10 box-border">
                             {item.icon}
                         </div>
@@ -55,11 +71,11 @@ export const HowItWorks = ({ onRegister }: { onRegister: () => void }) => (
                 ))}
             </div>
 
-            <div className="text-center">
-                <div className="inline-flex flex-col md:flex-row items-center gap-6 px-8 py-4 rounded-full bg-surface/10 border border-white/5 backdrop-blur-sm">
+            <div className="text-center w-full">
+                <div className="inline-flex flex-col md:flex-row items-center gap-4 md:gap-6 px-6 md:px-8 py-6 md:py-4 rounded-3xl md:rounded-full bg-surface/10 border border-white/5 backdrop-blur-sm w-full md:w-auto">
                     <p className="text-lg text-white font-medium">We care about progress, not perfection.</p>
                     <div className="hidden md:block h-4 w-px bg-white/10"></div>
-                    <button onClick={onRegister} className="text-sm font-bold text-primary hover:text-white transition-colors uppercase tracking-widest">
+                    <button onClick={onRegister} className="w-full md:w-auto text-sm font-bold text-primary hover:text-white transition-colors uppercase tracking-widest py-2 md:py-0 border-t border-white/10 md:border-0 md:pt-0 pt-4 mt-2 md:mt-0">
                         Start Building →
                     </button>
                 </div>
@@ -69,33 +85,52 @@ export const HowItWorks = ({ onRegister }: { onRegister: () => void }) => (
 );
 
 export const Protocol5030 = () => (
-    <section className="relative py-24 bg-surface/5 border-y border-white/5">
+    <section className="relative py-16 md:py-24 bg-surface/5 border-y border-white/5">
         <div className="px-8 max-w-[1120px] mx-auto">
             <Reveal x={-20}>
                 <div className="grid md:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <h2 className="text-sm font-bold text-primary uppercase tracking-[0.4em] mb-6">The 50:30 Protocol</h2>
-                        <h3 className="text-4xl font-heading font-medium text-white mb-8">Built for real builders with real lives.</h3>
-                        <div className="space-y-4 text-lg text-muted font-light">
+                    <div className="text-center md:text-left">
+                        <h2 className="text-sm font-bold text-primary uppercase tracking-[0.4em] mb-6">BUILT FOR REAL BUILDERS</h2>
+
+                        {/* Mobile Numbers Block */}
+                        <div className="md:hidden mb-8">
+                            <div className="grid grid-cols-2 gap-8 text-center border-b border-white/10 pb-8 mb-8">
+                                <div>
+                                    <div className="text-5xl font-heading font-bold text-white mb-2">50H</div>
+                                    <div className="text-[10px] uppercase tracking-widest text-muted">Total Sprint</div>
+                                </div>
+                                <div>
+                                    <div className="text-5xl font-heading font-bold text-primary mb-2">~30H</div>
+                                    <div className="text-[10px] uppercase tracking-widest text-muted">Active Build</div>
+                                </div>
+                            </div>
+                            <p className="text-white/80 font-medium">No pitches. No theory.<br />Only shipping.</p>
+                        </div>
+
+                        <h3 className="hidden md:block text-3xl md:text-4xl font-heading font-medium text-white mb-8">Built for real builders with real lives.</h3>
+                        <div className="hidden md:block space-y-4 text-lg text-muted font-light">
                             <p>Flexible slots. Honest progress. High stakes delivery.</p>
                             <p className="opacity-80">We don't track your minutes with a stopwatch. We judge your commitment through daily check-ins and the quality of what you ship.</p>
                         </div>
                     </div>
-                    <div className="p-8 border border-border bg-surface/10 rounded-[2.5rem] relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-8 opacity-5"><Clock className="w-32 h-32" /></div>
-                        <h4 className="text-xs font-bold text-white/50 uppercase tracking-[0.2em] mb-8">The Balance</h4>
-                        <div className="space-y-8">
-                            <div className="flex justify-between items-end border-b border-white/5 pb-4">
-                                <span className="text-muted text-sm uppercase tracking-widest">Total Sprint Window</span>
-                                <span className="text-white text-4xl font-heading font-bold">50H</span>
+
+                    <div className="hidden md:flex flex-col gap-4 mt-8">
+                        <div className="p-8 border border-border bg-surface/10 rounded-[2.5rem] relative overflow-hidden">
+                            <div className="absolute top-0 right-0 p-8 opacity-5"><Clock className="w-32 h-32" /></div>
+                            <h4 className="text-xs font-bold text-white/50 uppercase tracking-[0.2em] mb-8">The Balance</h4>
+                            <div className="space-y-8">
+                                <div className="flex flex-col md:flex-row justify-between items-center md:items-end border-b border-white/5 pb-4 text-center md:text-left gap-2 md:gap-0">
+                                    <span className="text-white text-5xl md:text-4xl font-heading font-bold order-1 md:order-2">50H</span>
+                                    <span className="text-muted text-sm uppercase tracking-widest order-2 md:order-1">Total Sprint Window</span>
+                                </div>
+                                <div className="flex flex-col md:flex-row justify-between items-center md:items-end border-b border-white/5 pb-4 text-center md:text-left gap-2 md:gap-0">
+                                    <span className="text-primary text-5xl md:text-4xl font-heading font-bold order-1 md:order-2">~30H</span>
+                                    <span className="text-muted text-sm uppercase tracking-widest order-2 md:order-1">Recommended Effort</span>
+                                </div>
+                                <p className="text-xs text-muted/60 italic">
+                                    *We don't track hours. We evaluate output.
+                                </p>
                             </div>
-                            <div className="flex justify-between items-end border-b border-white/5 pb-4">
-                                <span className="text-muted text-sm uppercase tracking-widest">Recommended Effort</span>
-                                <span className="text-primary text-4xl font-heading font-bold">~30H</span>
-                            </div>
-                            <p className="text-xs text-muted/60 italic">
-                                *We don't track hours. We evaluate output.
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -105,7 +140,7 @@ export const Protocol5030 = () => (
 );
 
 export const JudgingMindset = () => (
-    <section className="py-32 px-8 max-w-[1120px] mx-auto bg-surface/5 rounded-[3rem]">
+    <section className="py-16 md:py-32 px-6 md:px-8 max-w-[1120px] mx-auto bg-surface/5 rounded-[2rem] md:rounded-[3rem]">
         <Reveal>
             <div className="grid md:grid-cols-2 gap-16 items-center">
                 <div>
@@ -158,7 +193,7 @@ export const JudgingMindset = () => (
 );
 
 export const MentorSessions = () => (
-    <section className="py-20 px-8 max-w-[1280px] mx-auto border-t border-white/5">
+    <section className="py-16 md:py-20 px-6 md:px-8 max-w-[1280px] mx-auto border-t border-white/5">
         <Reveal>
             <div className="mb-16">
                 <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Live Learning</h2>
@@ -197,12 +232,12 @@ export const MentorSessions = () => (
                         border: "border-amber-500/20"
                     }
                 ].map((session, i) => (
-                    <div key={i} className={`p-8 rounded-3xl bg-gradient-to-br ${session.color} border ${session.border} hover:scale-[1.02] transition-transform`}>
-                        <div className="mb-6 bg-black/20 w-12 h-12 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                    <div key={i} className={`p-5 md:p-8 rounded-3xl bg-gradient-to-br ${session.color} border ${session.border} hover:scale-[1.02] transition-transform w-full`}>
+                        <div className="mb-4 md:mb-6 bg-black/20 w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center backdrop-blur-sm">
                             {session.icon}
                         </div>
-                        <h4 className="text-xl font-bold text-white mb-2">{session.category}</h4>
-                        <p className="text-sm text-white/60 mb-6 leading-relaxed">Mentored by {session.mentors}</p>
+                        <h4 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">{session.category}</h4>
+                        <p className="text-xs md:text-sm text-white/60 mb-4 md:mb-6 leading-relaxed">Mentored by {session.mentors}</p>
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/20 border border-white/5 text-[10px] font-bold uppercase tracking-widest text-white/50">
                             <Clock className="w-3 h-3" />
                             <span>TBD</span>
@@ -214,37 +249,40 @@ export const MentorSessions = () => (
     </section>
 );
 
+const JUDGES = [
+    { name: "Surya Pratap Singh", role: "Jury", title: "Founder, Vasudev AI", focus: "AI & Product Strategy" },
+    { name: "Aman Dangi", role: "Jury", title: "Tech Lead", focus: "Scalability & Systems" },
+    { name: "Ashutosh K. Tripathi", role: "Mentor", title: "Product Leader", focus: "User Experience" },
+    { name: "Bishwajeet Singh", role: "Mentor", title: "Senior Engineer", focus: "Design & Architecture" },
+    {
+        name: "Udayy Sharma",
+        role: "Jury",
+        title: "Angel Investor",
+        focus: "Business Viability",
+        image: "https://indiancreators.com/wp-content/uploads/2025/02/Untitled-design.webp",
+        linkedin: "https://in.linkedin.com/in/udaydotai"
+    },
+    { name: "Agrim Gupta", role: "Jury", title: "Founder", focus: "Product Market Fit" },
+    { name: "Svetlana Hanover", role: "Mentor", title: "Marketing Expert", focus: "Growth & Branding" }
+];
+
 export const JudgesSection = () => (
-    <section className="py-[160px] px-8 max-w-[1280px] mx-auto relative cursor-default">
+    <section className="py-24 md:py-[160px] px-6 md:px-8 max-w-[1280px] mx-auto relative cursor-default">
         {/* Background Gradients */}
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2" />
 
         <Reveal x={-20}>
             <div className="mb-24 text-center">
                 <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Mentors & Jury</h2>
-                <h3 className="section-headline text-5xl md:text-7xl font-medium text-white mb-8">Built by Builders.</h3>
+                <h3 className="section-headline text-4xl md:text-7xl font-medium text-white mb-8">Built by Builders.</h3>
                 <p className="text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
                     Our judges are startup builders, domain experts, and product leaders. They prioritize <span className="text-white font-medium">usefulness</span> over complexity.
                 </p>
             </div>
 
             <div className="flex flex-wrap justify-center gap-6">
-                {[
-                    { name: "Surya Pratap Singh", role: "Jury", title: "Founder, Vasudev AI", focus: "AI & Product Strategy" },
-                    { name: "Aman Dangi", role: "Jury", title: "Tech Lead", focus: "Scalability & Systems" },
-                    { name: "Ashutosh K. Tripathi", role: "Mentor", title: "Product Leader", focus: "User Experience" },
-                    { name: "Bishwajeet Singh", role: "Mentor", title: "Senior Engineer", focus: "Design & Architecture" },
-                    {
-                        name: "Udayy Sharma",
-                        role: "Jury",
-                        title: "Angel Investor",
-                        focus: "Business Viability",
-                        image: "https://indiancreators.com/wp-content/uploads/2025/02/Untitled-design.webp",
-                        linkedin: "https://in.linkedin.com/in/udaydotai"
-                    },
-                    { name: "Agrim Gupta", role: "Jury", title: "Founder", focus: "Product Market Fit" },
-                    { name: "Svetlana Hanover", role: "Mentor", title: "Marketing Expert", focus: "Growth & Branding" }
-                ].map((person, i) => (
+                {/* Mobile: Show only 3. Desktop: Show all */}
+                {JUDGES.slice(0, (typeof window !== 'undefined' && window.innerWidth < 768) ? 3 : JUDGES.length).map((person, i) => (
                     <div key={i} className="group relative p-1 rounded-[2rem] bg-gradient-to-b from-white/10 to-transparent hover:from-primary/40 hover:to-primary/5 transition-all duration-500 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-20px)] min-w-[240px]">
                         <div className="relative h-full p-8 rounded-[1.8rem] bg-[#0A0A0A] border border-white/5 overflow-hidden flex flex-col items-center text-center">
 
@@ -317,11 +355,11 @@ const RubricItem = ({ title, pts, criteria }: { title: string, pts: number, crit
 );
 
 export const JudgingSection = () => (
-    <section className="py-[160px] px-8 max-w-[1120px] mx-auto">
+    <section className="py-24 md:py-[160px] px-6 md:px-8 max-w-[1120px] mx-auto">
         <Reveal x={-20}>
             <div className="mb-20">
                 <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-10">Judging Criteria</h2>
-                <h3 className="section-headline text-4xl md:text-6xl font-medium text-white mb-10">Usefulness &gt; Complexity</h3>
+                <h3 className="section-headline text-3xl md:text-6xl font-medium text-white mb-10">Usefulness &gt; Complexity</h3>
                 <p className="text-xl text-muted font-light max-w-2xl leading-relaxed">
                     We reward solutions that can survive in the real world. Complex tech is optional. Real impact is mandatory.
                 </p>
@@ -352,20 +390,20 @@ export const JudgingSection = () => (
     </section>
 );
 
-export const AwardsSection = () => {
+export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
     return (
-        <section className="py-[160px] px-8 max-w-[1120px] mx-auto">
+        <section className="py-24 md:py-[160px] px-6 md:px-8 max-w-[1120px] mx-auto">
             <Reveal x={-20}>
                 <div className="mb-24 text-center">
                     <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Recognition & Rewards</h2>
-                    <h3 className="section-headline text-4xl md:text-6xl font-medium text-white mb-8">We reward builders who ship.</h3>
+                    <h3 className="section-headline text-3xl md:text-6xl font-medium text-white mb-8">We reward builders who ship.</h3>
                     <p className="text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
                         This sprint is not about prize money. It’s about building something that deserves to exist.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-4 md:gap-8 items-end mb-24 max-w-5xl mx-auto">
-
+                {/* Desktop Grid Layout */}
+                <div className="hidden md:grid md:grid-cols-3 gap-4 md:gap-8 items-end mb-24 max-w-5xl mx-auto">
                     {/* 1st Runner Up Card (Silver) - Left */}
                     <div className="order-2 md:order-1 p-8 border border-slate-400/30 bg-gradient-to-br from-slate-400/5 to-transparent rounded-[2rem] relative overflow-hidden group hover:border-slate-400/50 transition-all duration-500">
                         <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -463,6 +501,23 @@ export const AwardsSection = () => {
                     </div>
                 </div>
 
+                {/* Mobile List Layout */}
+                <div className="md:hidden flex flex-col gap-4 mb-12 max-w-[320px] mx-auto text-left">
+                    {[
+                        { title: "Sprint Winner", prize: "Certificate • Feature • Early access", icon: "🥇" },
+                        { title: "Runner-ups", prize: "Badge • Access", icon: "🥈" },
+                        { title: "Builders", prize: "Proof of work", icon: "🥉" }
+                    ].map((item, i) => (
+                        <div key={i} className="flex items-start gap-4 p-4 border-b border-white/10 last:border-0 hover:bg-white/5 transition-colors rounded-lg">
+                            <span className="text-2xl shrink-0">{item.icon}</span>
+                            <div>
+                                <h4 className="text-white font-bold mb-1">{item.title}</h4>
+                                <p className="text-sm text-muted">{item.prize}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
                 {/* Special Categories */}
                 <div className="mb-24">
                     <h4 className="text-xl font-heading font-medium text-white mb-8 text-center">Special Category Awards</h4>
@@ -497,11 +552,10 @@ export const AwardsSection = () => {
                 </div>
 
                 <div className="mt-16 text-center">
-                    <button onClick={() => window.open('https://forms.gle/your-form-link', '_blank')} className="text-sm font-bold text-white hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-0.5 uppercase tracking-widest">
+                    <button onClick={onRegister} className="text-sm font-bold text-white hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-0.5 uppercase tracking-widest">
                         Start Your Entry →
                     </button>
                 </div>
-
             </Reveal>
         </section>
     );
@@ -560,7 +614,7 @@ export const FAQ = () => {
     ];
 
     return (
-        <section className="py-[160px] px-8 max-w-[1120px] mx-auto">
+        <section className="py-24 md:py-[160px] px-6 md:px-8 max-w-[1120px] mx-auto">
             <Reveal x={-20}>
                 <div className="grid md:grid-cols-2 gap-20">
                     <div>
@@ -579,7 +633,7 @@ export const FAQ = () => {
 };
 
 export const Community = () => (
-    <section className="py-[120px] px-8 relative overflow-hidden">
+    <section className="py-20 md:py-[120px] px-4 md:px-8 relative overflow-hidden">
         <div className="max-w-[1200px] mx-auto relative z-10">
             <div className="relative rounded-[3rem] bg-[#5865F2] overflow-hidden group">
 
@@ -609,7 +663,9 @@ export const Community = () => (
                             <button onClick={() => window.open('https://discord.gg/t9S8fznbpn', '_blank')} className="bg-white text-[#5865F2] pl-8 pr-2 py-2 rounded-full font-black text-lg hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:scale-105 transition-all flex items-center gap-6 group/btn">
                                 <span>JOIN DISCORD</span>
                                 <div className="w-12 h-12 rounded-full bg-[#5865F2] text-white flex items-center justify-center -rotate-45 group-hover/btn:rotate-0 transition-transform">
-                                    <Rocket className="w-5 h-5" />
+                                    <svg width="24" height="24" viewBox="0 0 127 96" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
+                                        <path d="M107.7 8.07001C99.08 4.11001 90.03 1.25001 80.6 0.050009C80.46 0.030009 80.32 0.090009 80.24 0.210009C79.05 2.37001 77.7 5.25001 76.77 7.42001C66.56 5.90001 56.4 5.90001 46.33 7.42001C45.39 5.24001 44.03 2.37001 42.86 0.200009C42.78 0.080009 42.64 0.020009 42.5 0.050009C33.06 1.25001 24.02 4.11001 15.39 8.07001C15.3 8.11001 15.24 8.18001 15.2 8.27001C-2.29004 39.2901 -2.71004 69.4601 5.93996 98.7101C6.00996 98.9301 6.22996 99.0801 6.45996 99.0801C17.93 107.5 29.04 107.5 39.99 107.5H40.04C40.24 107.49 40.42 107.38 40.54 107.21C43.25 103.5 45.69 99.5801 47.78 95.4201C47.92 95.1401 47.78 94.8101 47.48 94.7001C43.49 93.1801 39.7 91.2901 36.1 89.1401C35.8 88.9601 35.77 88.5401 36.05 88.3101C36.85 87.7101 37.63 87.0801 38.39 86.4301C38.56 86.2901 38.8 86.2601 38.99 86.3501C61.46 96.6501 84.7 96.6501 106.87 86.3501C107.06 86.2601 107.3 86.2901 107.47 86.4301C108.23 87.0801 109.02 87.7101 109.81 88.3101C110.09 88.5401 110.07 88.9601 109.76 89.1401C106.16 91.2901 102.36 93.1801 98.37 94.7001C98.07 94.8101 97.94 95.1401 98.07 95.4201C100.16 99.5801 102.61 103.5 105.31 107.21C105.43 107.38 105.62 107.49 105.81 107.5H105.86C116.82 107.5 127.93 107.5 139.4 99.0801C139.63 99.0801 139.85 98.9301 139.92 98.7101C149.37 65.9101 146.43 35.8201 127.86 8.27001C127.82 8.18001 127.76 8.11001 127.67 8.07001ZM42.45 78.4301C35.91 78.4301 30.52 72.4301 30.52 65.0701C30.52 57.7101 35.79 51.7101 42.45 51.7101C49.16 51.7101 54.55 57.7701 54.43 65.0701C54.43 72.4301 49.1 78.4301 42.45 78.4301ZM83.4 78.4301C76.86 78.4301 71.47 72.4301 71.47 65.0701C71.47 57.7101 76.74 51.7101 83.4 51.7101C90.11 51.7101 95.5 57.7701 95.38 65.0701C95.38 72.4301 90.05 78.4301 83.4 78.4301Z" fill="white" />
+                                    </svg>
                                 </div>
                             </button>
 
@@ -624,69 +680,71 @@ export const Community = () => (
                         </div>
                     </div>
 
-                    {/* Visual Right: 3D Mock Interface */}
-                    <div className="relative hidden lg:block perspective-1000">
-                        {/* Huge Background Text Adjusted */}
-                        <div className="absolute -top-20 -right-20 text-[180px] font-black text-black/10 -rotate-12 pointer-events-none select-none whitespace-nowrap z-0">
-                            Vasudev AI
+                    {/* Visual Right: Community Constellation */}
+                    <div className="relative flex items-center justify-center lg:h-full py-12 lg:py-0">
+                        {/* Glowing Backdrop */}
+                        <div className="absolute inset-0 bg-[#5865F2] blur-[100px] opacity-20 rounded-full" />
+
+                        {/* Animated System */}
+                        <div className="relative w-[400px] h-[400px] flex items-center justify-center">
+                            {/* Orbits */}
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className={`absolute inset-0 border border-white/5 rounded-full animate-[spin_10s_linear_infinite] border-dashed`} style={{ padding: `${i * 30}px`, animationDuration: `${20 + i * 10}s` }} />
+                            ))}
+
+                            {/* Center */}
+                            <motion.div
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                whileInView={{ scale: 1, opacity: 1 }}
+                                className="w-32 h-32 bg-white/10 backdrop-blur-2xl px-6 rounded-3xl border border-white/20 flex flex-col items-center justify-center gap-2 z-20 shadow-2xl"
+                            >
+                                <span className="text-4xl font-black text-white">500+</span>
+                                <span className="text-xs font-bold text-white/50 uppercase tracking-widest">Builders</span>
+                            </motion.div>
+
+                            {/* Floating Cards */}
+                            <motion.div
+                                animate={{ y: [-10, 10, -10] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                className="absolute top-10 right-10 bg-[#0F0F0F] p-4 rounded-xl border border-white/10 flex items-center gap-3 shadow-xl z-20"
+                            >
+                                <div className="w-10 h-10 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center">
+                                    <Code className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <div className="text-sm font-bold text-white">Dev Help</div>
+                                    <div className="text-xs text-muted">#development</div>
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                animate={{ y: [10, -10, 10] }}
+                                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                                className="absolute bottom-20 left-0 bg-[#0F0F0F] p-4 rounded-xl border border-white/10 flex items-center gap-3 shadow-xl z-20"
+                            >
+                                <div className="w-10 h-10 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center">
+                                    <PenTool className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <div className="text-sm font-bold text-white">Design Critiques</div>
+                                    <div className="text-xs text-muted">#design</div>
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                animate={{ y: [-15, 15, -15] }}
+                                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                                className="absolute -bottom-5 right-20 bg-[#0F0F0F] p-4 rounded-xl border border-white/10 flex items-center gap-3 shadow-xl z-20"
+                            >
+                                <div className="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center">
+                                    <Rocket className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <div className="text-sm font-bold text-white">Showcase</div>
+                                    <div className="text-xs text-muted">#shipping</div>
+                                </div>
+                            </motion.div>
                         </div>
-
-                        <motion.div
-                            className="relative z-10 bg-[#36393f] rounded-xl border border-white/10 shadow-2xl overflow-hidden max-w-md ml-auto rotate-y-[-10deg] rotate-x-[5deg] hover:rotate-0 transition-all duration-700"
-                            initial={{ y: 20, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            {/* Fake Header */}
-                            <div className="h-4 bg-[#202225] flex items-center px-4 gap-1.5 border-b border-black/20">
-                                <div className="w-2 h-2 rounded-full bg-red-500" />
-                                <div className="w-2 h-2 rounded-full bg-yellow-500" />
-                                <div className="w-2 h-2 rounded-full bg-green-500" />
-                            </div>
-
-                            {/* Mock Chat Content */}
-                            <div className="p-6 space-y-4">
-                                <div className="flex gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-primary flex-shrink-0" />
-                                    <div>
-                                        <div className="flex items-baseline gap-2">
-                                            <span className="text-white font-bold text-sm">sgsurya</span>
-                                            <span className="text-xs text-muted">Today at 2:30 AM</span>
-                                        </div>
-                                        <div className="text-white/80 text-xs mt-1 bg-[#2f3136] p-2 rounded-r-lg rounded-bl-lg">
-                                            Just pushed the deployed link! The mentorship session yesterday really helped clarify the user flow. 🚀
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-green-500 flex-shrink-0" />
-                                    <div>
-                                        <div className="flex items-baseline gap-2">
-                                            <span className="text-white font-bold text-sm">rahul_dev</span>
-                                            <span className="text-xs text-muted">Today at 2:32 AM</span>
-                                        </div>
-                                        <div className="text-white/80 text-xs mt-1 bg-[#2f3136] p-2 rounded-r-lg rounded-bl-lg">
-                                            Whoa, that UI is clean! simple tool ??
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4 opacity-50">
-                                    <div className="w-10 h-10 rounded-full bg-purple-500 flex-shrink-0" />
-                                    <div className="flex-1 space-y-2">
-                                        <div className="h-3 bg-white/10 rounded w-1/4" />
-                                        <div className="h-10 bg-white/10 rounded w-full" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Floating Reaction */}
-                            <div className="absolute bottom-10 right-10 bg-[#5865F2] text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1 animate-bounce">
-                                <Star className="w-3 h-3 fill-current" />
-                                Great work!
-                            </div>
-                        </motion.div>
                     </div>
                 </div>
             </div>

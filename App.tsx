@@ -23,12 +23,14 @@ export default function App() {
       <Protocol5030 />
       <ProblemExplorer />
       <JudgingMindset />
-      <AwardsSection />
+      <AwardsSection onRegister={() => setShowRegistration(true)} />
       <MentorSessions />
       <JudgesSection />
       <FAQ />
       <Community />
       <Footer onRegister={() => setShowRegistration(true)} />
+
+
     </div>
   );
 }

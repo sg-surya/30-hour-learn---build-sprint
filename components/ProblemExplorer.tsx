@@ -6,9 +6,10 @@ import { PROBLEM_STATEMENTS } from '../data/constants';
 
 export const ProblemExplorer = () => {
     const [selectedDomain, setSelectedDomain] = useState<number | null>(null);
+    const [showAllDomains, setShowAllDomains] = useState(false);
 
     return (
-        <section className="relative py-[160px] px-8 max-w-[1400px] mx-auto min-h-screen">
+        <section className="relative py-24 md:py-[160px] px-6 md:px-8 max-w-[1400px] mx-auto min-h-screen">
             <Reveal>
                 <div className="mb-20 text-center">
                     <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Real World Problems</h2>
@@ -20,8 +21,9 @@ export const ProblemExplorer = () => {
 
                     {/* Domain List / Sidebar */}
                     <div className={`transition-all duration-500 ease-in-out ${selectedDomain !== null ? 'w-full lg:w-[320px] shrink-0' : 'w-full'}`}>
+                        {/* Mobile: Show only first 6 unless expanded. Desktop: Show all. */}
                         <div className={`grid gap-4 transition-all duration-500 ${selectedDomain !== null ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-1' : 'grid-cols-2 md:grid-cols-4 lg:grid-cols-5'}`}>
-                            {PROBLEM_STATEMENTS.map((item, i) => (
+                            {PROBLEM_STATEMENTS.slice(0, (window.innerWidth < 768 && !showAllDomains && selectedDomain === null) ? 6 : PROBLEM_STATEMENTS.length).map((item, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setSelectedDomain(selectedDomain === i ? null : i)}
@@ -55,7 +57,7 @@ export const ProblemExplorer = () => {
                                     {(selectedDomain === null || selectedDomain === i) && (
                                         <>
                                             <div className="font-bold text-sm text-white mb-1 group-hover:text-white transition-colors">{item.domain}</div>
-                                            <div className="text-[10px] text-muted uppercase tracking-wide font-medium leading-tight opacity-70 group-hover:opacity-100 transition-opacity">
+                                            <div className="hidden md:block text-[10px] text-muted uppercase tracking-wide font-medium leading-tight opacity-70 group-hover:opacity-100 transition-opacity">
                                                 {/* @ts-ignore */}
                                                 {item.desc}
                                             </div>
@@ -73,6 +75,18 @@ export const ProblemExplorer = () => {
                                 </button>
                             ))}
                         </div>
+
+                        {/* Mobile "Show More" Button */}
+                        {!showAllDomains && selectedDomain === null && (
+                            <div className="md:hidden mt-8 text-center">
+                                <button
+                                    onClick={() => setShowAllDomains(true)}
+                                    className="px-8 py-3 rounded-full bg-surface/10 border border-white/10 text-sm font-bold text-white hover:bg-surface/20 transition-all uppercase tracking-widest"
+                                >
+                                    + View All {PROBLEM_STATEMENTS.length} Domains
+                                </button>
+                            </div>
+                        )}
                     </div>
 
                     {/* Expanded Content Area */}

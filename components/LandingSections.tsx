@@ -286,8 +286,8 @@ const JUDGES = [
     },
     {
         name: "Udayy Sharma",
-        role: "Jury",
-        title: "Angel Investor",
+        role: "Jury & Mentor",
+        title: "Tech & Market Lead",
         focus: "Business Viability",
         image: "https://indiancreators.com/wp-content/uploads/2025/02/Untitled-design.webp",
         linkedin: "https://in.linkedin.com/in/udaydotai"
@@ -302,76 +302,143 @@ const JUDGES = [
     }
 ];
 
-export const JudgesSection = () => (
-    <section className="py-24 md:py-[160px] px-6 md:px-8 max-w-[1280px] mx-auto relative cursor-default">
-        {/* Background Gradients */}
-        <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2" />
+export const JudgesSection = () => {
+    const jury = JUDGES.filter(j => j.role.includes("Jury"));
+    const mentors = JUDGES.filter(j => j.role.includes("Mentor"));
 
-        <Reveal x={-20}>
-            <div className="mb-24 text-center">
-                <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Mentors & Jury</h2>
-                <h3 className="section-headline text-4xl md:text-7xl font-medium text-white mb-8">Built by Builders.</h3>
-                <p className="text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
-                    Our judges are startup builders, domain experts, and product leaders. They prioritize <span className="text-white font-medium">usefulness</span> over complexity.
-                </p>
-            </div>
+    const getFocusStyle = (focus: string) => {
+        if (focus.includes("AI") || focus.includes("Product")) return "bg-blue-500/10 text-blue-400 border-blue-500/20";
+        if (focus.includes("System") || focus.includes("Scalability")) return "bg-purple-500/10 text-purple-400 border-purple-500/20";
+        if (focus.includes("Design") || focus.includes("User")) return "bg-green-500/10 text-green-400 border-green-500/20";
+        if (focus.includes("Business") || focus.includes("Growth")) return "bg-amber-500/10 text-amber-400 border-amber-500/20";
+        return "bg-white/10 text-white border-white/20";
+    };
 
-            <div className="flex flex-wrap justify-center gap-6">
-                {/* Show all judges on both Mobile and Desktop */}
-                {JUDGES.map((person, i) => (
-                    <div key={i} className="group relative p-1 rounded-[2rem] bg-gradient-to-b from-white/10 to-transparent hover:from-primary/40 hover:to-primary/5 transition-all duration-500 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-20px)] min-w-[240px]">
-                        <div className="relative h-full p-8 rounded-[1.8rem] bg-[#0A0A0A] border border-white/5 overflow-hidden flex flex-col items-center text-center">
+    return (
+        <section className="py-20 md:py-[120px] px-6 md:px-8 max-w-[1280px] mx-auto relative cursor-default">
+            {/* Background Gradients */}
+            <div className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2" />
 
-                            {/* Hover Effect Background */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <Reveal x={-20}>
+                <div className="mb-20 text-center">
+                    <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Decision Makers</h2>
+                    <h3 className="section-headline text-4xl md:text-7xl font-medium text-white mb-6">Built by Builders.</h3>
+                    <p className="text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
+                        Your project will be reviewed by builders who have shipped real products — <span className="text-white font-medium">not theory</span>.
+                    </p>
+                </div>
 
-                            {/* Avatar */}
-                            <div className="relative mb-8">
-                                <div className="w-24 h-24 rounded-full bg-surface border border-white/10 flex items-center justify-center text-3xl font-bold text-white/20 group-hover:text-white group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(109,124,255,0.3)] transition-all duration-500 z-10 relative overflow-hidden">
+                {/* JURY SECTION */}
+                <div className="mb-20">
+                    <div className="flex items-center justify-center gap-4 mb-10 opacity-80 hover:opacity-100 transition-opacity">
+                        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-amber-500/50" />
+                        <h4 className="text-sm font-bold text-amber-500 uppercase tracking-[0.3em]">The Jury Panel</h4>
+                        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-amber-500/50" />
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-8">
+                        {jury.map((person, i) => (
+                            <div key={i} className="group relative w-full md:w-[280px]">
+                                <div className="absolute inset-0 bg-gradient-to-b from-amber-500/20 to-transparent rounded-[2rem] opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl" />
+                                <div className="relative h-full p-6 pb-8 rounded-[2rem] bg-[#0A0A0A] border border-white/5 group-hover:border-amber-500/30 transition-all duration-500 flex flex-col items-center text-center group-hover:-translate-y-1 shadow-2xl">
+
+                                    {/* Avatar */}
+                                    <div className="relative mb-6">
+                                        <div className="w-28 h-28 rounded-full p-1 bg-gradient-to-b from-amber-400/30 to-transparent">
+                                            {/* @ts-ignore */}
+                                            <div className="w-full h-full rounded-full overflow-hidden border-2 border-amber-500/20 group-hover:border-amber-500 transition-colors duration-500 bg-surface">
+                                                {/* @ts-ignore */}
+                                                {person.image ? (
+                                                    /* @ts-ignore */
+                                                    <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-white/20">{person.name[0]}</div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-amber-500 text-black text-[10px] font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(245,158,11,0.4)]">
+                                            Jury
+                                        </div>
+                                    </div>
+
+                                    {/* Info */}
+                                    <h5 className="text-lg font-bold text-white mb-1 group-hover:text-amber-400 transition-colors">{person.name}</h5>
                                     {/* @ts-ignore */}
-                                    {person.image ? (
+                                    <p className="text-xs font-bold text-muted/60 uppercase tracking-wider mb-6">{person.title}</p>
+
+                                    {/* Focus Badge */}
+                                    <div className={`px-4 py-2 rounded-xl border text-xs font-bold ${getFocusStyle(person.focus)} w-full`}>
+                                        <div className="text-[10px] uppercase tracking-widest opacity-60 mb-1">Evaluating</div>
+                                        {person.focus}
+                                    </div>
+
+                                    {/* LinkedIn */}
+                                    {/* @ts-ignore */}
+                                    {person.linkedin && (
                                         /* @ts-ignore */
-                                        <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
-                                    ) : (
-                                        person.name[0]
+                                        <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="absolute top-4 right-4 text-white/10 hover:text-white transition-colors">
+                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
+                                        </a>
                                     )}
                                 </div>
-                                {/* Decorative Rings */}
-                                <div className="absolute inset-0 rounded-full border border-white/5 scale-110 group-hover:scale-125 transition-transform duration-700" />
-                                <div className="absolute inset-0 rounded-full border border-dashed border-white/5 scale-125 group-hover:scale-150 transition-transform duration-700 delay-75" />
                             </div>
-
-                            <div className="relative z-10 w-full flex-grow flex flex-col items-center">
-                                <div className={`mb-4 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border ${person.role === 'Jury' ? 'bg-amber-500/10 border-amber-500/20 text-amber-500' : 'bg-primary/10 border-primary/20 text-primary'}`}>
-                                    {person.role}
-                                </div>
-
-                                <h4 className="text-xl font-heading font-medium text-white mb-2 group-hover:text-primary transition-colors">{person.name}</h4>
-                                <div className="text-sm text-muted mb-6 font-light">{person.title}</div>
-
-                                <div className="mt-auto w-full pt-6 border-t border-white/5 group-hover:border-white/10 transition-colors">
-                                    <div className="text-[10px] text-muted/50 uppercase tracking-widest mb-2 font-bold">Focus Area</div>
-                                    <div className="text-sm text-white/80">{person.focus}</div>
-                                </div>
-                            </div>
-
-                            {/* Social Icon Float */}
-                            {/* @ts-ignore */}
-                            {person.linkedin && (
-                                <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-20">
-                                    {/* @ts-ignore */}
-                                    <div onClick={() => window.open(person.linkedin, '_blank')} className="w-8 h-8 rounded-full bg-white/5 hover:bg-[#0077b5] flex items-center justify-center text-white transition-colors cursor-pointer border border-white/10 hover:border-transparent">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-        </Reveal>
-    </section>
-);
+                </div>
+
+                {/* MENTORS SECTION */}
+                <div>
+                    <div className="flex items-center justify-center gap-4 mb-10 opacity-60">
+                        <div className="h-[1px] w-12 bg-white/20" />
+                        <h4 className="text-sm font-bold text-white/60 uppercase tracking-[0.3em]">The Mentors</h4>
+                        <div className="h-[1px] w-12 bg-white/20" />
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {mentors.map((person, i) => (
+                            <div key={i} className="group relative w-full md:w-[240px]">
+                                <div className="relative h-full p-6 rounded-[1.8rem] bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04] transition-all duration-300 flex flex-col items-center text-center">
+
+                                    {/* Avatar */}
+                                    <div className="relative mb-5">
+                                        <div className="w-20 h-20 rounded-full bg-surface border border-white/10 p-0.5">
+                                            {/* @ts-ignore */}
+                                            {person.image ? (
+                                                /* @ts-ignore */
+                                                <img src={person.image} alt={person.name} className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all" />
+                                            ) : (
+                                                <div className="w-full h-full rounded-full bg-surface flex items-center justify-center text-xl font-bold text-white/20">{person.name[0]}</div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Info */}
+                                    <h5 className="text-base font-bold text-white mb-0.5">{person.name}</h5>
+                                    {/* @ts-ignore */}
+                                    <p className="text-[10px] font-bold text-muted/50 uppercase tracking-wider mb-4">{person.title}</p>
+
+                                    {/* Focus */}
+                                    <div className={`text-xs font-medium px-3 py-1 rounded-full ${getFocusStyle(person.focus).split(' ')[0]} ${getFocusStyle(person.focus).split(' ')[1]} opacity-80`}>
+                                        {person.focus}
+                                    </div>
+
+                                    {/* LinkedIn */}
+                                    {/* @ts-ignore */}
+                                    {person.linkedin && (
+                                        /* @ts-ignore */
+                                        <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="absolute top-4 right-4 text-white/5 hover:text-white/40 transition-colors">
+                                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </Reveal>
+        </section>
+    );
+};
 
 const RubricItem = ({ title, pts, criteria }: { title: string, pts: number, criteria: string[] }) => (
     <div className="p-8 md:p-10 border border-border bg-surface/5 rounded-3xl">

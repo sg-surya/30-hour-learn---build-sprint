@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Check, ChevronDown, CheckCircle, ChevronRight, User, BookOpen, Users, Lightbulb, Code, Globe, Clock, Trophy, Shield, Rocket } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, ChevronDown, CheckCircle, ChevronRight, User, BookOpen, Users, Lightbulb, Code, Globe, Clock, Trophy, Shield, Rocket, Loader2 } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 // --- Types ---
 type ParticipationType = 'Solo' | 'Team';
@@ -215,9 +216,62 @@ const MultiSelect = ({ label, options, selected, onChange }: any) => {
 export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
     const [step, setStep] = useState(0);
     const [data, setData] = useState<FormData>(INITIAL_DATA);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const updateData = (field: keyof FormData, value: any) => {
         setData(prev => ({ ...prev, [field]: value }));
+    };
+
+    const handleSubmit = async () => {
+        setIsSubmitting(true);
+        try {
+            const { error } = await supabase
+                .from('registrations')
+                .insert([
+                    {
+                        full_name: data.fullName,
+                        email: data.email,
+                        mobile: data.mobile,
+                        age: parseInt(data.age) || 0,
+                        gender: data.gender,
+                        city: data.city,
+                        state: data.state,
+                        country: data.country,
+                        education_status: data.status,
+                        organization: data.organization,
+                        experience_level: data.experienceLevel,
+                        github: data.github,
+                        linkedin: data.linkedin,
+                        portfolio: data.portfolio,
+                        skills: data.skills,
+                        participation_type: data.participationType,
+                        team_name: data.teamName,
+                        team_size: parseInt(data.teamSize) || 1,
+                        team_leader_name: data.teamLeaderName,
+                        team_leader_email: data.teamLeaderEmail,
+                        team_leader_phone: data.teamLeaderPhone,
+                        has_idea: data.hasIdea === 'Yes',
+                        project_title: data.projectTitle,
+                        problem_statement: data.problemStatement,
+                        idea_desc: data.ideaDescription,
+                        tech_stack: data.techStack,
+                        full_commitment: data.fullCommitment === 'Yes',
+                        voice_sessions: data.voiceSessions,
+                        motivation: data.motivation,
+                        expectations: data.expectations
+                    }
+                ]);
+
+            if (error) throw error;
+
+            alert('Registration Successful! Welcome to the Sprint.');
+            onBack();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert('Failed to register. Please try again or contact support.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const steps = [
@@ -489,10 +543,20 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
                             ) : (
                                 <button
                                     type="button"
-                                    onClick={() => alert("Registered! (Mock)")}
-                                    className="px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-accentPurple text-white font-bold hover:shadow-[0_0_20px_rgba(109,124,255,0.4)] transition-all shadow-lg flex items-center gap-2 scale-105"
+                                    onClick={handleSubmit}
+                                    disabled={isSubmitting}
+                                    className="px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-accentPurple text-white font-bold hover:shadow-[0_0_20px_rgba(109,124,255,0.4)] transition-all shadow-lg flex items-center gap-2 scale-105 disabled:opacity-50 disabled:grayscale disabled:pointer-events-none"
                                 >
-                                    Submit Application <Rocket className="w-4 h-4" />
+                                    {isSubmitting ? (
+                                        <>
+                                            <Loader2 className="w-4 h-4 animate-spin" />
+                                            Registering...
+                                        </>
+                                    ) : (
+                                        <>
+                                            Submit Application <Rocket className="w-4 h-4" />
+                                        </>
+                                    )}
                                 </button>
                             )}
                         </div>

@@ -217,12 +217,17 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
     const [step, setStep] = useState(0);
     const [data, setData] = useState<FormData>(INITIAL_DATA);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const updateData = (field: keyof FormData, value: any) => {
         setData(prev => ({ ...prev, [field]: value }));
     };
 
     const handleSubmit = async () => {
+        if (!data.agreedToRules) {
+            alert("Please agree to the Rules & Code of Conduct.");
+            return;
+        }
         setIsSubmitting(true);
         try {
             const { error } = await supabase
@@ -263,9 +268,7 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
                 ]);
 
             if (error) throw error;
-
-            alert('Registration Successful! Welcome to the Sprint.');
-            onBack();
+            setIsSubmitted(true);
         } catch (error) {
             console.error('Error submitting form:', error);
             alert('Failed to register. Please try again or contact support.');
@@ -282,184 +285,211 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
         { title: "Review", icon: CheckCircle }
     ];
 
-    const handleNext = () => setStep(prev => Math.min(prev + 1, steps.length - 1));
+    const handleNext = () => {
+        // Basic Validation
+        if (step === 0) {
+            if (!data.fullName || !data.email || !data.mobile) return alert("Please fill in all required fields.");
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) return alert("Please enter a valid email address.");
+
+            const phoneRegex = /^\+?[0-9]{10,15}$/;
+            if (!phoneRegex.test(data.mobile.replace(/[\s-]/g, ''))) return alert("Please enter a valid mobile number.");
+        }
+        if (step === 1 && (!data.status || !data.experienceLevel)) return alert("Please complete your background details.");
+
+        setStep(prev => Math.min(prev + 1, steps.length - 1));
+    };
     const handlePrev = () => setStep(prev => Math.max(prev - 1, 0));
 
     const renderStep = () => {
-        switch (step) {
-            case 0: // Identity
-                return (
-                    <div className="space-y-6 animate-in slide-in-from-right fade-in duration-300">
-                        <h2 className="text-2xl font-bold text-white mb-6">Basic Details</h2>
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <FormInput label="Full Name" required value={data.fullName} onChange={(e: any) => updateData('fullName', e.target.value)} placeholder="e.g. John Doe" />
-                            <FormInput label="Age" type="number" required value={data.age} onChange={(e: any) => updateData('age', e.target.value)} placeholder="e.g. 21" />
-                        </div>
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <FormInput label="Email Address" type="email" required value={data.email} onChange={(e: any) => updateData('email', e.target.value)} placeholder="you@example.com" />
-                            <FormInput label="Mobile Number" type="tel" required value={data.mobile} onChange={(e: any) => updateData('mobile', e.target.value)} placeholder="+91 98765 43210" />
-                        </div>
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <FormSelect label="Gender" value={data.gender} onChange={(val: string) => updateData('gender', val)} options={["Male", "Female", "Other", "Prefer not to say"]} placeholder="Select Gender" />
-                        </div>
-                        <div className="grid md:grid-cols-3 gap-6">
-                            <FormInput label="City" required value={data.city} onChange={(e: any) => updateData('city', e.target.value)} placeholder="e.g. Bangalore" />
-                            <FormInput label="State" required value={data.state} onChange={(e: any) => updateData('state', e.target.value)} placeholder="e.g. Karnataka" />
-                            <FormInput label="Country" required value={data.country} onChange={(e: any) => updateData('country', e.target.value)} placeholder="e.g. India" />
-                        </div>
-                    </div>
-                );
-            case 1: // Background
-                return (
-                    <div className="space-y-6 animate-in slide-in-from-right fade-in duration-300">
-                        <h2 className="text-2xl font-bold text-white mb-6">Education & Background</h2>
-                        <FormSelect label="Current Status" required value={data.status} onChange={(val: string) => updateData('status', val)} options={STATUS_OPTIONS} placeholder="Select Status" />
-                        <FormInput label="College / Organization Name" value={data.organization} onChange={(e: any) => updateData('organization', e.target.value)} placeholder="e.g. IIT Bombay / Google" />
-                        <FormSelect label="Experience Level" required value={data.experienceLevel} onChange={(val: string) => updateData('experienceLevel', val)} options={EXP_LEVELS} placeholder="Select Level" />
+        const variants = {
+            hidden: { opacity: 0, x: 20 },
+            visible: { opacity: 1, x: 0 },
+            exit: { opacity: 0, x: -20 }
+        };
 
-                        <div className="grid md:grid-cols-2 gap-6 pt-4">
-                            <FormInput label="GitHub Profile" value={data.github} onChange={(e: any) => updateData('github', e.target.value)} placeholder="github.com/username" />
-                            <FormInput label="LinkedIn Profile" value={data.linkedin} onChange={(e: any) => updateData('linkedin', e.target.value)} placeholder="linkedin.com/in/username" />
-                        </div>
-                        <FormInput label="Portfolio / Website" value={data.portfolio} onChange={(e: any) => updateData('portfolio', e.target.value)} placeholder="yourwebsite.com" />
-                    </div>
-                );
-            case 2: // Team & Skills
-                return (
-                    <div className="space-y-6 animate-in slide-in-from-right fade-in duration-300">
-                        <h2 className="text-2xl font-bold text-white mb-6">Team & Skills</h2>
-
-                        <MultiSelect label="Your Skill Set" options={SKILL_OPTIONS} selected={data.skills} onChange={(val: string[]) => updateData('skills', val)} />
-
-                        <div className="pt-6 border-t border-white/5">
-                            <label className="text-xs font-bold text-muted uppercase tracking-wider block mb-4">Participation Type</label>
-                            <div className="flex gap-4">
-                                {['Solo', 'Team'].map((type) => (
-                                    <button
-                                        key={type}
-                                        onClick={() => updateData('participationType', type)}
-                                        className={`flex-1 py-4 rounded-xl border flex items-center justify-center gap-2 transition-all ${data.participationType === type
-                                            ? 'bg-primary/20 border-primary text-white'
-                                            : 'bg-white/5 border-white/10 text-muted hover:bg-white/10'
-                                            }`}
-                                    >
-                                        {type === 'Solo' ? <User className="w-4 h-4" /> : <Users className="w-4 h-4" />}
-                                        <span className="font-bold">{type}</span>
-                                    </button>
-                                ))}
+        const renderContent = () => {
+            switch (step) {
+                case 0: // Identity
+                    return (
+                        <>
+                            <h2 className="text-2xl font-bold text-white mb-6">Basic Details</h2>
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <FormInput label="Full Name" required value={data.fullName} onChange={(e: any) => updateData('fullName', e.target.value)} placeholder="e.g. John Doe" />
+                                <FormInput label="Age" type="number" required value={data.age} onChange={(e: any) => updateData('age', e.target.value)} placeholder="e.g. 21" />
                             </div>
-                        </div>
-
-                        {data.participationType === 'Team' && (
-                            <div className="space-y-6 pt-4 p-6 bg-white/5 rounded-2xl border border-white/10">
-                                <h3 className="text-lg font-bold text-white">Team Details</h3>
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <FormInput label="Team Name" required value={data.teamName} onChange={(e: any) => updateData('teamName', e.target.value)} placeholder="e.g. Code Warriors" />
-                                    <FormSelect label="Team Size" value={data.teamSize} onChange={(val: string) => updateData('teamSize', val)} options={["2", "3", "4"]} placeholder="Size" />
-                                </div>
-                                <FormInput label="Team Leader Name" required value={data.teamLeaderName} onChange={(e: any) => updateData('teamLeaderName', e.target.value)} placeholder="e.g. You" />
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <FormInput label="Leader Email" required value={data.teamLeaderEmail} onChange={(e: any) => updateData('teamLeaderEmail', e.target.value)} placeholder="email@example.com" />
-                                    <FormInput label="Leader Phone" required value={data.teamLeaderPhone} onChange={(e: any) => updateData('teamLeaderPhone', e.target.value)} placeholder="+91..." />
-                                </div>
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <FormInput label="Email Address" type="email" required value={data.email} onChange={(e: any) => updateData('email', e.target.value)} placeholder="you@example.com" />
+                                <FormInput label="Mobile Number" type="tel" required value={data.mobile} onChange={(e: any) => updateData('mobile', e.target.value)} placeholder="+91 98765 43210" />
                             </div>
-                        )}
-                    </div>
-                );
-            case 3: // Project
-                return (
-                    <div className="space-y-6 animate-in slide-in-from-right fade-in duration-300">
-                        <h2 className="text-2xl font-bold text-white mb-6">Project Idea</h2>
-
-                        <div className="space-y-3">
-                            <label className="text-xs font-bold text-muted uppercase tracking-wider">Do you already have an idea?</label>
-                            <div className="flex gap-4">
-                                {['Yes', 'No'].map((opt) => (
-                                    <button
-                                        key={opt}
-                                        onClick={() => updateData('hasIdea', opt)}
-                                        className={`px-6 py-2 rounded-lg border text-sm font-bold transition-all ${data.hasIdea === opt
-                                            ? 'bg-accentPurple/20 border-accentPurple text-white'
-                                            : 'bg-white/5 border-white/10 text-muted'
-                                            }`}
-                                    >
-                                        {opt}
-                                    </button>
-                                ))}
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <FormSelect label="Gender" value={data.gender} onChange={(val: string) => updateData('gender', val)} options={["Male", "Female", "Other", "Prefer not to say"]} placeholder="Select Gender" />
                             </div>
-                        </div>
-
-                        {data.hasIdea === 'Yes' ? (
-                            <div className="space-y-6 pt-4">
-                                <FormInput label="Project Title" required value={data.projectTitle} onChange={(e: any) => updateData('projectTitle', e.target.value)} placeholder="e.g. Agritech AI" />
-                                <FormTextarea label="Short Description (100-200 words)" required value={data.ideaDescription} onChange={(e: any) => updateData('ideaDescription', e.target.value)} placeholder="Describe your idea..." />
-                                <FormTextarea label="Problem Statement" required value={data.problemStatement} onChange={(e: any) => updateData('problemStatement', e.target.value)} placeholder="What problem are you solving?" />
-                                <MultiSelect label="Tech Stack" options={TECH_STACK_OPTIONS} selected={data.techStack} onChange={(val: string[]) => updateData('techStack', val)} />
+                            <div className="grid md:grid-cols-3 gap-6">
+                                <FormInput label="City" required value={data.city} onChange={(e: any) => updateData('city', e.target.value)} placeholder="e.g. Bangalore" />
+                                <FormInput label="State" required value={data.state} onChange={(e: any) => updateData('state', e.target.value)} placeholder="e.g. Karnataka" />
+                                <FormInput label="Country" required value={data.country} onChange={(e: any) => updateData('country', e.target.value)} placeholder="e.g. India" />
                             </div>
-                        ) : (
-                            <div className="p-6 bg-white/5 rounded-xl border border-white/10 text-center">
-                                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-4">
-                                    <Lightbulb className="w-6 h-6" />
-                                </div>
-                                <h3 className="text-lg font-bold text-white mb-2">No Idea? No Problem!</h3>
-                                <p className="text-muted text-sm max-w-xs mx-auto">
-                                    You can pick a problem statement from our 14 domains during the sprint. We will also help you ideate during the networking sessions.
-                                </p>
+                        </>
+                    );
+                case 1: // Background
+                    return (
+                        <>
+                            <h2 className="text-2xl font-bold text-white mb-6">Education & Background</h2>
+                            <FormSelect label="Current Status" required value={data.status} onChange={(val: string) => updateData('status', val)} options={STATUS_OPTIONS} placeholder="Select Status" />
+                            <FormInput label="College / Organization Name" value={data.organization} onChange={(e: any) => updateData('organization', e.target.value)} placeholder="e.g. IIT Bombay / Google" />
+                            <FormSelect label="Experience Level" required value={data.experienceLevel} onChange={(val: string) => updateData('experienceLevel', val)} options={EXP_LEVELS} placeholder="Select Level" />
+                            <div className="grid md:grid-cols-2 gap-6 pt-4">
+                                <FormInput label="GitHub Profile" value={data.github} onChange={(e: any) => updateData('github', e.target.value)} placeholder="github.com/username" />
+                                <FormInput label="LinkedIn Profile" value={data.linkedin} onChange={(e: any) => updateData('linkedin', e.target.value)} placeholder="linkedin.com/in/username" />
                             </div>
-                        )}
-                    </div>
-                );
-            case 4: // Final
-                return (
-                    <div className="space-y-6 animate-in slide-in-from-right fade-in duration-300">
-                        <h2 className="text-2xl font-bold text-white mb-6">Final Touch</h2>
-
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <label className="text-xs font-bold text-muted uppercase tracking-wider block">Commit Full Duration?</label>
-                                <div className="flex gap-2">
-                                    {['Yes', 'No'].map(opt => (
-                                        <button key={opt} onClick={() => updateData('fullCommitment', opt)} className={`flex-1 py-2 rounded border text-sm ${data.fullCommitment === opt ? 'bg-white text-black font-bold' : 'bg-transparent border-white/20 text-muted'}`}>{opt}</button>
+                            <FormInput label="Portfolio / Website" value={data.portfolio} onChange={(e: any) => updateData('portfolio', e.target.value)} placeholder="yourwebsite.com" />
+                        </>
+                    );
+                case 2: // Team & Skills
+                    return (
+                        <>
+                            <h2 className="text-2xl font-bold text-white mb-6">Team & Skills</h2>
+                            <MultiSelect label="Your Skill Set" options={SKILL_OPTIONS} selected={data.skills} onChange={(val: string[]) => updateData('skills', val)} />
+                            <div className="pt-6 border-t border-white/5">
+                                <label className="text-xs font-bold text-muted uppercase tracking-wider block mb-4">Participation Type</label>
+                                <div className="flex gap-4">
+                                    {['Solo', 'Team'].map((type) => (
+                                        <button
+                                            key={type}
+                                            onClick={() => updateData('participationType', type)}
+                                            className={`flex-1 py-4 rounded-xl border flex items-center justify-center gap-2 transition-all ${data.participationType === type
+                                                ? 'bg-primary/20 border-primary text-white'
+                                                : 'bg-white/5 border-white/10 text-muted hover:bg-white/10'
+                                                }`}
+                                        >
+                                            {type === 'Solo' ? <User className="w-4 h-4" /> : <Users className="w-4 h-4" />}
+                                            <span className="font-bold">{type}</span>
+                                        </button>
                                     ))}
                                 </div>
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-xs font-bold text-muted uppercase tracking-wider block">Join Voice Sessions?</label>
-                                <div className="flex gap-2">
-                                    {['Yes', 'Maybe', 'No'].map(opt => (
-                                        <button key={opt} onClick={() => updateData('voiceSessions', opt)} className={`flex-1 py-2 rounded border text-sm ${data.voiceSessions === opt ? 'bg-white text-black font-bold' : 'bg-transparent border-white/20 text-muted'}`}>{opt}</button>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-                        <FormTextarea label="Why participate? (Short)" value={data.motivation} onChange={(e: any) => updateData('motivation', e.target.value)} placeholder="Your motivation..." />
-                        <FormTextarea label="Expectations" value={data.expectations} onChange={(e: any) => updateData('expectations', e.target.value)} placeholder="What do you want to learn?" />
-
-                        <div className="pt-6 space-y-4">
-                            {[
-                                { key: 'agreedToRules', label: 'I agree to the Hackathon Rules & Code of Conduct' },
-                                { key: 'originalWork', label: 'I confirm this is my original work' },
-                                { key: 'allowShowcase', label: 'I allow organizers to showcase my project' }
-                            ].map((item) => (
-                                <label key={item.key} className="flex items-center gap-3 cursor-pointer group">
-                                    <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
-                                        /* @ts-ignore */
-                                        data[item.key] ? 'bg-primary border-primary' : 'border-white/20 group-hover:border-white/50'
-                                        }`}>
-                                        {/* @ts-ignore */
-                                            data[item.key] && <Check className="w-3 h-3 text-white" />}
+                            {data.participationType === 'Team' && (
+                                <div className="space-y-6 pt-4 p-6 bg-white/5 rounded-2xl border border-white/10">
+                                    <h3 className="text-lg font-bold text-white">Team Details</h3>
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <FormInput label="Team Name" required value={data.teamName} onChange={(e: any) => updateData('teamName', e.target.value)} placeholder="e.g. Code Warriors" />
+                                        <FormSelect label="Team Size" value={data.teamSize} onChange={(val: string) => updateData('teamSize', val)} options={["2", "3", "4"]} placeholder="Size" />
                                     </div>
-                                    {/* @ts-ignore */}
-                                    <input type="checkbox" className="hidden" checked={data[item.key]} onChange={(e) => updateData(item.key as any, e.target.checked)} />
-                                    <span className="text-sm text-white/80 group-hover:text-white transition-colors">{item.label}</span>
-                                </label>
-                            ))}
-                        </div>
-                    </div>
-                );
-            default: return null;
-        }
+                                    <FormInput label="Team Leader Name" required value={data.teamLeaderName} onChange={(e: any) => updateData('teamLeaderName', e.target.value)} placeholder="e.g. You" />
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <FormInput label="Leader Email" required value={data.teamLeaderEmail} onChange={(e: any) => updateData('teamLeaderEmail', e.target.value)} placeholder="email@example.com" />
+                                        <FormInput label="Leader Phone" required value={data.teamLeaderPhone} onChange={(e: any) => updateData('teamLeaderPhone', e.target.value)} placeholder="+91..." />
+                                    </div>
+                                </div>
+                            )}
+                        </>
+                    );
+                case 3: // Project
+                    return (
+                        <>
+                            <h2 className="text-2xl font-bold text-white mb-6">Project Idea</h2>
+                            <div className="space-y-3">
+                                <label className="text-xs font-bold text-muted uppercase tracking-wider">Do you already have an idea?</label>
+                                <div className="flex gap-4">
+                                    {['Yes', 'No'].map((opt) => (
+                                        <button
+                                            key={opt}
+                                            onClick={() => updateData('hasIdea', opt)}
+                                            className={`px-6 py-2 rounded-lg border text-sm font-bold transition-all ${data.hasIdea === opt
+                                                ? 'bg-accentPurple/20 border-accentPurple text-white'
+                                                : 'bg-white/5 border-white/10 text-muted'
+                                                }`}
+                                        >
+                                            {opt}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            {data.hasIdea === 'Yes' ? (
+                                <div className="space-y-6 pt-4">
+                                    <FormInput label="Project Title" required value={data.projectTitle} onChange={(e: any) => updateData('projectTitle', e.target.value)} placeholder="e.g. Agritech AI" />
+                                    <FormTextarea label="Short Description (100-200 words)" required value={data.ideaDescription} onChange={(e: any) => updateData('ideaDescription', e.target.value)} placeholder="Describe your idea..." />
+                                    <FormTextarea label="Problem Statement" required value={data.problemStatement} onChange={(e: any) => updateData('problemStatement', e.target.value)} placeholder="What problem are you solving?" />
+                                    <MultiSelect label="Tech Stack" options={TECH_STACK_OPTIONS} selected={data.techStack} onChange={(val: string[]) => updateData('techStack', val)} />
+                                </div>
+                            ) : (
+                                <div className="p-6 bg-white/5 rounded-xl border border-white/10 text-center">
+                                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-4">
+                                        <Lightbulb className="w-6 h-6" />
+                                    </div>
+                                    <h3 className="text-lg font-bold text-white mb-2">No Idea? No Problem!</h3>
+                                    <p className="text-muted text-sm max-w-xs mx-auto">
+                                        You can pick a problem statement from our 14 domains during the sprint. We will also help you ideate during the networking sessions.
+                                    </p>
+                                </div>
+                            )}
+                        </>
+                    );
+                case 4: // Final
+                    return (
+                        <>
+                            <h2 className="text-2xl font-bold text-white mb-6">Final Touch</h2>
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-muted uppercase tracking-wider block">Commit Full Duration?</label>
+                                    <div className="flex gap-2">
+                                        {['Yes', 'No'].map(opt => (
+                                            <button key={opt} onClick={() => updateData('fullCommitment', opt)} className={`flex-1 py-2 rounded border text-sm ${data.fullCommitment === opt ? 'bg-white text-black font-bold' : 'bg-transparent border-white/20 text-muted'}`}>{opt}</button>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-muted uppercase tracking-wider block">Join Voice Sessions?</label>
+                                    <div className="flex gap-2">
+                                        {['Yes', 'Maybe', 'No'].map(opt => (
+                                            <button key={opt} onClick={() => updateData('voiceSessions', opt)} className={`flex-1 py-2 rounded border text-sm ${data.voiceSessions === opt ? 'bg-white text-black font-bold' : 'bg-transparent border-white/20 text-muted'}`}>{opt}</button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            <FormTextarea label="Why participate? (Short)" value={data.motivation} onChange={(e: any) => updateData('motivation', e.target.value)} placeholder="Your motivation..." />
+                            <FormTextarea label="Expectations" value={data.expectations} onChange={(e: any) => updateData('expectations', e.target.value)} placeholder="What do you want to learn?" />
+                            <div className="pt-6 space-y-4">
+                                {[
+                                    { key: 'agreedToRules', label: 'I agree to the Hackathon Rules & Code of Conduct' },
+                                    { key: 'originalWork', label: 'I confirm this is my original work' },
+                                    { key: 'allowShowcase', label: 'I allow organizers to showcase my project' }
+                                ].map((item) => (
+                                    <label key={item.key} className="flex items-center gap-3 cursor-pointer group">
+                                        <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                                            /* @ts-ignore */
+                                            data[item.key] ? 'bg-primary border-primary' : 'border-white/20 group-hover:border-white/50'
+                                            }`}>
+                                            {/* @ts-ignore */
+                                                data[item.key] && <Check className="w-3 h-3 text-white" />}
+                                        </div>
+                                        {/* @ts-ignore */}
+                                        <input type="checkbox" className="hidden" checked={data[item.key]} onChange={(e) => updateData(item.key as any, e.target.checked)} />
+                                        <span className="text-sm text-white/80 group-hover:text-white transition-colors">{item.label}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </>
+                    );
+                default: return null;
+            }
+        };
+
+        return (
+            <motion.div
+                key={step}
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                className="space-y-6"
+            >
+                {renderContent()}
+            </motion.div>
+        );
     };
 
     return (
@@ -519,47 +549,124 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
                     <div className="max-w-xl mx-auto w-full flex-grow flex flex-col justify-center">
                         <StepIndicator currentStep={step} totalSteps={steps.length} />
 
-                        <form className="flex-grow" onSubmit={(e) => e.preventDefault()}>
-                            {renderStep()}
-                        </form>
-
-                        <div className="flex justify-between items-center pt-10 mt-auto">
-                            <button
-                                type="button"
-                                onClick={handlePrev}
-                                className={`px-6 py-3 rounded-xl border border-white/10 text-white/70 hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 ${step === 0 ? 'invisible' : ''}`}
-                            >
-                                Back
-                            </button>
-
-                            {step < steps.length - 1 ? (
-                                <button
-                                    type="button"
-                                    onClick={handleNext}
-                                    className="px-8 py-3 rounded-xl bg-white text-black font-bold hover:bg-primary hover:text-white transition-all shadow-lg flex items-center gap-2 group"
+                        <AnimatePresence mode="wait">
+                            {isSubmitted ? (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="flex flex-col items-center justify-center h-full text-center space-y-6"
                                 >
-                                    Next Step <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                    <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-2 relative">
+                                        <div className="absolute inset-0 bg-green-500/20 blur-xl rounded-full animate-pulse" />
+                                        <CheckCircle className="w-10 h-10 text-green-500" />
+                                    </div>
+
+                                    <div>
+                                        <h2 className="text-3xl font-bold text-white mb-2">Registration Confirmed!</h2>
+                                        <p className="text-muted text-sm max-w-sm mx-auto">
+                                            You've taken the first step. Now, let's get you ready for the sprint.
+                                        </p>
+                                    </div>
+
+                                    <div className="p-1 rounded-2xl bg-gradient-to-br from-[#5865F2] to-accentPurple w-full max-w-sm">
+                                        <div className="bg-[#0F0F0F] rounded-[14px] p-6 text-left relative overflow-hidden">
+                                            <div className="absolute top-0 right-0 p-3 opacity-10">
+                                                <Users className="w-24 h-24" />
+                                            </div>
+
+                                            <h3 className="text-xl font-bold text-white mb-2 pr-10">
+                                                🚀 Vital Next Step
+                                            </h3>
+                                            <p className="text-sm text-gray-300 mb-6 leading-relaxed">
+                                                The entire sprint happens on Discord.
+                                                <ul className="list-disc list-inside mt-2 space-y-1 text-gray-400">
+                                                    <li>Find teammates & discuss ideas</li>
+                                                    <li>Get mentor support (24/7)</li>
+                                                    <li>Submit your final project</li>
+                                                </ul>
+                                            </p>
+
+                                            <button
+                                                onClick={() => window.open('https://discord.gg/t9S8fznbpn', '_blank')}
+                                                className="w-full py-3.5 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(88,101,242,0.4)] group"
+                                            >
+                                                <img src="https://assets-global.website-files.com/6257adef93867e56f84d3092/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" className="w-5 h-5 brightness-0 invert" alt="" />
+                                                Join Sprint Server
+                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-4 pt-4">
+                                        <p className="text-xs text-white/30 uppercase tracking-widest font-bold">What happens next?</p>
+                                        <div className="flex gap-4 text-xs text-muted">
+                                            <div className="flex items-center gap-2">
+                                                <span className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center font-mono">1</span>
+                                                Check Email
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center font-mono">2</span>
+                                                Join Discord
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center font-mono">3</span>
+                                                Start Building
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button onClick={onBack} className="text-muted hover:text-white text-xs underline pt-4">
+                                        Back to Home
+                                    </button>
+                                </motion.div>
                             ) : (
+                                <form className="flex-grow" onSubmit={(e) => e.preventDefault()}>
+                                    <AnimatePresence mode="wait">
+                                        {renderStep()}
+                                    </AnimatePresence>
+                                </form>
+                            )}
+                        </AnimatePresence>
+
+                        {!isSubmitted && (
+                            <div className="flex justify-between items-center pt-10 mt-auto">
                                 <button
                                     type="button"
-                                    onClick={handleSubmit}
-                                    disabled={isSubmitting}
-                                    className="px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-accentPurple text-white font-bold hover:shadow-[0_0_20px_rgba(109,124,255,0.4)] transition-all shadow-lg flex items-center gap-2 scale-105 disabled:opacity-50 disabled:grayscale disabled:pointer-events-none"
+                                    onClick={handlePrev}
+                                    className={`px-6 py-3 rounded-xl border border-white/10 text-white/70 hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 ${step === 0 ? 'invisible' : ''}`}
                                 >
-                                    {isSubmitting ? (
-                                        <>
-                                            <Loader2 className="w-4 h-4 animate-spin" />
-                                            Registering...
-                                        </>
-                                    ) : (
-                                        <>
-                                            Submit Application <Rocket className="w-4 h-4" />
-                                        </>
-                                    )}
+                                    Back
                                 </button>
-                            )}
-                        </div>
+
+                                {step < steps.length - 1 ? (
+                                    <button
+                                        type="button"
+                                        onClick={handleNext}
+                                        className="px-8 py-3 rounded-xl bg-white text-black font-bold hover:bg-primary hover:text-white transition-all shadow-lg flex items-center gap-2 group"
+                                    >
+                                        Next Step <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        onClick={handleSubmit}
+                                        disabled={isSubmitting}
+                                        className="px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-accentPurple text-white font-bold hover:shadow-[0_0_20px_rgba(109,124,255,0.4)] transition-all shadow-lg flex items-center gap-2 scale-105 disabled:opacity-50 disabled:grayscale disabled:pointer-events-none"
+                                    >
+                                        {isSubmitting ? (
+                                            <>
+                                                <Loader2 className="w-4 h-4 animate-spin" />
+                                                Registering...
+                                            </>
+                                        ) : (
+                                            <>
+                                                Submit Application <Rocket className="w-4 h-4" />
+                                            </>
+                                        )}
+                                    </button>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

@@ -606,7 +606,7 @@ export const Community = () => (
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-6 items-center lg:justify-start justify-center">
-                            <button onClick={() => window.open('https://discord.gg/e5uPQDXSSk', '_blank')} className="bg-white text-[#5865F2] pl-8 pr-2 py-2 rounded-full font-black text-lg hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:scale-105 transition-all flex items-center gap-6 group/btn">
+                            <button onClick={() => window.open('https://discord.gg/t9S8fznbpn', '_blank')} className="bg-white text-[#5865F2] pl-8 pr-2 py-2 rounded-full font-black text-lg hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:scale-105 transition-all flex items-center gap-6 group/btn">
                                 <span>JOIN DISCORD</span>
                                 <div className="w-12 h-12 rounded-full bg-[#5865F2] text-white flex items-center justify-center -rotate-45 group-hover/btn:rotate-0 transition-transform">
                                     <Rocket className="w-5 h-5" />

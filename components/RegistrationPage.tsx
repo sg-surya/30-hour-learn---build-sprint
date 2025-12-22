@@ -109,31 +109,61 @@ const FormInput = ({ label, type = "text", value, onChange, placeholder, require
             value={value}
             onChange={onChange}
             placeholder={placeholder}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all font-light"
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all font-light [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
     </div>
 );
 
-const FormSelect = ({ label, value, onChange, options, placeholder, required = false }: any) => (
-    <div className="space-y-2">
-        <label className="text-xs font-bold text-muted uppercase tracking-wider flex items-center gap-1">
-            {label} {required && <span className="text-red-500">*</span>}
-        </label>
-        <div className="relative">
-            <select
-                value={value}
-                onChange={onChange}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all font-light cursor-pointer"
-            >
-                <option value="" disabled className="bg-[#0F0F0F] text-muted">{placeholder}</option>
-                {options.map((opt: string) => (
-                    <option key={opt} value={opt} className="bg-[#0F0F0F] text-white">{opt}</option>
-                ))}
-            </select>
-            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50 pointer-events-none" />
+const FormSelect = ({ label, value, onChange, options, placeholder, required = false }: any) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div className="space-y-2 relative">
+            <label className="text-xs font-bold text-muted uppercase tracking-wider flex items-center gap-1">
+                {label} {required && <span className="text-red-500">*</span>}
+            </label>
+            <div className="relative">
+                <button
+                    type="button"
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-left focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all font-light flex justify-between items-center"
+                >
+                    <span className={value ? "text-white" : "text-white/20"}>
+                        {value || placeholder}
+                    </span>
+                    <ChevronDown className={`w-4 h-4 text-white/50 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="absolute top-full left-0 w-full mt-2 bg-[#1A1A1A] border border-white/10 rounded-xl overflow-hidden shadow-xl z-50 max-h-60 overflow-y-auto"
+                        >
+                            {options.map((opt: string) => (
+                                <button
+                                    key={opt}
+                                    type="button"
+                                    onClick={() => {
+                                        onChange(opt);
+                                        setIsOpen(false);
+                                    }}
+                                    className="w-full text-left px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white transition-colors flex items-center justify-between"
+                                >
+                                    {opt}
+                                    {value === opt && <Check className="w-4 h-4 text-primary" />}
+                                </button>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+            {isOpen && <div className="fixed inset-0 z-40 bg-transparent" onClick={() => setIsOpen(false)} />}
         </div>
-    </div>
-);
+    );
+};
 
 const FormTextarea = ({ label, value, onChange, placeholder, required = false }: any) => (
     <div className="space-y-2">
@@ -216,7 +246,7 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
                             <FormInput label="Mobile Number" type="tel" required value={data.mobile} onChange={(e: any) => updateData('mobile', e.target.value)} placeholder="+91 98765 43210" />
                         </div>
                         <div className="grid md:grid-cols-2 gap-6">
-                            <FormSelect label="Gender" value={data.gender} onChange={(e: any) => updateData('gender', e.target.value)} options={["Male", "Female", "Other", "Prefer not to say"]} placeholder="Select Gender" />
+                            <FormSelect label="Gender" value={data.gender} onChange={(val: string) => updateData('gender', val)} options={["Male", "Female", "Other", "Prefer not to say"]} placeholder="Select Gender" />
                         </div>
                         <div className="grid md:grid-cols-3 gap-6">
                             <FormInput label="City" required value={data.city} onChange={(e: any) => updateData('city', e.target.value)} placeholder="e.g. Bangalore" />
@@ -229,9 +259,9 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
                 return (
                     <div className="space-y-6 animate-in slide-in-from-right fade-in duration-300">
                         <h2 className="text-2xl font-bold text-white mb-6">Education & Background</h2>
-                        <FormSelect label="Current Status" required value={data.status} onChange={(e: any) => updateData('status', e.target.value)} options={STATUS_OPTIONS} placeholder="Select Status" />
+                        <FormSelect label="Current Status" required value={data.status} onChange={(val: string) => updateData('status', val)} options={STATUS_OPTIONS} placeholder="Select Status" />
                         <FormInput label="College / Organization Name" value={data.organization} onChange={(e: any) => updateData('organization', e.target.value)} placeholder="e.g. IIT Bombay / Google" />
-                        <FormSelect label="Experience Level" required value={data.experienceLevel} onChange={(e: any) => updateData('experienceLevel', e.target.value)} options={EXP_LEVELS} placeholder="Select Level" />
+                        <FormSelect label="Experience Level" required value={data.experienceLevel} onChange={(val: string) => updateData('experienceLevel', val)} options={EXP_LEVELS} placeholder="Select Level" />
 
                         <div className="grid md:grid-cols-2 gap-6 pt-4">
                             <FormInput label="GitHub Profile" value={data.github} onChange={(e: any) => updateData('github', e.target.value)} placeholder="github.com/username" />
@@ -271,7 +301,7 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
                                 <h3 className="text-lg font-bold text-white">Team Details</h3>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <FormInput label="Team Name" required value={data.teamName} onChange={(e: any) => updateData('teamName', e.target.value)} placeholder="e.g. Code Warriors" />
-                                    <FormSelect label="Team Size" value={data.teamSize} onChange={(e: any) => updateData('teamSize', e.target.value)} options={["2", "3", "4"]} placeholder="Size" />
+                                    <FormSelect label="Team Size" value={data.teamSize} onChange={(val: string) => updateData('teamSize', val)} options={["2", "3", "4"]} placeholder="Size" />
                                 </div>
                                 <FormInput label="Team Leader Name" required value={data.teamLeaderName} onChange={(e: any) => updateData('teamLeaderName', e.target.value)} placeholder="e.g. You" />
                                 <div className="grid md:grid-cols-2 gap-6">
@@ -379,8 +409,8 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
     };
 
     return (
-        <div className="min-h-screen bg-black p-[3px] font-sans text-white">
-            <div className="w-full min-h-[calc(100vh-6px)] bg-[#0F0F0F] rounded-[20px] border border-white/10 relative overflow-hidden flex flex-col md:flex-row">
+        <div className="h-screen bg-black p-[10px] font-sans text-white overflow-hidden box-border">
+            <div className="w-full h-full bg-[#0F0F0F] rounded-[20px] border border-white/10 relative overflow-hidden flex flex-col md:flex-row shadow-2xl">
 
                 {/* Left Side: Context/Info */}
                 <div className="hidden md:flex flex-col justify-between p-12 w-1/3 border-r border-white/5 relative z-10 bg-white/[0.02]">

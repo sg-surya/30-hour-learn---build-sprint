@@ -58,6 +58,34 @@ export const CustomCursor = () => {
     );
 };
 
+// --- SPOTLIGHT CURSOR EFFECT ---
+export const SpotlightCursor = () => {
+    const mouseX = useMotionValue(-1000);
+    const mouseY = useMotionValue(-1000);
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            mouseX.set(e.clientX);
+            mouseY.set(e.clientY);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, [mouseX, mouseY]);
+
+    return (
+        <motion.div
+            className="fixed inset-0 pointer-events-none z-[9998] transition-opacity duration-300"
+            style={{
+                background: useTransform(
+                    [mouseX, mouseY],
+                    ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, rgba(109, 124, 255, 0.15), transparent 80%)`
+                )
+            }}
+        />
+    );
+};
+
 // --- SCROLL PROGRESS ---
 export const ScrollProgress = () => {
     const { scrollYProgress } = useScroll();

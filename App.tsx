@@ -6,7 +6,7 @@ import { ProblemExplorer } from './components/ProblemExplorer';
 import { WhatIsSprint, HowItWorks, SprintRoadmap, Protocol5030, JudgingMindset, MentorSessions, JudgesSection, JudgingSection, AwardsSection, FAQ, Community, MarqueeSection } from './components/LandingSections';
 import { RegistrationPage } from './components/RegistrationPage';
 import { Footer } from './components/Footer';
-import { CustomCursor, GrainOverlay, ScrollProgress, ParallaxBackground } from './components/VisualEffects';
+import { GrainOverlay, ScrollProgress, ParallaxBackground, SpotlightCursor } from './components/VisualEffects';
 
 export default function App() {
   const [showRegistration, setShowRegistration] = useState(false);
@@ -17,6 +17,7 @@ export default function App() {
 
   return (
     <div className="relative selection:bg-primary/25 bg-background min-h-screen text-white">
+      <SpotlightCursor />
       <GrainOverlay />
       <ScrollProgress />
       <ParallaxBackground />

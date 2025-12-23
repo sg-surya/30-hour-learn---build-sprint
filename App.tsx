@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Hero } from './components/Hero';
 import { Sponsors } from './components/Sponsors';
 import { ProblemExplorer } from './components/ProblemExplorer';
-import { WhatIsSprint, HowItWorks, SprintRoadmap, Protocol5030, JudgingMindset, MentorSessions, JudgesSection, JudgingSection, AwardsSection, FAQ, Community, MarqueeSection } from './components/LandingSections';
+import { WhatIsSprint, HowItWorks, SprintRoadmap, Protocol5030, JudgingMindset, MentorSessions, JudgesSection, JudgingSection, AwardsSection, FAQ, Community, MarqueeSection, WhatToSubmit } from './components/LandingSections';
 import { RegistrationPage } from './components/RegistrationPage';
 import { Footer } from './components/Footer';
 import { GrainOverlay, ScrollProgress, ParallaxBackground, SpotlightCursor } from './components/VisualEffects';
@@ -30,6 +30,7 @@ export default function App() {
       <SprintRoadmap />
       <Protocol5030 />
       <ProblemExplorer />
+      <WhatToSubmit />
       <JudgingMindset />
       <AwardsSection onRegister={() => setShowRegistration(true)} />
       <MentorSessions />

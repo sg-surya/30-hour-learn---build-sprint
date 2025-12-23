@@ -989,55 +989,55 @@ export const WhatToSubmit = () => {
 
                 <div className="grid md:grid-cols-2 gap-4">
                     {/* Prototype */}
-                    <div className="p-6 md:p-8 rounded-3xl bg-surface/5 border border-white/10 hover:border-primary transition-all duration-300 group hover:bg-primary hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1">
-                        <h4 className="text-xl font-heading font-medium text-white mb-3 group-hover:text-white transition-colors">Prototype</h4>
-                        <p className="text-muted text-sm leading-relaxed group-hover:text-white/90 transition-colors">
+                    <div className="p-6 md:p-8 rounded-3xl bg-surface/5 border border-white/10 hover:border-[#e6e8e6] transition-all duration-300 group hover:bg-[#e6e8e6] hover:shadow-2xl hover:shadow-white/10 hover:-translate-y-1">
+                        <h4 className="text-xl font-heading font-medium text-white mb-3 group-hover:text-black transition-colors">Prototype</h4>
+                        <p className="text-muted text-sm leading-relaxed group-hover:text-black/70 transition-colors">
                             A functional, working code prototype. We prioritize working software over mockups.
                         </p>
                     </div>
 
                     {/* Submission Presentation */}
-                    <div className="p-6 md:p-8 rounded-3xl bg-surface/5 border border-white/10 hover:border-primary transition-all duration-300 group row-span-2 hover:bg-primary hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1">
-                        <h4 className="text-xl font-heading font-medium text-white mb-3 group-hover:text-white transition-colors">Submission Presentation</h4>
-                        <p className="text-muted text-sm mb-4 group-hover:text-white/90 transition-colors">
+                    <div className="p-6 md:p-8 rounded-3xl bg-surface/5 border border-white/10 hover:border-[#e6e8e6] transition-all duration-300 group row-span-2 hover:bg-[#e6e8e6] hover:shadow-2xl hover:shadow-white/10 hover:-translate-y-1">
+                        <h4 className="text-xl font-heading font-medium text-white mb-3 group-hover:text-black transition-colors">Submission Presentation</h4>
+                        <p className="text-muted text-sm mb-4 group-hover:text-black/70 transition-colors">
                             A presentation (Max 10-12 slides) summarizing:
                         </p>
-                        <ul className="space-y-2 text-sm text-muted/80 font-light group-hover:text-white/90 transition-colors">
+                        <ul className="space-y-2 text-sm text-muted/80 font-light group-hover:text-black/70 transition-colors">
                             <li className="flex gap-2 items-start">
-                                <span className="text-primary mt-1 group-hover:text-white transition-colors">•</span>
+                                <span className="text-primary mt-1 group-hover:text-black transition-colors">•</span>
                                 Problem and Solution Overview
                             </li>
                             <li className="flex gap-2 items-start">
-                                <span className="text-primary mt-1 group-hover:text-white transition-colors">•</span>
+                                <span className="text-primary mt-1 group-hover:text-black transition-colors">•</span>
                                 Key Features and Differentiators
                             </li>
                             <li className="flex gap-2 items-start">
-                                <span className="text-primary mt-1 group-hover:text-white transition-colors">•</span>
+                                <span className="text-primary mt-1 group-hover:text-black transition-colors">•</span>
                                 Tech Stack Utilised
                             </li>
                             <li className="flex gap-2 items-start">
-                                <span className="text-primary mt-1 group-hover:text-white transition-colors">•</span>
+                                <span className="text-primary mt-1 group-hover:text-black transition-colors">•</span>
                                 Market Opportunity and Viability
                             </li>
                             <li className="flex gap-2 items-start">
-                                <span className="text-primary mt-1 group-hover:text-white transition-colors">•</span>
+                                <span className="text-primary mt-1 group-hover:text-black transition-colors">•</span>
                                 Future Roadmap and Vision
                             </li>
                         </ul>
                     </div>
 
                     {/* Code Repository */}
-                    <div className="p-6 md:p-8 rounded-3xl bg-surface/5 border border-white/10 hover:border-primary transition-all duration-300 group hover:bg-primary hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1">
-                        <h4 className="text-xl font-heading font-medium text-white mb-3 group-hover:text-white transition-colors">Code Repository</h4>
-                        <p className="text-muted text-sm leading-relaxed group-hover:text-white/90 transition-colors">
+                    <div className="p-6 md:p-8 rounded-3xl bg-surface/5 border border-white/10 hover:border-[#e6e8e6] transition-all duration-300 group hover:bg-[#e6e8e6] hover:shadow-2xl hover:shadow-white/10 hover:-translate-y-1">
+                        <h4 className="text-xl font-heading font-medium text-white mb-3 group-hover:text-black transition-colors">Code Repository</h4>
+                        <p className="text-muted text-sm leading-relaxed group-hover:text-black/70 transition-colors">
                             Link to your Github repository. Ensure README is well-documented with setup instructions.
                         </p>
                     </div>
 
                     {/* Video Pitch */}
-                    <div className="p-6 md:p-8 rounded-3xl bg-surface/5 border border-white/10 hover:border-primary transition-all duration-300 group md:col-span-2 hover:bg-primary hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1">
-                        <h4 className="text-xl font-heading font-medium text-white mb-3 group-hover:text-white transition-colors">Video Pitch (Max 3 mins)</h4>
-                        <p className="text-muted text-sm leading-relaxed group-hover:text-white/90 transition-colors">
+                    <div className="p-6 md:p-8 rounded-3xl bg-surface/5 border border-white/10 hover:border-[#e6e8e6] transition-all duration-300 group md:col-span-2 hover:bg-[#e6e8e6] hover:shadow-2xl hover:shadow-white/10 hover:-translate-y-1">
+                        <h4 className="text-xl font-heading font-medium text-white mb-3 group-hover:text-black transition-colors">Video Pitch (Max 3 mins)</h4>
+                        <p className="text-muted text-sm leading-relaxed group-hover:text-black/70 transition-colors">
                             A concise, engaging video demonstrating the functionality of the prototype, explaining its features, and outlining its impact. Must be uploaded to a public video hosting service (YouTube/Loom/Drive).
                         </p>
                     </div>

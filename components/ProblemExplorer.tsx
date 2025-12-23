@@ -32,7 +32,7 @@ export const ProblemExplorer = () => {
                                             ? 'border-primary bg-primary/20 shadow-[0_0_30px_rgba(109,124,255,0.2)] p-6 z-10 scale-105 lg:scale-100'
                                             : selectedDomain !== null
                                                 ? 'p-4 border-white/5 bg-white/[0.02] hover:bg-white/[0.05] grayscale hover:grayscale-0 opacity-60 hover:opacity-100'
-                                                : 'p-6 border-border bg-surface/5 hover:border-primary/30'
+                                                : 'p-6 border-border bg-surface/5 hover:bg-primary hover:border-primary hover:shadow-primary/20'
                                         }
                     ${ // @ts-ignore
                                         item.isPriority && selectedDomain !== i ? 'border-primary/20' : ''
@@ -41,7 +41,7 @@ export const ProblemExplorer = () => {
                                 >
                                     <div className={`flex items-center gap-4 ${selectedDomain !== i && selectedDomain !== null ? 'mb-0' : 'mb-3 gap-0 justify-between items-start'}`}>
                                         {/* @ts-ignore */}
-                                        <div className={`${selectedDomain === i ? 'text-primary' : item.isPriority ? 'text-white' : 'text-muted'} group-hover:text-primary transition-colors duration-300`}>
+                                        <div className={`${selectedDomain === i ? 'text-primary' : item.isPriority ? 'text-white' : 'text-muted'} group-hover:text-white transition-colors duration-300`}>
                                             {item.icon}
                                         </div>
                                         {/* @ts-ignore */}
@@ -50,14 +50,14 @@ export const ProblemExplorer = () => {
                                         )}
 
                                         {selectedDomain !== null && selectedDomain !== i && (
-                                            <div className="font-bold text-sm text-white group-hover:text-primary transition-colors">{item.domain}</div>
+                                            <div className="font-bold text-sm text-white group-hover:text-white transition-colors">{item.domain}</div>
                                         )}
                                     </div>
 
                                     {(selectedDomain === null || selectedDomain === i) && (
                                         <>
                                             <div className="font-bold text-sm text-white mb-1 group-hover:text-white transition-colors">{item.domain}</div>
-                                            <div className="hidden md:block text-[10px] text-muted uppercase tracking-wide font-medium leading-tight opacity-70 group-hover:opacity-100 transition-opacity">
+                                            <div className="hidden md:block text-[10px] text-muted uppercase tracking-wide font-medium leading-tight opacity-70 group-hover:opacity-100 group-hover:text-white/90 transition-all">
                                                 {/* @ts-ignore */}
                                                 {item.desc}
                                             </div>
@@ -65,13 +65,14 @@ export const ProblemExplorer = () => {
                                     )}
 
                                     {/* Hover Overlay Hint (Only in Grid Mode) */}
-                                    {selectedDomain === null && (
+                                    {/* Hover Overlay Hint (Only in Grid Mode) - Removed to allow color fill to shine */}
+                                    {/* {selectedDomain === null && (
                                         <div className="hidden md:flex absolute inset-0 bg-background/90 backdrop-blur-sm items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl border border-primary/20">
                                             <span className="text-xs font-bold text-primary flex items-center gap-1">
                                                 View Problems <span className="text-[10px]">→</span>
                                             </span>
                                         </div>
-                                    )}
+                                    )} */}
                                 </button>
                             ))}
                         </div>

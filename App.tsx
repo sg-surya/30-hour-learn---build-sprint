@@ -7,9 +7,33 @@ import { WhatIsSprint, HowItWorks, SprintRoadmap, Protocol5030, JudgingMindset, 
 import { RegistrationPage } from './components/RegistrationPage';
 import { Footer } from './components/Footer';
 import { GrainOverlay, ScrollProgress, ParallaxBackground, SpotlightCursor } from './components/VisualEffects';
+import Lenis from 'lenis';
+import { useEffect } from 'react';
 
 export default function App() {
   const [showRegistration, setShowRegistration] = useState(false);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      touchMultiplier: 2,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   if (showRegistration) {
     return <RegistrationPage onBack={() => setShowRegistration(false)} />;

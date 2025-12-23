@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Clock, Zap, Users } from 'lucide-react';
 import { Reveal } from './Reveal';
+import { TextReveal } from './VisualEffects';
 
 export const Hero = ({ onRegister }: { onRegister: () => void }) => {
     const containerRef = useRef<HTMLElement>(null);
@@ -45,10 +46,18 @@ export const Hero = ({ onRegister }: { onRegister: () => void }) => {
                     <div className="hidden md:inline-block px-5 py-2 border border-border bg-surface/10 rounded-full text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-8 backdrop-blur-sm">
                         50 Hours Build Sprint · 30-Hour Effort · Vasudev AI
                     </div>
-                    <h1 className="hero-headline font-semibold mb-6 text-white select-none">
-                        Build Hard.<br />
-                        <span className="text-white/40 italic font-medium hero-title-secondary cursor-default text-[0.85em]">On Your Schedule.</span>
-                    </h1>
+                </Reveal>
+
+                <div className="flex flex-col items-center">
+                    <TextReveal className="hero-headline font-semibold mb-2 text-white select-none text-center justify-center">
+                        Build Hard.
+                    </TextReveal>
+                    <TextReveal className="text-xl md:text-3xl text-white/40 italic font-medium hero-title-secondary cursor-default mb-6 text-center justify-center" delay={0.3}>
+                        On Your Schedule.
+                    </TextReveal>
+                </div>
+
+                <Reveal>
                     <p className="hidden md:block text-xl md:text-2xl text-muted max-w-2xl mx-auto font-light mb-8 leading-relaxed hero-subline cursor-default">
                         50 hours to turn a real problem into a working solution.<br />
                         Commit ~30 hours of honest building, whenever it fits your schedule.
@@ -75,9 +84,9 @@ export const Hero = ({ onRegister }: { onRegister: () => void }) => {
                             50H sprint · 30H active build
                         </div>
 
-                        <div className="hidden md:flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/5 backdrop-blur-sm">
-                            <div className="w-1.5 h-1.5 rounded-full bg-accentPurple animate-pulse" />
-                            <span className="text-[10px] text-muted font-medium tracking-widest uppercase">Dates TBA</span>
+                        <div className="hidden md:flex items-center gap-3 px-6 py-2 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm mt-4">
+                            <div className="w-2 h-2 rounded-full bg-accentPurple animate-pulse shadow-[0_0_10px_#9f7aea]" />
+                            <span className="text-sm font-bold text-white tracking-[0.2em] uppercase">Date Reveal Soon</span>
                         </div>
 
                         <span className="hidden md:block text-[10px] text-muted/50 font-medium tracking-widest uppercase">Takes less than 2 minutes</span>

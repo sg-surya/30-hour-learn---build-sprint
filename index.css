@@ -12,6 +12,14 @@
         overflow-x: hidden;
         font-family: 'Inter', sans-serif;
         -webkit-font-smoothing: antialiased;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Only show custom cursor on devices that support hover */
+    @media (hover: none) and (pointer: coarse) {
+        body {
+            cursor: auto;
+        }
     }
 }
 

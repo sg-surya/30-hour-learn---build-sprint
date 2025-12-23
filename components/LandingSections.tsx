@@ -532,6 +532,10 @@ export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
                                     <Users className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
                                     <span>Group Mentorship Session</span>
                                 </li>
+                                <li className="flex gap-2 items-start text-muted text-sm">
+                                    <Users className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                                    <span><strong>Premium Group Access</strong></span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -560,6 +564,14 @@ export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
                                 <li className="flex gap-3 items-start text-white/90 text-sm">
                                     <Rocket className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                                     <span><strong>1:1 Mentorship</strong> (Product & Tech)</span>
+                                </li>
+                                <li className="flex gap-3 items-start text-white/90 text-sm">
+                                    <Briefcase className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                                    <span><strong>Internship Opportunity</strong></span>
+                                </li>
+                                <li className="flex gap-3 items-start text-white/90 text-sm">
+                                    <Users className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                                    <span><strong>Premium Group Access</strong></span>
                                 </li>
                                 <li className="flex gap-3 items-start text-white/90 text-sm">
                                     <Globe className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
@@ -599,6 +611,10 @@ export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
                                     <FileCheck className="w-4 h-4 text-orange-600/60 shrink-0 mt-0.5" />
                                     <span>Judges Feedback Report</span>
                                 </li>
+                                <li className="flex gap-2 items-start text-muted text-sm">
+                                    <Users className="w-4 h-4 text-orange-600/60 shrink-0 mt-0.5" />
+                                    <span><strong>Premium Group Access</strong></span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -607,8 +623,8 @@ export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
                 {/* Mobile List Layout */}
                 <div className="md:hidden flex flex-col gap-4 mb-12 max-w-[320px] mx-auto text-left">
                     {[
-                        { title: "Sprint Winner", prize: "Certificate • Feature • Early access", icon: "🥇" },
-                        { title: "Runner-ups", prize: "Badge • Access", icon: "🥈" },
+                        { title: "Sprint Winner", prize: "Internship • Premium Group • Feature", icon: "🥇" },
+                        { title: "Runner-ups", prize: "Premium Group • Badge • Access", icon: "🥈" },
                         { title: "Builders", prize: "Proof of work", icon: "🥉" }
                     ].map((item, i) => (
                         <div key={i} className="flex items-start gap-4 p-4 border-b border-white/10 last:border-0 hover:bg-white/5 transition-colors rounded-lg">
@@ -849,7 +865,7 @@ export const MarqueeSection = () => {
                     {[...Array(2)].map((_, i) => (
                         <div key={i} className="flex gap-16 md:gap-32 items-center">
                             {[
-                                "VASUDEV AI", "BUILD HARD", "SHIP FAST", "SOLVE PROBLEMS",
+                                "VASUDEV AI", "UTSAVY", "BUILD HARD", "SHIP FAST", "SOLVE PROBLEMS",
                                 "JUST CODE", "NO FLUFF", "REAL IMPACT", "50 HOURS SPRINT"
                             ].map((text, j) => (
                                 <div key={j} className="flex items-center gap-16 md:gap-32">

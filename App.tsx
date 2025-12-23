@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Hero } from './components/Hero';
+import { Sponsors } from './components/Sponsors';
 import { ProblemExplorer } from './components/ProblemExplorer';
 import { WhatIsSprint, HowItWorks, Protocol5030, JudgingMindset, MentorSessions, JudgesSection, JudgingSection, AwardsSection, FAQ, Community, MarqueeSection } from './components/LandingSections';
 import { RegistrationPage } from './components/RegistrationPage';
@@ -17,6 +18,7 @@ export default function App() {
     <div className="relative selection:bg-primary/25 bg-background min-h-screen text-white">
 
       <Hero onRegister={() => setShowRegistration(true)} />
+      <Sponsors />
       <MarqueeSection />
       <WhatIsSprint />
       <HowItWorks onRegister={() => setShowRegistration(true)} />

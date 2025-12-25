@@ -87,37 +87,38 @@ export const HowItWorks = ({ onRegister }: { onRegister: () => void }) => (
 export const SprintRoadmap = () => {
     const steps = [
         {
-            phase: "Phase 01",
+            phase: "Part 1: Prep",
             title: "Registration Opens",
-            desc: "Secure your spot immediately. Join the Community.",
+            desc: "Secure your spot. Join the builder community.",
             icon: <Users className="w-5 h-5" />,
             status: "active"
         },
         {
-            phase: "Phase 02",
-            title: "PS Release",
-            desc: "Problem Statements go live. Dec 25th.",
+            phase: "Part 1: Prep",
+            title: "Problem Statements Live",
+            desc: "Choose a real-world problem to work on.",
             icon: <Zap className="w-5 h-5" />,
             status: "active"
         },
         {
-            phase: "Phase 03",
-            title: "PPT Submission",
-            desc: "Submit your solution approach. Deadline: Jan 5th.",
+            phase: "Part 1: Prep",
+            title: "Approach Deck (PPT)",
+            desc: "A short PPT: Protocol, Solution, Why it matters.",
             icon: <FileCheck className="w-5 h-5" />,
-            status: "upcoming"
+            status: "upcoming",
+            note: "Clarity > Slides. Not judged on design."
         },
         {
-            phase: "Phase 04",
-            title: "Build Phase",
-            desc: "Shortlisted teams start building. Specific dates TBD.",
+            phase: "Part 2: Sprint",
+            title: "The 50-Hour Winter Sprint",
+            desc: "Build. Validate. Ship. ~30H of honest building.",
             icon: <Code className="w-5 h-5" />,
             status: "upcoming"
         },
         {
-            phase: "Phase 05",
-            title: "Final Showdown",
-            desc: "Live Demos & Judging. Date TBD.",
+            phase: "Part 3: Review",
+            title: "Demo & Review",
+            desc: "Live demos, feedback, and recognition.",
             icon: <Trophy className="w-5 h-5" />,
             status: "upcoming"
         }
@@ -130,7 +131,7 @@ export const SprintRoadmap = () => {
                     <h2 className="text-[11px] font-bold text-cyan-400 uppercase tracking-[0.6em] mb-6">Winter Timeline</h2>
                     <h3 className="section-headline text-4xl md:text-5xl font-medium text-white mb-6">From Idea to Ship.</h3>
                     <p className="text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
-                        A structured 50-hour window designed for maximum output.
+                        A structured journey designed for clarity and momentum.
                     </p>
                 </div>
 
@@ -141,12 +142,12 @@ export const SprintRoadmap = () => {
                     {/* Vertical Line (Mobile) */}
                     <div className="md:hidden absolute top-0 left-8 w-0.5 h-full bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
-                    <div className="grid md:grid-cols-5 gap-12 md:gap-4 relative">
+                    <div className="grid md:grid-cols-5 gap-12 md:gap-4 relative text-left">
                         {steps.map((step, i) => (
                             <div key={i} className="relative flex flex-row md:flex-col items-start md:items-center gap-6 md:gap-0 group">
                                 {/* Node */}
                                 <div className="md:mb-8 relative shrink-0">
-                                    <div className="w-16 h-16 rounded-full bg-[#0A0A0A] border border-white/10 flex items-center justify-center relative z-10 group-hover:border-cyan-400/50 transition-colors duration-500">
+                                    <div className={`w-16 h-16 rounded-full bg-[#0A0A0A] border flex items-center justify-center relative z-10 transition-colors duration-500 ${step.status === 'active' ? 'border-cyan-400/50' : 'border-white/10 group-hover:border-cyan-400/50'}`}>
                                         <div className={`text-white/40 group-hover:text-cyan-400 transition-colors duration-500 ${step.status === 'active' ? 'text-cyan-400' : ''}`}>
                                             {step.icon}
                                         </div>
@@ -158,10 +159,16 @@ export const SprintRoadmap = () => {
                                 </div>
 
                                 {/* Content */}
-                                <div className="pt-2 md:pt-0 md:text-center">
+                                <div className="pt-2 md:pt-0 md:text-center w-full">
                                     <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mb-2 opacity-80">{step.phase}</div>
                                     <h4 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">{step.title}</h4>
-                                    <p className="text-sm text-muted font-light leading-relaxed">{step.desc}</p>
+                                    <p className="text-sm text-muted font-light leading-relaxed mb-2">{step.desc}</p>
+                                    {/* Helper Text for PPT Phase */}
+                                    {step.note && (
+                                        <div className="inline-block px-2 py-1 bg-cyan-950/30 border border-cyan-500/10 rounded text-[10px] text-cyan-200/70 font-medium">
+                                            {step.note}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -284,52 +291,66 @@ export const MentorSessions = () => (
     <section className="py-16 md:py-20 px-6 md:px-8 max-w-[1280px] mx-auto border-t border-white/5">
         <Reveal>
             <div className="mb-16">
-                <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Live Learning</h2>
-                <h3 className="section-headline text-4xl md:text-5xl font-medium text-white mb-6">Mentor Sessions</h3>
-                <p className="text-muted max-w-2xl">Interactive sessions across categories during the sprint to help you unblock and accelerate.</p>
+                <h2 className="text-[11px] font-bold text-cyan-400 uppercase tracking-[0.6em] mb-6">Real-World Problem Areas</h2>
+                <h3 className="section-headline text-4xl md:text-5xl font-medium text-white mb-6">Choose One Broad Track.</h3>
+                <p className="text-muted max-w-2xl">Problem statements will be provided. You don’t need to be an expert — clear understanding matters more than jargon.</p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
                 {[
                     {
-                        category: "Development",
+                        category: "AI, ML & DeepTech",
+                        tagline: "Intelligence · Automation · Trust",
                         icon: <Code className="w-6 h-6 text-blue-400" />,
-                        mentors: "Aman, Ashutosh, Surya, Bishwajit",
-                        color: "from-blue-500/20 to-blue-900/10",
+                        covers: ["AI & DeepTech", "Cybersecurity", "DevTools", "Media & Creator"],
+                        examples: "AI agents, Fraud detection, Productivity tools",
+                        color: "from-blue-500/10 to-blue-900/5",
                         border: "border-blue-500/20"
                     },
                     {
-                        category: "Design",
-                        icon: <PenTool className="w-6 h-6 text-purple-400" />,
-                        mentors: "Bishwajeet, Surya",
-                        color: "from-purple-500/20 to-purple-900/10",
+                        category: "Industry & Infrastructure",
+                        tagline: "Systems that power everyday life",
+                        icon: <Briefcase className="w-6 h-6 text-purple-400" />,
+                        covers: ["FinTech", "MedTech", "AgriTech", "Logistics & Smart Cities"],
+                        examples: "Payments, Healthcare access, Supply chain",
+                        color: "from-purple-500/10 to-purple-900/5",
                         border: "border-purple-500/20"
                     },
                     {
-                        category: "Marketing",
-                        icon: <Megaphone className="w-6 h-6 text-pink-400" />,
-                        mentors: "Svetlana Hanover",
-                        color: "from-pink-500/20 to-pink-900/10",
-                        border: "border-pink-500/20"
-                    },
-                    {
-                        category: "Business",
-                        icon: <Briefcase className="w-6 h-6 text-amber-400" />,
-                        mentors: "Agrim Gupta, Svetlana",
-                        color: "from-amber-500/20 to-amber-900/10",
-                        border: "border-amber-500/20"
+                        category: "Open Innovation & Social Impact",
+                        tagline: "India-first · People-first",
+                        icon: <Globe className="w-6 h-6 text-green-400" />,
+                        covers: ["EdTech", "Social Impact", "ClimateTech", "governance"],
+                        examples: "Skill accessibility, Climate solutions, Public systems",
+                        color: "from-green-500/10 to-green-900/5",
+                        border: "border-green-500/20"
                     }
                 ].map((session, i) => (
-                    <div key={i} className={`p-5 md:p-8 rounded-3xl bg-gradient-to-br ${session.color} border ${session.border} hover:scale-[1.02] transition-transform w-full flex md:block items-center gap-5 md:gap-0`}>
-                        <div className="mb-0 md:mb-6 bg-black/20 w-12 h-12 md:w-12 md:h-12 rounded-xl flex items-center justify-center backdrop-blur-sm shrink-0">
+                    <div key={i} className={`p-6 md:p-8 rounded-3xl bg-gradient-to-br ${session.color} border ${session.border} hover:scale-[1.02] transition-transform w-full flex flex-col h-full`}>
+                        <div className="mb-6 bg-black/20 w-12 h-12 rounded-xl flex items-center justify-center backdrop-blur-sm shrink-0">
                             {session.icon}
                         </div>
                         <div>
-                            <h4 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">{session.category}</h4>
-                            <p className="hidden md:block text-xs md:text-sm text-white/60 mb-4 md:mb-6 leading-relaxed">Mentored by {session.mentors}</p>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/20 border border-white/5 text-[10px] font-bold uppercase tracking-widest text-white/50">
-                                <Clock className="w-3 h-3" />
-                                <span>TBD</span>
+                            <h4 className="text-xl font-bold text-white mb-2 leading-tight">{session.category}</h4>
+                            <p className="text-xs text-white/50 uppercase tracking-widest font-bold mb-6">{session.tagline}</p>
+
+                            <div className="space-y-4 mb-6">
+                                <div className="text-sm text-muted font-light">
+                                    <strong className="text-white/80 block mb-2 text-xs uppercase tracking-wider opacity-70">Covers:</strong>
+                                    <div className="flex flex-wrap gap-2">
+                                        {session.covers.map((c, idx) => (
+                                            <span key={idx} className="px-2 py-1 rounded bg-white/5 border border-white/5 text-xs text-white/70">
+                                                {c}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-auto pt-4 border-t border-white/5">
+                                <p className="text-xs text-white/40 leading-relaxed">
+                                    <strong className="text-cyan-400/80">Examples:</strong> {session.examples}
+                                </p>
                             </div>
                         </div>
                     </div>

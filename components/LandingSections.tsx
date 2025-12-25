@@ -185,7 +185,7 @@ export const Protocol5030 = () => (
             <Reveal x={-20}>
                 <div className="grid md:grid-cols-2 gap-16 items-center">
                     <div className="text-center md:text-left">
-                        <h2 className="text-sm font-bold text-primary uppercase tracking-[0.4em] mb-6">BUILT FOR REAL BUILDERS</h2>
+                        <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-[0.4em] mb-6">BUILT FOR REAL BUILDERS</h2>
 
                         {/* Mobile Numbers Block */}
                         <div className="md:hidden mb-8">
@@ -195,7 +195,7 @@ export const Protocol5030 = () => (
                                     <div className="text-[10px] uppercase tracking-widest text-muted">Total Sprint</div>
                                 </div>
                                 <div>
-                                    <div className="text-5xl font-heading font-bold text-primary mb-2">~30H</div>
+                                    <div className="text-5xl font-heading font-bold text-cyan-400 mb-2">~30H</div>
                                     <div className="text-[10px] uppercase tracking-widest text-muted">Active Build</div>
                                 </div>
                             </div>
@@ -219,7 +219,7 @@ export const Protocol5030 = () => (
                                     <span className="text-muted text-sm uppercase tracking-widest order-2 md:order-1">Total Sprint Window</span>
                                 </div>
                                 <div className="flex flex-col md:flex-row justify-between items-center md:items-end border-b border-white/5 pb-4 text-center md:text-left gap-2 md:gap-0">
-                                    <span className="text-primary text-5xl md:text-4xl font-heading font-bold order-1 md:order-2">~30H</span>
+                                    <span className="text-cyan-400 text-5xl md:text-4xl font-heading font-bold order-1 md:order-2">~30H</span>
                                     <span className="text-muted text-sm uppercase tracking-widest order-2 md:order-1">Recommended Effort</span>
                                 </div>
                                 <p className="text-xs text-muted/60 italic">
@@ -372,7 +372,7 @@ const JUDGES = [
     {
         name: "Aman Dangi",
         role: "Jury",
-        title: "Tech Lead",
+        title: "Co-Founder, Vasudev AI",
         focus: "Scalability & Systems",
         image: "https://media.licdn.com/dms/image/v2/D4D03AQGRXv8guRVRnA/profile-displayphoto-scale_400_400/B4DZpuYCvoHwBo-/0/1762788470044?e=1767830400&v=beta&t=Dk7Wu7cB6TMFVTJ-0seG_ePkxxDFLYRPAYo0bCGeUmg",
         linkedin: "https://www.linkedin.com/in/aman-dangi26/"
@@ -430,7 +430,7 @@ export const JudgesSection = () => {
 
             <Reveal x={-20}>
                 <div className="mb-20 text-center">
-                    <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Decision Makers</h2>
+                    <h2 className="text-[11px] font-bold text-cyan-400 uppercase tracking-[0.6em] mb-6">Decision Makers</h2>
                     <h3 className="section-headline text-4xl md:text-7xl font-medium text-white mb-6">Built by Builders.</h3>
                     <p className="text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
                         Your project will be reviewed by builders who have shipped real products — <span className="text-white font-medium">not theory</span>.
@@ -498,9 +498,9 @@ export const JudgesSection = () => {
                 {/* MENTORS SECTION */}
                 <div>
                     <div className="flex items-center justify-center gap-4 mb-10 opacity-60">
-                        <div className="h-[1px] w-12 bg-white/20" />
-                        <h4 className="text-sm font-bold text-white/60 uppercase tracking-[0.3em]">The Mentors</h4>
-                        <div className="h-[1px] w-12 bg-white/20" />
+                        <div className="h-[1px] w-12 bg-cyan-500/30" />
+                        <h4 className="text-sm font-bold text-cyan-200 uppercase tracking-[0.3em]">The Mentors</h4>
+                        <div className="h-[1px] w-12 bg-cyan-500/30" />
                     </div>
 
                     <div className="flex flex-wrap justify-center gap-6">
@@ -570,7 +570,7 @@ export const JudgingSection = () => (
     <section className="py-24 md:py-[160px] px-6 md:px-8 max-w-[1120px] mx-auto">
         <Reveal x={-20}>
             <div className="mb-20">
-                <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-10">Judging Criteria</h2>
+                <h2 className="text-[11px] font-bold text-cyan-400 uppercase tracking-[0.6em] mb-10">Judging Criteria</h2>
                 <h3 className="section-headline text-3xl md:text-6xl font-medium text-white mb-10">Usefulness &gt; Complexity</h3>
                 <p className="text-xl text-muted font-light max-w-2xl leading-relaxed">
                     We reward solutions that can survive in the real world. Complex tech is optional. Real impact is mandatory.
@@ -607,7 +607,7 @@ export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
         <section className="py-24 md:py-[160px] px-6 md:px-8 max-w-[1120px] mx-auto">
             <Reveal x={-20}>
                 <div className="mb-24 text-center">
-                    <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">Recognition & Rewards</h2>
+                    <h2 className="text-[11px] font-bold text-cyan-400 uppercase tracking-[0.6em] mb-6">Recognition & Rewards</h2>
                     <h3 className="section-headline text-3xl md:text-6xl font-medium text-white mb-8">We reward builders who ship.</h3>
                     <p className="text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
                         This sprint is not about prize money. It’s about building something that deserves to exist.

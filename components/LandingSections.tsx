@@ -380,7 +380,7 @@ const JUDGES = [
     {
         name: "Ashutosh K. Tripathi",
         role: "Mentor",
-        title: "Product Leader",
+        title: "AI Engineer, Vasudev AI",
         focus: "User Experience",
         image: "https://media.licdn.com/dms/image/v2/D5603AQGYCLuK_w70vw/profile-displayphoto-shrink_100_100/B56ZcI0d7jGoAY-/0/1748199662481?e=1767830400&v=beta&t=nRCNMdWNuSAlgguEMKExrSSrSFDItgDDM8-BhR5Jmos",
         linkedin: "https://www.linkedin.com/in/ashutosh-kumar-tripathi-926308237/"
@@ -388,7 +388,7 @@ const JUDGES = [
     {
         name: "Biswajit Kumar",
         role: "Mentor",
-        title: "Senior Engineer",
+        title: "Designer, Vasudev AI",
         focus: "Design & Architecture",
         image: "https://media.licdn.com/dms/image/v2/D5603AQHVB2Ar2a4kjg/profile-displayphoto-scale_400_400/B56Zn2cyFgHIAk-/0/1760776366788?e=1767830400&v=beta&t=YQN9A6Yzg52lOdcr8qmF-8bL8ffAhskT1o50JeBbfdg",
         linkedin: "https://www.linkedin.com/in/biswajit-exe20/"
@@ -404,7 +404,7 @@ const JUDGES = [
     {
         name: "Agrim Gupta",
         role: "Jury",
-        title: "Founder",
+        title: "Founder, UTSAVY",
         focus: "Product Market Fit",
         image: "https://media.licdn.com/dms/image/v2/D5635AQFmfw24J0Vcaw/profile-framedphoto-shrink_400_400/B56Zq6JN_0KsAc-/0/1764059570401?e=1767031200&v=beta&t=ONWZmnoVXvlKDzgTsiuBjcRI7cEWbp83SMGpir5c-1c",
         linkedin: "https://www.linkedin.com/in/agrim-choudhary-gupta-626807245/"

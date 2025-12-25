@@ -22,87 +22,99 @@ export const Hero = ({ onRegister }: { onRegister: () => void }) => {
         <section
             ref={containerRef}
             onMouseMove={handleMouseMove}
-            className="relative min-h-[70vh] md:min-h-[85vh] flex flex-col items-center justify-center px-4 md:px-6 text-center overflow-hidden pt-8 md:pt-24 pb-12"
+            className="relative h-[100dvh] w-full flex flex-col items-center justify-center px-4 md:px-6 text-center overflow-hidden"
         >
             <div
                 className="absolute inset-0 pointer-events-none z-0 opacity-40 transition-opacity duration-1000"
                 style={{
-                    background: `radial-gradient(800px at ${mousePos.x}px ${mousePos.y}px, rgba(109, 124, 255, 0.12), transparent 70%)`
+                    background: `radial-gradient(800px at ${mousePos.x}px ${mousePos.y}px, rgba(109, 124, 255, 0.08), transparent 70%)`
                 }}
             />
+            {/* Winter Theme Background Elements */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0B10] via-[#0f111a] to-[#0A0B10] -z-20" />
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] -z-10 mix-blend-overlay" />
+
             <motion.div
                 style={{ y: blobY }}
                 className="absolute inset-0 -z-10 pointer-events-none overflow-hidden"
             >
-                <div className="absolute top-[30%] left-1/2 w-[85vw] h-[85vw] bg-primary/5 blur-[120px] rounded-full animate-fluid-blob" />
-                <div className="absolute top-[40%] left-[45%] w-[65vw] h-[65vw] bg-accentPurple/5 blur-[150px] rounded-full animate-fluid-blob" />
+                {/* Subtle Winter Glows */}
+                <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[80vw] h-[40vw] bg-blue-500/5 blur-[100px] rounded-full" />
+                <div className="absolute top-[40%] left-[20%] w-[40vw] h-[40vw] bg-cyan-500/5 blur-[120px] rounded-full" />
             </motion.div>
 
-            <motion.div style={{ y: textY, opacity }} className="max-w-[1120px] mx-auto z-10">
+            <motion.div style={{ y: textY, opacity }} className="max-w-[1120px] mx-auto z-10 relative">
                 <Reveal>
-                    <div className="md:hidden inline-block px-4 py-1.5 border border-white/20 bg-white/5 rounded-full text-[10px] font-bold text-white uppercase tracking-[0.2em] mb-6 backdrop-blur-sm">
-                        BUILD SPRINT · NO FLUFF
-                    </div>
-                    <div className="hidden md:inline-block px-5 py-2 border border-border bg-surface/10 rounded-full text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-8 backdrop-blur-sm">
-                        50 Hours Build Sprint · 30-Hour Effort · Vasudev AI
+                    {/* Event Identity Badge */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-cyan-500/15 bg-cyan-950/10 rounded-full text-[10px] font-bold text-cyan-100 uppercase tracking-[0.2em] mb-3 backdrop-blur-md shadow-[0_0_20px_-5px_rgba(34,211,238,0.15)]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+                        VASUDEV WINTER HACK · 50H Build Sprint
                     </div>
                 </Reveal>
 
                 <div className="flex flex-col items-center">
-                    <TextReveal className="hero-headline font-semibold mb-2 text-white select-none text-center justify-center">
-                        Build Hard.
+                    <TextReveal className="hero-headline font-extrabold mb-1 text-white select-none text-center justify-center leading-[0.9]">
+                        Build Real.
                     </TextReveal>
-                    <TextReveal className="text-xl md:text-3xl text-white/40 italic font-medium hero-title-secondary cursor-default mb-6 text-center justify-center" delay={0.3}>
+                    <TextReveal className="hero-headline font-extrabold mb-2 text-white select-none text-center justify-center leading-[0.9]">
+                        This Winter.
+                    </TextReveal>
+                    <TextReveal className="text-xl md:text-3xl text-white/50 italic font-light hero-title-secondary cursor-default mb-4 text-center justify-center font-serif" delay={0.3}>
                         On Your Schedule.
                     </TextReveal>
                 </div>
 
                 <Reveal>
-                    <p className="hidden md:block text-xl md:text-2xl text-muted max-w-2xl mx-auto font-light mb-8 leading-relaxed hero-subline cursor-default">
-                        50 hours to turn a real problem into a working solution.<br />
-                        Commit ~30 hours of honest building, whenever it fits your schedule.
-                    </p>
-                    <p className="md:hidden text-lg text-muted max-w-[90%] mx-auto font-light mb-8 leading-relaxed hero-subline cursor-default">
-                        A startup-first sprint to build real solutions in 30 hours.
-                    </p>
-                    <p className="hidden md:block text-sm text-primary/70 font-medium mb-10 tracking-wide uppercase tracking-[0.2em]">
-                        Solo or Team (Max 4) · Real Work · Meaningful Recognition
-                    </p>
+                    <div className="max-w-3xl mx-auto mb-5">
+                        <p className="text-lg md:text-xl text-muted font-light mb-2 leading-relaxed hero-subline cursor-default">
+                            50 hours to turn a real problem into a working solution.<br className="hidden md:block" />
+                            <span className="text-white/80">You decide how and when to spend ~30 hours building.</span>
+                        </p>
+                        <p className="inline-block text-xs md:text-sm text-cyan-200/70 font-medium tracking-widest uppercase border-b border-cyan-500/10 pb-1">
+                            Beginner-friendly · Advanced-approved · Mentor-supported
+                        </p>
+                    </div>
 
                     <div className="flex flex-col items-center gap-4">
+                        {/* Mentor Hint */}
+                        <div className="flex items-center gap-2 text-[10px] md:text-xs text-muted/60 font-medium mb-1">
+                            <Users className="w-3.5 h-3.5 text-cyan-400/70" />
+                            <span>Live mentor sessions during the sprint (1–2 hrs)</span>
+                        </div>
+
                         <motion.button
-                            whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(109, 124, 255, 0.4)" }}
+                            whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(34, 211, 238, 0.3)" }}
                             whileTap={{ scale: 0.98 }}
                             onClick={onRegister}
-                            className="cta-border px-16 py-6 rounded-full text-white font-bold text-xl tracking-tight group shadow-[0_0_20px_rgba(109,124,255,0.2)]"
+                            className="relative group bg-gradient-to-br from-[#0A0B10] to-[#131620] border border-cyan-500/30 px-12 py-5 rounded-full overflow-hidden transition-all duration-300"
                         >
-                            Enter the Sprint
-                            <span className="inline-block transition-transform group-hover:translate-x-2 ml-3">→</span>
+                            <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                            <div className="relative z-10 flex items-center gap-3 text-white font-bold text-lg tracking-tight">
+                                Enter the Sprint
+                                <span className="inline-block transition-transform group-hover:translate-x-2">→</span>
+                            </div>
+                            {/* Inner Glow Border */}
+                            <div className="absolute inset-0 rounded-full border border-cyan-500/20 opacity-50 group-hover:opacity-100 transition-opacity" />
                         </motion.button>
 
-                        <div className="md:hidden mt-4 text-[11px] font-bold text-muted uppercase tracking-widest">
-                            50H sprint · 30H active build
+                        <div className="flex flex-col items-center gap-2 mt-1">
+                            <span className="text-xs font-bold text-white tracking-[0.2em] uppercase text-shadow-glow">Winter Dates Revealing Soon</span>
                         </div>
 
-                        <div className="hidden md:flex items-center gap-3 px-6 py-2 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm mt-4">
-                            <div className="w-2 h-2 rounded-full bg-accentPurple animate-pulse shadow-[0_0_10px_#9f7aea]" />
-                            <span className="text-sm font-bold text-white tracking-[0.2em] uppercase">Date Reveal Soon</span>
-                        </div>
-
-                        <span className="hidden md:block text-[10px] text-muted/50 font-medium tracking-widest uppercase">Takes less than 2 minutes</span>
-
-                        <div className="hidden md:flex flex-col md:flex-row items-center gap-6 mt-6">
+                        <div className="hidden md:flex flex-col md:flex-row items-center gap-6 mt-4 opacity-60 hover:opacity-100 transition-opacity duration-300">
                             <div className="flex items-center gap-2">
-                                <Clock className="w-4 h-4 text-primary" />
-                                <span className="text-[10px] text-muted font-bold tracking-[0.2em] uppercase">50h Duration</span>
+                                <Clock className="w-3.5 h-3.5 text-cyan-400" />
+                                <span className="text-[9px] text-muted font-bold tracking-[0.2em] uppercase">50H Window</span>
                             </div>
+                            <div className="w-0.5 h-3 bg-white/20" />
                             <div className="flex items-center gap-2">
-                                <Zap className="w-4 h-4 text-accentPurple" />
-                                <span className="text-[10px] text-muted font-bold tracking-[0.2em] uppercase">Online Sprint</span>
+                                <Zap className="w-3.5 h-3.5 text-cyan-400" />
+                                <span className="text-[9px] text-muted font-bold tracking-[0.2em] uppercase">Online</span>
                             </div>
+                            <div className="w-0.5 h-3 bg-white/20" />
                             <div className="flex items-center gap-2">
-                                <Users className="w-4 h-4 text-white" />
-                                <span className="text-[10px] text-muted font-bold tracking-[0.2em] uppercase">Solo or Team (Max 4)</span>
+                                <Users className="w-3.5 h-3.5 text-cyan-400" />
+                                <span className="text-[9px] text-muted font-bold tracking-[0.2em] uppercase">Solo or Team (Max 4)</span>
                             </div>
                         </div>
                     </div>

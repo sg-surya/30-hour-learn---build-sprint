@@ -2,7 +2,8 @@
 
 @layer base {
     :root {
-        --accent-gradient: linear-gradient(90deg, #6D7CFF, #8B5CF6);
+        /* Winter Edition Gradient: Cyan to Blue */
+        --accent-gradient: linear-gradient(90deg, #22d3ee, #3b82f6);
         --bg-color: #0A0B10;
     }
 
@@ -36,8 +37,8 @@
     }
 
     .hero-title-secondary:hover {
-        color: rgba(255, 255, 255, 0.7) !important;
-        text-shadow: 0 0 40px rgba(109, 124, 255, 0.35);
+        color: rgba(255, 255, 255, 0.9) !important;
+        text-shadow: 0 0 40px rgba(34, 211, 238, 0.5);
     }
 
     .hero-subline {
@@ -45,7 +46,7 @@
     }
 
     .hero-subline:hover {
-        color: #C7CBFF !important;
+        color: #e0f2fe !important;
     }
 
     .section-headline {
@@ -78,13 +79,17 @@
     }
 
     .cta-border:hover {
-        box-shadow: 0 10px 40px -10px rgba(109, 124, 255, 0.4);
+        box-shadow: 0 10px 40px -10px rgba(34, 211, 238, 0.4);
         transform: translateY(-4px);
         filter: brightness(1.15);
     }
 
     .cta-border:hover::after {
         opacity: 0.6;
+    }
+
+    .text-shadow-glow {
+        text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
     }
 
     .manifesto-text {
@@ -160,7 +165,7 @@
 }
 
 ::selection {
-    background: rgba(109, 124, 255, 0.3);
+    background: rgba(34, 211, 238, 0.3);
     color: white;
 }
 

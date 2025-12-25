@@ -17,96 +17,62 @@ export const ProblemExplorer = () => {
                     <p className="text-muted max-w-2xl mx-auto">Click on a domain to view detailed problem statements.</p>
                 </div>
 
-                <div className="flex flex-col lg:flex-row gap-8 items-start relative transition-all duration-500">
-
-                    {/* Domain List / Sidebar */}
-                    <div className={`transition-all duration-500 ease-in-out ${selectedDomain !== null ? 'w-full lg:w-[320px] shrink-0' : 'w-full'}`}>
-                        {/* Mobile: Show only first 6 unless expanded. Desktop: Show all. */}
-                        <div className={`grid gap-4 transition-all duration-500 ${selectedDomain !== null ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-1' : 'grid-cols-2 md:grid-cols-4 lg:grid-cols-5'}`}>
-                            {PROBLEM_STATEMENTS.slice(0, (window.innerWidth < 768 && !showAllDomains && selectedDomain === null) ? 6 : PROBLEM_STATEMENTS.length).map((item, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => setSelectedDomain(selectedDomain === i ? null : i)}
-                                    className={`group relative text-left rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl w-full
-                    ${selectedDomain === i
-                                            ? 'border-primary bg-primary/20 shadow-[0_0_30px_rgba(109,124,255,0.2)] p-6 z-10 scale-105 lg:scale-100'
-                                            : selectedDomain !== null
-                                                ? 'p-4 border-white/5 bg-white/[0.02] hover:bg-white/[0.05] grayscale hover:grayscale-0 opacity-60 hover:opacity-100'
-                                                : 'p-6 border-border bg-surface/5 hover:bg-primary hover:border-primary hover:shadow-primary/20'
-                                        }
-                    ${ // @ts-ignore
-                                        item.isPriority && selectedDomain !== i ? 'border-primary/20' : ''
-                                        }
-                  `}
-                                >
-                                    <div className={`flex items-center gap-4 ${selectedDomain !== i && selectedDomain !== null ? 'mb-0' : 'mb-3 gap-0 justify-between items-start'}`}>
-                                        {/* @ts-ignore */}
-                                        <div className={`${selectedDomain === i ? 'text-primary' : item.isPriority ? 'text-white' : 'text-muted'} group-hover:text-white transition-colors duration-300`}>
-                                            {item.icon}
-                                        </div>
-                                        {/* @ts-ignore */}
-                                        {item.isPriority && (
-                                            <div className={`w-1.5 h-1.5 rounded-full bg-accentPurple shadow-[0_0_8px_#A020F0] ${selectedDomain !== null && selectedDomain !== i ? 'hidden' : ''}`} title="High Priority" />
-                                        )}
-
-                                        {selectedDomain !== null && selectedDomain !== i && (
-                                            <div className="font-bold text-sm text-white group-hover:text-white transition-colors">{item.domain}</div>
-                                        )}
+                <div className="relative">
+                    {/* Domain Grid - Always full width now */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        {PROBLEM_STATEMENTS.map((item, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setSelectedDomain(i)}
+                                className={`group relative text-left rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl w-full p-6 border-border bg-surface/5 hover:bg-primary hover:border-primary hover:shadow-primary/20`}
+                            >
+                                <div className="flex flex-col gap-4 mb-3">
+                                    <div className="text-muted group-hover:text-white transition-colors duration-300">
+                                        {item.icon}
                                     </div>
-
-                                    {(selectedDomain === null || selectedDomain === i) && (
-                                        <>
-                                            <div className="font-bold text-sm text-white mb-1 group-hover:text-white transition-colors">{item.domain}</div>
-                                            <div className="hidden md:block text-[10px] text-muted uppercase tracking-wide font-medium leading-tight opacity-70 group-hover:opacity-100 group-hover:text-white/90 transition-all">
-                                                {/* @ts-ignore */}
-                                                {item.desc}
-                                            </div>
-                                        </>
+                                    {/* @ts-ignore */}
+                                    {item.isPriority && (
+                                        <div className="w-1.5 h-1.5 rounded-full bg-accentPurple shadow-[0_0_8px_#A020F0] absolute top-6 right-6" title="High Priority" />
                                     )}
+                                </div>
 
-                                    {/* Hover Overlay Hint (Only in Grid Mode) */}
-                                    {/* Hover Overlay Hint (Only in Grid Mode) - Removed to allow color fill to shine */}
-                                    {/* {selectedDomain === null && (
-                                        <div className="hidden md:flex absolute inset-0 bg-background/90 backdrop-blur-sm items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl border border-primary/20">
-                                            <span className="text-xs font-bold text-primary flex items-center gap-1">
-                                                View Problems <span className="text-[10px]">→</span>
-                                            </span>
-                                        </div>
-                                    )} */}
-                                </button>
-                            ))}
-                        </div>
-
-                        {/* Mobile "Show More" Button */}
-                        {!showAllDomains && selectedDomain === null && (
-                            <div className="md:hidden mt-8 text-center">
-                                <button
-                                    onClick={() => setShowAllDomains(true)}
-                                    className="px-8 py-3 rounded-full bg-surface/10 border border-white/10 text-sm font-bold text-white hover:bg-surface/20 transition-all uppercase tracking-widest"
-                                >
-                                    + View All {PROBLEM_STATEMENTS.length} Domains
-                                </button>
-                            </div>
-                        )}
+                                <div className="font-bold text-sm text-white group-hover:text-white transition-colors">{item.domain}</div>
+                                <div className="hidden md:block text-[10px] text-muted uppercase tracking-wide font-medium leading-tight opacity-70 group-hover:opacity-100 group-hover:text-white/90 transition-all mt-1">
+                                    {/* @ts-ignore */}
+                                    {item.desc}
+                                </div>
+                            </button>
+                        ))}
                     </div>
 
-                    {/* Expanded Content Area */}
-                    <AnimatePresence mode="wait">
+                    {/* Modal Overlay */}
+                    <AnimatePresence>
                         {selectedDomain !== null && (
                             <motion.div
-                                id="problems-view"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 20 }}
-                                transition={{ duration: 0.4, ease: "easeOut" }}
-                                className="flex-1 w-full overflow-hidden"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/60 backdrop-blur-md"
+                                onClick={() => setSelectedDomain(null)}
                             >
-                                <div className="relative rounded-[2rem] p-1 bg-gradient-to-br from-primary/30 to-transparent sticky top-8">
-                                    <div className="bg-background border border-white/5 rounded-[1.8rem] p-8 md:p-12 relative overflow-hidden min-h-[600px] flex flex-col">
-                                        {/* Background decoration */}
-                                        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[100px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2" />
+                                <motion.div
+                                    initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                                    exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="bg-[#0A0A0A] border border-white/10 rounded-[2rem] w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
+                                >
+                                    {/* Scrollable Content */}
+                                    <div className="p-8 md:p-12">
+                                        {/* Header */}
+                                        <div className="flex flex-col md:flex-row md:items-center gap-6 mb-12 border-b border-white/5 pb-8 relative">
+                                            <button
+                                                onClick={() => setSelectedDomain(null)}
+                                                className="absolute top-0 right-0 p-2 text-white/40 hover:text-white hover:bg-white/10 rounded-full transition-all"
+                                            >
+                                                <X className="w-6 h-6" />
+                                            </button>
 
-                                        <div className="flex flex-col md:flex-row md:items-center gap-6 mb-12 relative z-10 border-b border-white/5 pb-8">
                                             <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center shadow-[0_0_40px_-10px_rgba(109,124,255,0.3)] shrink-0">
                                                 <div className="text-primary scale-150">{PROBLEM_STATEMENTS[selectedDomain].icon}</div>
                                             </div>
@@ -116,49 +82,83 @@ export const ProblemExplorer = () => {
                                                 {/* @ts-ignore */}
                                                 <p className="text-muted mt-2 max-w-xl">{PROBLEM_STATEMENTS[selectedDomain].desc}</p>
                                             </div>
-
-                                            <button onClick={() => setSelectedDomain(null)} className="md:ml-auto p-3 text-white/40 hover:text-white hover:bg-white/10 rounded-full transition-all z-10"><X className="w-6 h-6" /></button>
                                         </div>
 
-                                        <div className="grid md:grid-cols-2 gap-6 relative z-10 content-start">
+                                        {/* Problems Grid */}
+                                        <div className="grid md:grid-cols-2 gap-6">
                                             {PROBLEM_STATEMENTS[selectedDomain].problems.map((prob, k) => (
-                                                <div key={k} className="group relative p-8 bg-white/[0.02] hover:bg-white/[0.04] rounded-2xl border border-white/5 hover:border-primary/30 transition-all duration-300 flex flex-col h-full hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1">
-                                                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                                    <div className="mb-6 flex justify-between items-start">
-                                                        <div className="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary uppercase tracking-widest">
-                                                            Problem 0{k + 1}
-                                                        </div>
-                                                    </div>
-
-                                                    <h4 className="text-xl font-bold text-white mb-6 leading-tight group-hover:text-primary/90 transition-colors">{prob.title}</h4>
-
-                                                    <div className="flex-grow space-y-6">
-                                                        <div>
-                                                            <div className="text-[10px] uppercase tracking-widest text-muted/50 font-bold mb-2">The Pain Point</div>
-                                                            <p className="text-sm text-muted font-light leading-relaxed opacity-90 group-hover:opacity-100 transition-opacity">
-                                                                {prob.desc}
-                                                            </p>
-                                                        </div>
-
-                                                        <div className="pt-6 border-t border-white/5">
-                                                            <div className="text-[10px] uppercase tracking-widest text-primary/70 font-bold mb-2">Build This</div>
-                                                            {/* @ts-ignore */}
-                                                            <p className="text-sm text-white/90 font-medium leading-relaxed">
-                                                                {prob.solution}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <ProblemCard key={k} prob={prob} index={k} />
                                             ))}
                                         </div>
                                     </div>
-                                </div>
+                                </motion.div>
                             </motion.div>
                         )}
                     </AnimatePresence>
                 </div>
             </Reveal>
         </section>
+    );
+};
+
+const ProblemCard = ({ prob, index }: { prob: any, index: number }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <motion.div
+            layout
+            onClick={() => setIsOpen(!isOpen)}
+            className={`group relative p-6 md:p-8 bg-white/[0.02] hover:bg-white/[0.04] rounded-2xl border border-white/5 hover:border-primary/30 transition-all duration-300 cursor-pointer ${isOpen ? 'ring-1 ring-primary/50 bg-white/[0.04]' : ''}`}
+        >
+            <motion.div layout="position" className="mb-4 flex justify-between items-start">
+                <div className="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary uppercase tracking-widest">
+                    Problem 0{index + 1}
+                </div>
+                <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    className="text-white/40 group-hover:text-white transition-colors"
+                >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                </motion.div>
+            </motion.div>
+
+            <motion.h4 layout="position" className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-primary/90 transition-colors">
+                {prob.title}
+            </motion.h4>
+
+            {!isOpen && (
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-sm text-muted line-clamp-2">
+                    {prob.desc}
+                </motion.p>
+            )}
+
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-hidden"
+                    >
+                        <div className="pt-6 mt-4 border-t border-white/5 space-y-6">
+                            <div>
+                                <div className="text-[10px] uppercase tracking-widest text-muted/50 font-bold mb-2">The Pain Point</div>
+                                <p className="text-sm text-muted font-light leading-relaxed">
+                                    {prob.desc}
+                                </p>
+                            </div>
+
+                            <div>
+                                <div className="text-[10px] uppercase tracking-widest text-primary/70 font-bold mb-2">Build This</div>
+                                {/* @ts-ignore */}
+                                <p className="text-sm text-white/90 font-medium leading-relaxed">
+                                    {prob.solution}
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
     );
 };

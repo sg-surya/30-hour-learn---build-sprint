@@ -8,7 +8,7 @@ export const WhatIsSprint = () => (
         <div className="px-8 max-w-[800px] mx-auto text-center md:text-left">
             <Reveal>
                 <div className="md:text-center">
-                    <h2 className="text-sm font-bold text-primary uppercase tracking-[0.4em] mb-6">WHAT IS THIS?</h2>
+                    <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-[0.4em] mb-6">WHAT IS THIS?</h2>
                     <h3 className="text-3xl md:text-5xl font-heading font-medium text-white mb-8 leading-tight">
                         <span className="md:hidden">A startup-first build sprint.<br />No pitching. No fluff.</span>
                         <span className="hidden md:inline">A startup-first build sprint.</span>
@@ -20,20 +20,20 @@ export const WhatIsSprint = () => (
 
                         {/* Mobile Bullets */}
                         <div className="md:hidden space-y-4 text-left max-w-[280px] mx-auto">
-                            <p className="text-white/90 text-lg">A startup-first build sprint where you identify a real problem and ship a solution.</p>
+                            <p className="text-white/90 text-lg">A beginner-friendly Winter Edition sprint where you identify a real problem and ship a solution.</p>
                             <div className="space-y-3 pt-4">
-                                <div className="flex items-center gap-3 text-white font-medium"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />Real problems</div>
-                                <div className="flex items-center gap-3 text-white font-medium"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />Real builds</div>
-                                <div className="flex items-center gap-3 text-white font-medium"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />Real progress</div>
+                                <div className="flex items-center gap-3 text-white font-medium"><div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />Real problems</div>
+                                <div className="flex items-center gap-3 text-white font-medium"><div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />Real builds</div>
+                                <div className="flex items-center gap-3 text-white font-medium"><div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />Real progress</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="hidden md:flex flex-wrap justify-center gap-6 md:gap-12 text-sm font-medium text-white/80">
-                    <div className="flex items-center gap-3"><Clock className="w-5 h-5 text-primary" /> 50h Window · ~30h Effort</div>
-                    <div className="flex items-center gap-3"><Users className="w-5 h-5 text-primary" /> Solo or Small Teams</div>
-                    <div className="flex items-center gap-3"><Rocket className="w-5 h-5 text-primary" /> Build for Impact</div>
+                    <div className="flex items-center gap-3"><Clock className="w-5 h-5 text-cyan-400" /> 50h Window · ~30h Effort</div>
+                    <div className="flex items-center gap-3"><Users className="w-5 h-5 text-cyan-400" /> Solo or Small Teams</div>
+                    <div className="flex items-center gap-3"><Rocket className="w-5 h-5 text-cyan-400" /> Build for Impact</div>
                 </div>
             </Reveal>
         </div>
@@ -44,7 +44,7 @@ export const HowItWorks = ({ onRegister }: { onRegister: () => void }) => (
     <section className="py-16 md:py-24 px-6 md:px-8 max-w-[1120px] mx-auto">
         <Reveal>
             <div className="mb-24 text-center">
-                <h2 className="text-sm font-bold text-accentPurple uppercase tracking-[0.4em] mb-4">Process</h2>
+                <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-[0.4em] mb-4">Process</h2>
                 <h3 className="text-4xl md:text-5xl font-heading font-medium text-white">How It Works</h3>
             </div>
 
@@ -58,12 +58,12 @@ export const HowItWorks = ({ onRegister }: { onRegister: () => void }) => (
                     { icon: <Rocket className="w-6 h-6" />, step: "04", title: "Submit", desc: "Show what you built, why it matters, and how it scales." }
                 ].map((item, i) => (
                     <div key={i} className="relative grid place-items-center text-center group min-w-[80vw] md:min-w-0 snap-center">
-                        <div className="w-20 h-20 bg-background border border-border rounded-3xl flex items-center justify-center text-muted group-hover:text-primary group-hover:border-primary/50 group-hover:shadow-[0_0_30px_-10px_rgba(109,124,255,0.3)] transition-all duration-500 mb-6 bg-gradient-to-br from-surface/50 to-background z-10 box-border">
+                        <div className="w-20 h-20 bg-background border border-border rounded-3xl flex items-center justify-center text-muted group-hover:text-cyan-400 group-hover:border-cyan-400/50 group-hover:shadow-[0_0_30px_-10px_rgba(34,211,238,0.3)] transition-all duration-500 mb-6 bg-gradient-to-br from-surface/50 to-background z-10 box-border">
                             {item.icon}
                         </div>
 
                         <div className="space-y-3">
-                            <div className="text-[10px] font-bold text-accentPurple uppercase tracking-[0.2em] opacity-80">Step {item.step}</div>
+                            <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-[0.2em] opacity-80">Step {item.step}</div>
                             <h4 className="text-xl font-bold text-white">{item.title}</h4>
                             <p className="text-sm text-muted font-light leading-relaxed max-w-[200px] mx-auto">{item.desc}</p>
                         </div>
@@ -75,7 +75,7 @@ export const HowItWorks = ({ onRegister }: { onRegister: () => void }) => (
                 <div className="inline-flex flex-col md:flex-row items-center gap-4 md:gap-6 px-6 md:px-8 py-6 md:py-4 rounded-3xl md:rounded-full bg-surface/10 border border-white/5 backdrop-blur-sm w-full md:w-auto">
                     <p className="text-lg text-white font-medium">We care about progress, not perfection.</p>
                     <div className="hidden md:block h-4 w-px bg-white/10"></div>
-                    <button onClick={onRegister} className="w-full md:w-auto text-sm font-bold text-primary hover:text-white transition-colors uppercase tracking-widest py-2 md:py-0 border-t border-white/10 md:border-0 md:pt-0 pt-4 mt-2 md:mt-0">
+                    <button onClick={onRegister} className="w-full md:w-auto text-sm font-bold text-cyan-400 hover:text-white transition-colors uppercase tracking-widest py-2 md:py-0 border-t border-white/10 md:border-0 md:pt-0 pt-4 mt-2 md:mt-0">
                         Start Building →
                     </button>
                 </div>
@@ -88,37 +88,37 @@ export const SprintRoadmap = () => {
     const steps = [
         {
             phase: "Phase 01",
-            title: "The Registration",
-            desc: "Secure your spot. Join the Discord community.",
+            title: "Registration Opens",
+            desc: "Secure your spot immediately. Join the Community.",
             icon: <Users className="w-5 h-5" />,
             status: "active"
         },
         {
             phase: "Phase 02",
-            title: "Team Formation",
-            desc: "Find teammates. Lock your roster.",
-            icon: <Users className="w-5 h-5" />,
-            status: "upcoming"
+            title: "PS Release",
+            desc: "Problem Statements go live. Dec 25th.",
+            icon: <Zap className="w-5 h-5" />,
+            status: "active"
         },
         {
             phase: "Phase 03",
-            title: "Sprint Kickoff",
-            desc: "Problem statements live. 50H timer starts.",
-            icon: <Rocket className="w-5 h-5" />,
+            title: "PPT Submission",
+            desc: "Submit your solution approach. Deadline: Jan 5th.",
+            icon: <FileCheck className="w-5 h-5" />,
             status: "upcoming"
         },
         {
             phase: "Phase 04",
-            title: "Build & Check-in",
-            desc: "Deep work. Mentor guidance. Progress updates.",
+            title: "Build Phase",
+            desc: "Shortlisted teams start building. Specific dates TBD.",
             icon: <Code className="w-5 h-5" />,
             status: "upcoming"
         },
         {
             phase: "Phase 05",
-            title: "The Submission",
-            desc: "Code freeze. Video demo. GitHub repo.",
-            icon: <FileCheck className="w-5 h-5" />,
+            title: "Final Showdown",
+            desc: "Live Demos & Judging. Date TBD.",
+            icon: <Trophy className="w-5 h-5" />,
             status: "upcoming"
         }
     ];
@@ -127,7 +127,7 @@ export const SprintRoadmap = () => {
         <section className="py-16 md:py-24 px-6 md:px-8 max-w-[1280px] mx-auto border-t border-white/5">
             <Reveal>
                 <div className="text-center mb-20">
-                    <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-6">The Timeline</h2>
+                    <h2 className="text-[11px] font-bold text-cyan-400 uppercase tracking-[0.6em] mb-6">Winter Timeline</h2>
                     <h3 className="section-headline text-4xl md:text-5xl font-medium text-white mb-6">From Idea to Ship.</h3>
                     <p className="text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
                         A structured 50-hour window designed for maximum output.
@@ -146,21 +146,21 @@ export const SprintRoadmap = () => {
                             <div key={i} className="relative flex flex-row md:flex-col items-start md:items-center gap-6 md:gap-0 group">
                                 {/* Node */}
                                 <div className="md:mb-8 relative shrink-0">
-                                    <div className="w-16 h-16 rounded-full bg-[#0A0A0A] border border-white/10 flex items-center justify-center relative z-10 group-hover:border-primary/50 transition-colors duration-500">
-                                        <div className={`text-white/40 group-hover:text-primary transition-colors duration-500 ${step.status === 'active' ? 'text-primary' : ''}`}>
+                                    <div className="w-16 h-16 rounded-full bg-[#0A0A0A] border border-white/10 flex items-center justify-center relative z-10 group-hover:border-cyan-400/50 transition-colors duration-500">
+                                        <div className={`text-white/40 group-hover:text-cyan-400 transition-colors duration-500 ${step.status === 'active' ? 'text-cyan-400' : ''}`}>
                                             {step.icon}
                                         </div>
                                     </div>
                                     {/* Active Pulse */}
                                     {step.status === 'active' && (
-                                        <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping" />
+                                        <div className="absolute inset-0 bg-cyan-400/20 rounded-full animate-ping" />
                                     )}
                                 </div>
 
                                 {/* Content */}
                                 <div className="pt-2 md:pt-0 md:text-center">
-                                    <div className="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 opacity-80">{step.phase}</div>
-                                    <h4 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors duration-300">{step.title}</h4>
+                                    <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mb-2 opacity-80">{step.phase}</div>
+                                    <h4 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">{step.title}</h4>
                                     <p className="text-sm text-muted font-light leading-relaxed">{step.desc}</p>
                                 </div>
                             </div>
@@ -938,7 +938,7 @@ export const MarqueeSection = () => {
     return (
         <section className="relative py-10 overflow-hidden border-y border-white/5 bg-background">
             {/* Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[100px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/5 blur-[100px] pointer-events-none" />
 
             {/* Gradient Masks */}
             <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-background to-transparent z-10" />
@@ -957,13 +957,13 @@ export const MarqueeSection = () => {
                                 "JUST CODE", "NO FLUFF", "REAL IMPACT", "50 HOURS SPRINT"
                             ].map((text, j) => (
                                 <div key={j} className="flex items-center gap-16 md:gap-32">
-                                    <span className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 select-none hover:to-primary transition-all duration-500 cursor-default pr-4">
+                                    <span className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 select-none hover:to-cyan-400 transition-all duration-500 cursor-default pr-4">
                                         {text}
                                     </span>
                                     {/* Decorative Divider */}
                                     <div className="relative w-12 h-12 flex items-center justify-center">
                                         <div className="absolute w-full h-full border border-white/10 rounded-full animate-[spin_10s_linear_infinite]" />
-                                        <div className="w-2 h-2 bg-primary rounded-full shadow-[0_0_10px_#6D7CFF]" />
+                                        <div className="w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
                                     </div>
                                 </div>
                             ))}

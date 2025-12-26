@@ -82,20 +82,66 @@ export const Hero = ({ onRegister }: { onRegister: () => void }) => {
                             <span>Live mentor sessions during the sprint (1–2 hrs)</span>
                         </div>
 
-                        <motion.button
-                            whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(34, 211, 238, 0.3)" }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={onRegister}
-                            className="relative group bg-gradient-to-br from-[#0A0B10] to-[#131620] border border-cyan-500/30 px-12 py-5 rounded-full overflow-hidden transition-all duration-300"
-                        >
-                            <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                            <div className="relative z-10 flex items-center gap-3 text-white font-bold text-lg tracking-tight">
-                                Enter the Sprint
-                                <span className="inline-block transition-transform group-hover:translate-x-2">→</span>
-                            </div>
-                            {/* Inner Glow Border */}
-                            <div className="absolute inset-0 rounded-full border border-cyan-500/20 opacity-50 group-hover:opacity-100 transition-opacity" />
-                        </motion.button>
+                        <div className="relative">
+                            <motion.button
+                                whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(34, 211, 238, 0.3)" }}
+                                whileTap={{ scale: 0.98 }}
+                                onClick={onRegister}
+                                className="relative group bg-gradient-to-br from-[#0A0B10] to-[#131620] border border-cyan-500/50 shadow-[0_0_20px_-5px_rgba(34,211,238,0.15)] px-12 py-5 rounded-full overflow-hidden transition-all duration-300 z-10"
+                            >
+                                <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                                <div className="relative z-10 flex items-center gap-3 text-white font-bold text-lg tracking-tight">
+                                    Enter the Sprint
+                                    <span className="inline-block transition-transform group-hover:translate-x-2">→</span>
+                                </div>
+                                {/* Inner Glow Border */}
+                                <div className="absolute inset-0 rounded-full border border-cyan-500/20 opacity-50 group-hover:opacity-100 transition-opacity" />
+                            </motion.button>
+
+                            {/* Animated Hand-drawn Arrow & Label */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 20, rotate: -5 }}
+                                animate={{
+                                    opacity: 1,
+                                    x: 0,
+                                    y: [0, -8, 0],
+                                    rotate: [-5, -2, -5]
+                                }}
+                                transition={{
+                                    opacity: { delay: 1, duration: 0.8 },
+                                    x: { delay: 1, duration: 0.8 },
+                                    y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                                    rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                                }}
+                                className="absolute -right-[150px] top-1/2 -translate-y-1/2 hidden md:flex flex-col items-center pointer-events-none select-none z-20"
+                            >
+                                <span className="text-cyan-200 font-serif italic text-xl translate-y-6 translate-x-4 rotate-[-4deg]" style={{ textShadow: "0 0 15px rgba(34,211,238,0.6)" }}>
+                                    Start Here
+                                </span>
+                                <svg width="140" height="80" viewBox="0 0 140 80" fill="none" className="text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
+                                    <motion.path
+                                        d="M120 15 C 90 10, 80 40, 15 42"
+                                        stroke="currentColor"
+                                        strokeWidth="3"
+                                        strokeLinecap="round"
+                                        fill="none"
+                                        initial={{ pathLength: 0 }}
+                                        animate={{ pathLength: 1 }}
+                                        transition={{ delay: 1.5, duration: 1.5, ease: "easeInOut" }}
+                                    />
+                                    <motion.path
+                                        d="M15 42 L 28 34 M 15 42 L 26 52"
+                                        stroke="currentColor"
+                                        strokeWidth="3"
+                                        strokeLinecap="round"
+                                        fill="none"
+                                        initial={{ pathLength: 0, opacity: 0 }}
+                                        animate={{ pathLength: 1, opacity: 1 }}
+                                        transition={{ delay: 2.8, duration: 0.4 }}
+                                    />
+                                </svg>
+                            </motion.div>
+                        </div>
 
                         <div className="flex flex-col items-center gap-2 mt-1">
                             <span className="text-xs font-bold text-white tracking-[0.2em] uppercase text-shadow-glow">Winter Dates Revealing Soon</span>

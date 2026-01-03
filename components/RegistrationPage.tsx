@@ -300,7 +300,6 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
         { title: "Identity", icon: User },
         { title: "Background", icon: BookOpen },
         { title: "Team & Skills", icon: Users },
-        { title: "Project", icon: Lightbulb },
         { title: "Review", icon: CheckCircle }
     ];
 
@@ -405,48 +404,8 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
                             )}
                         </>
                     );
-                case 3: // Project
-                    return (
-                        <>
-                            <h2 className="text-2xl font-bold text-white mb-6">Project Idea</h2>
-                            <div className="space-y-3">
-                                <label className="text-xs font-bold text-muted uppercase tracking-wider">Do you already have an idea?</label>
-                                <div className="flex gap-4">
-                                    {['Yes', 'No'].map((opt) => (
-                                        <button
-                                            key={opt}
-                                            onClick={() => updateData('hasIdea', opt)}
-                                            className={`px-6 py-2 rounded-lg border text-sm font-bold transition-all ${data.hasIdea === opt
-                                                ? 'bg-accentPurple/20 border-accentPurple text-white'
-                                                : 'bg-white/5 border-white/10 text-muted'
-                                                }`}
-                                        >
-                                            {opt}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                            {data.hasIdea === 'Yes' ? (
-                                <div className="space-y-6 pt-4">
-                                    <FormInput label="Project Title" required value={data.projectTitle} onChange={(e: any) => updateData('projectTitle', e.target.value)} placeholder="e.g. Agritech AI" />
-                                    <FormTextarea label="Short Description (100-200 words)" required value={data.ideaDescription} onChange={(e: any) => updateData('ideaDescription', e.target.value)} placeholder="Describe your idea..." />
-                                    <FormTextarea label="Problem Statement" required value={data.problemStatement} onChange={(e: any) => updateData('problemStatement', e.target.value)} placeholder="What problem are you solving?" />
-                                    <MultiSelect label="Tech Stack" options={TECH_STACK_OPTIONS} selected={data.techStack} onChange={(val: string[]) => updateData('techStack', val)} />
-                                </div>
-                            ) : (
-                                <div className="p-6 bg-white/5 rounded-xl border border-white/10 text-center">
-                                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-4">
-                                        <Lightbulb className="w-6 h-6" />
-                                    </div>
-                                    <h3 className="text-lg font-bold text-white mb-2">No Idea? No Problem!</h3>
-                                    <p className="text-muted text-sm max-w-xs mx-auto">
-                                        You can pick a problem statement from our 14 domains during the sprint. We will also help you ideate during the networking sessions.
-                                    </p>
-                                </div>
-                            )}
-                        </>
-                    );
-                case 4: // Final
+
+                case 3: // Final
                     return (
                         <>
                             <h2 className="text-2xl font-bold text-white mb-6">Final Touch</h2>
@@ -512,8 +471,8 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
     };
 
     return (
-        <div className="h-screen bg-black p-[10px] font-sans text-white overflow-hidden box-border">
-            <div className="w-full h-full bg-[#0F0F0F] rounded-[20px] border border-white/10 relative overflow-hidden flex flex-col md:flex-row shadow-2xl">
+        <div className="min-h-screen bg-black p-[10px] font-sans text-white box-border">
+            <div className="w-full min-h-[calc(100vh-20px)] bg-[#0F0F0F] rounded-[20px] border border-white/10 relative flex flex-col md:flex-row shadow-2xl">
 
                 {/* Left Side: Context/Info */}
                 <div className="hidden md:flex flex-col justify-between p-12 w-1/3 border-r border-white/5 relative z-10 bg-white/[0.02]">

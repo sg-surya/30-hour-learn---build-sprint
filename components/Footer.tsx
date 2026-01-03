@@ -24,7 +24,7 @@ export const Footer = ({ onRegister }: { onRegister: () => void }) => (
                 </div>
             </div>
             <div className="flex flex-col items-center gap-6">
-                <div className="text-[10px] text-muted/30">© 2025 Vasudev AI · Built for Real Builders.</div>
+                <div className="text-[10px] text-muted/30">© 2026 Vasudev AI · Built for Real Builders.</div>
             </div>
         </Reveal>
     </footer>

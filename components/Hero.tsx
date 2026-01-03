@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Clock, Zap, Users } from 'lucide-react';
+import { Clock, Zap, Users, Rocket } from 'lucide-react';
 import { Reveal } from './Reveal';
 import { TextReveal } from './VisualEffects';
 
-export const Hero = ({ onRegister }: { onRegister: () => void }) => {
+export const Hero = ({ onRegister, onSubmitPPT }: { onRegister: () => void, onSubmitPPT: () => void }) => {
     const containerRef = useRef<HTMLElement>(null);
     const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
     const { scrollY } = useScroll();
@@ -48,7 +48,7 @@ export const Hero = ({ onRegister }: { onRegister: () => void }) => {
                     {/* Event Identity Badge */}
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-cyan-500/15 bg-cyan-950/10 rounded-full text-[10px] font-bold text-cyan-100 uppercase tracking-[0.2em] mb-3 backdrop-blur-md shadow-[0_0_20px_-5px_rgba(34,211,238,0.15)]">
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
-                        VASUDEV WINTER HACK · 50H Build Sprint
+                        VASUDEV WINTER HACKS · 50H Build Sprint
                     </div>
                 </Reveal>
 
@@ -82,7 +82,7 @@ export const Hero = ({ onRegister }: { onRegister: () => void }) => {
                             <span>Live mentor sessions during the sprint (1–2 hrs)</span>
                         </div>
 
-                        <div className="relative">
+                        <div className="relative flex flex-col md:flex-row gap-4 items-center">
                             <motion.button
                                 whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(34, 211, 238, 0.3)" }}
                                 whileTap={{ scale: 0.98 }}
@@ -97,6 +97,19 @@ export const Hero = ({ onRegister }: { onRegister: () => void }) => {
                                 {/* Inner Glow Border */}
                                 <div className="absolute inset-0 rounded-full border border-cyan-500/20 opacity-50 group-hover:opacity-100 transition-opacity" />
                             </motion.button>
+
+                            <motion.button
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                onClick={onSubmitPPT}
+                                className="relative group bg-white/5 border border-white/10 hover:bg-white/10 px-12 py-5 rounded-full overflow-hidden transition-all duration-300 z-10 backdrop-blur-sm"
+                            >
+                                <div className="relative z-10 flex items-center gap-3 text-white font-bold text-lg tracking-tight">
+                                    Submit PPT
+                                    <Rocket className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+                                </div>
+                            </motion.button>
+
 
                             {/* Animated Hand-drawn Arrow & Label */}
                             <motion.div
@@ -166,6 +179,6 @@ export const Hero = ({ onRegister }: { onRegister: () => void }) => {
                     </div>
                 </Reveal>
             </motion.div>
-        </section>
+        </section >
     );
 };

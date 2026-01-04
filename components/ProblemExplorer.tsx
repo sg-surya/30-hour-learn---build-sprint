@@ -60,10 +60,11 @@ export const ProblemExplorer = () => {
                                     animate={{ scale: 1, opacity: 1, y: 0 }}
                                     exit={{ scale: 0.9, opacity: 0, y: 20 }}
                                     onClick={(e) => e.stopPropagation()}
-                                    className="bg-[#0A0A0A] border border-white/10 rounded-[2rem] w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
+                                    className="bg-[#0A0A0A] border border-white/10 rounded-[2rem] w-full max-w-4xl shadow-2xl relative flex flex-col"
+                                    style={{ maxHeight: 'calc(100vh - 20px)', margin: '10px' }}
                                 >
                                     {/* Scrollable Content */}
-                                    <div className="p-8 md:p-12">
+                                    <div className="p-8 md:p-12 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 40px)' }}>
                                         {/* Header */}
                                         <div className="flex flex-col md:flex-row md:items-center gap-6 mb-12 border-b border-white/5 pb-8 relative">
                                             <button
@@ -101,7 +102,12 @@ export const ProblemExplorer = () => {
     );
 };
 
-const ProblemCard = ({ prob, index }: { prob: any, index: number }) => {
+interface ProblemCardProps {
+    prob: any;
+    index: number;
+}
+
+const ProblemCard: React.FC<ProblemCardProps> = ({ prob, index }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (

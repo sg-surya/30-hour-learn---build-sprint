@@ -1,3 +1,5 @@
+import React from 'react';
+import { Reveal } from './Reveal';
 
 export const WhatToSubmit = () => {
     return (

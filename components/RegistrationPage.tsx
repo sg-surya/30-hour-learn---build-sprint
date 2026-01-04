@@ -471,11 +471,11 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
     };
 
     return (
-        <div className="min-h-screen bg-black p-[10px] font-sans text-white box-border">
-            <div className="w-full min-h-[calc(100vh-20px)] bg-[#0F0F0F] rounded-[20px] border border-white/10 relative flex flex-col md:flex-row shadow-2xl">
+        <div className="fixed inset-0 bg-black p-[10px] font-sans text-white box-border overflow-hidden">
+            <div className="w-full h-full bg-[#0F0F0F] rounded-[20px] border border-white/10 relative flex flex-col md:flex-row shadow-2xl overflow-hidden">
 
                 {/* Left Side: Context/Info */}
-                <div className="hidden md:flex flex-col justify-between p-12 w-1/3 border-r border-white/5 relative z-10 bg-white/[0.02]">
+                <div className="hidden md:flex flex-col justify-between p-12 w-1/3 border-r border-white/5 relative z-10 bg-white/[0.02] overflow-y-auto">
                     <div>
                         <button
                             onClick={onBack}
@@ -517,7 +517,7 @@ export const RegistrationPage = ({ onBack }: { onBack: () => void }) => {
                 </div>
 
                 {/* Right Side: Form */}
-                <div className="flex-1 p-6 md:p-20 overflow-y-auto relative z-10 flex flex-col">
+                <div className="flex-1 p-6 md:p-20 overflow-y-auto relative z-10 flex flex-col" data-lenis-prevent>
                     {/* Mobile Header */}
                     <div className="md:hidden w-full mb-8 flex justify-between items-center">
                         <button onClick={onBack} className="text-muted hover:text-white"><ArrowLeft className="w-5 h-5" /></button>

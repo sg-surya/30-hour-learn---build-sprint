@@ -368,9 +368,22 @@ export const PPTSubmissionPage = ({ onBack }: { onBack: () => void }) => {
                         <h1 className="text-4xl font-heading font-medium text-white mb-6 leading-tight">
                             Submit Your <br /> <span className="text-primary">Presentation.</span>
                         </h1>
-                        <p className="text-muted leading-relaxed mb-8 text-lg font-light">
+                        <p className="text-muted leading-relaxed mb-6 text-lg font-light">
                             Showcase your hard work. Make sure your links are accessible.
                         </p>
+
+                        {/* Download Template Button */}
+                        <a
+                            href="/Vasudev WinterHacks.pptx"
+                            download="Vasudev WinterHacks.pptx"
+                            className="inline-flex items-center gap-2 px-4 py-3 mb-8 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/30 transition-all group"
+                        >
+                            <FileText className="w-4 h-4 text-primary" />
+                            <span className="text-sm font-medium text-white">Download PPT Template</span>
+                            <svg className="w-4 h-4 text-white/50 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                        </a>
 
                         <div className="space-y-6">
                             {steps.map((s, i) => (

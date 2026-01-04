@@ -25,3 +25,15 @@ dist-ssr
 *.sw?
 
 .env
+.env.local
+.env.*.local
+
+# Testing
+coverage/
+
+# Production
+build/
+
+# Misc
+.DS_Store
+*.pem

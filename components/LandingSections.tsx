@@ -996,16 +996,26 @@ export const MarqueeSection = () => {
     )
 }
 
-export const WhatToSubmit = () => {
+export const WhatToSubmit = ({ onSubmitPPT }: { onSubmitPPT?: () => void }) => {
     return (
         <section className="py-16 md:py-24 px-6 md:px-8 max-w-[1280px] mx-auto border-t border-white/5">
             <Reveal x={-20}>
-                <div className="mb-12">
-                    <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-4">Requirements</h2>
-                    <h3 className="section-headline text-3xl md:text-5xl font-medium text-white mb-4">What to submit?</h3>
-                    <p className="text-lg text-muted font-light max-w-2xl leading-relaxed">
-                        Your final submission must include these key deliverables to be eligible for evaluation.
-                    </p>
+                <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <h2 className="text-[11px] font-bold text-accentPurple uppercase tracking-[0.6em] mb-4">Requirements</h2>
+                        <h3 className="section-headline text-3xl md:text-5xl font-medium text-white mb-4">What to submit?</h3>
+                        <p className="text-lg text-muted font-light max-w-2xl leading-relaxed">
+                            Your final submission must include these key deliverables to be eligible for evaluation.
+                        </p>
+                    </div>
+                    {onSubmitPPT && (
+                        <button
+                            onClick={onSubmitPPT}
+                            className="px-8 py-3 rounded-xl bg-white text-black font-bold hover:bg-black hover:text-white transition-all shadow-lg flex items-center gap-2 group whitespace-nowrap"
+                        >
+                            Submit Presentation <Rocket className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+                        </button>
+                    )}
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
@@ -1059,11 +1069,11 @@ export const WhatToSubmit = () => {
                     <div className="p-6 md:p-8 rounded-3xl bg-surface/5 border border-white/10 hover:border-[#e6e8e6] transition-all duration-300 group md:col-span-2 hover:bg-[#e6e8e6] hover:shadow-2xl hover:shadow-white/10 hover:-translate-y-1">
                         <h4 className="text-xl font-heading font-medium text-white mb-3 group-hover:text-black transition-colors">Video Pitch (Max 3 mins)</h4>
                         <p className="text-muted text-sm leading-relaxed group-hover:text-black/70 transition-colors">
-                            A concise, engaging video demonstrating the functionality of the prototype, explaining its features, and outlining its impact. Must be uploaded to a public video hosting service (YouTube/Loom/Drive).
+                            A concise, engaging video demonstrating the functionality of the prototype, explaining its features, and outlining its impact. Must be uploaded to a public video hosting service (YouTube/Drive).
                         </p>
                     </div>
                 </div>
             </Reveal>
-        </section>
+        </section >
     );
 };

@@ -405,9 +405,24 @@ export const PPTSubmissionPage = ({ onBack }: { onBack: () => void }) => {
                 {/* Right Side: Form */}
                 <div className="flex-1 p-6 md:p-20 overflow-y-auto relative z-10 flex flex-col" data-lenis-prevent>
                     {/* Mobile Header */}
-                    <div className="md:hidden w-full mb-8 flex justify-between items-center">
+                    <div className="md:hidden w-full mb-4 flex justify-between items-center">
                         <button onClick={onBack} className="text-muted hover:text-white"><ArrowLeft className="w-5 h-5" /></button>
                         <span className="text-sm font-bold text-white/50">Step {step + 1}/{steps.length}</span>
+                    </div>
+
+                    {/* Mobile Download Template Button */}
+                    <div className="md:hidden w-full mb-6">
+                        <a
+                            href="/Vasudev WinterHacks.pptx"
+                            download="Vasudev WinterHacks.pptx"
+                            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/30 transition-all group"
+                        >
+                            <FileText className="w-4 h-4 text-primary" />
+                            <span className="text-sm font-medium text-white">Download PPT Template</span>
+                            <svg className="w-4 h-4 text-white/50 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                        </a>
                     </div>
 
                     <div className="max-w-xl mx-auto w-full flex-grow flex flex-col justify-center">

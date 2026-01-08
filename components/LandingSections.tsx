@@ -635,7 +635,7 @@ export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
                                 </li>
                                 <li className="flex gap-2 items-start text-muted text-sm">
                                     <Gift className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                                    <span><strong>Swags & Vasudev AI Tools Early Access</strong></span>
+                                    <span><strong>Vasudev AI Swags</strong> & Tools Early Access</span>
                                 </li>
                                 <li className="flex gap-2 items-start text-muted text-sm">
                                     <Users className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
@@ -668,7 +668,7 @@ export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
                                 </li>
                                 <li className="flex gap-3 items-start text-white/90 text-sm">
                                     <Gift className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                                    <span><strong>Swags & Vasudev AI Tools Early Access</strong></span>
+                                    <span><strong>Vasudev AI Swags</strong> & Tools Early Access</span>
                                 </li>
                                 <li className="flex gap-3 items-start text-white/90 text-sm">
                                     <Rocket className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
@@ -714,7 +714,7 @@ export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
                                 </li>
                                 <li className="flex gap-2 items-start text-muted text-sm">
                                     <Gift className="w-4 h-4 text-orange-600/60 shrink-0 mt-0.5" />
-                                    <span><strong>Swags & Vasudev AI Tools Early Access</strong></span>
+                                    <span><strong>Vasudev AI Swags</strong> & Tools Early Access</span>
                                 </li>
                                 <li className="flex gap-2 items-start text-muted text-sm">
                                     <FileCheck className="w-4 h-4 text-orange-600/60 shrink-0 mt-0.5" />
@@ -732,9 +732,9 @@ export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
                 {/* Mobile List Layout */}
                 <div className="md:hidden flex flex-col gap-4 mb-12 max-w-[320px] mx-auto text-left">
                     {[
-                        { title: "Sprint Winner", prize: "Internship • Premium Group • Feature", icon: "🥇" },
-                        { title: "Runner-ups", prize: "Premium Group • Badge • Access", icon: "🥈" },
-                        { title: "Builders", prize: "Proof of work", icon: "🥉" }
+                        { title: "Sprint Winner", prize: "Internship • Mentorship • Premium Access", icon: "🥇" },
+                        { title: "1st Runner-up", prize: "Swags • Mentorship • Premium Access", icon: "🥈" },
+                        { title: "2nd Runner-up", prize: "Swags • Feedback • Premium Access", icon: "🥉" }
                     ].map((item, i) => (
                         <div key={i} className="flex items-start gap-4 p-4 border-b border-white/10 last:border-0 hover:bg-white/5 transition-colors rounded-lg">
                             <span className="text-2xl shrink-0">{item.icon}</span>
@@ -764,6 +764,86 @@ export const AwardsSection = ({ onRegister }: { onRegister: () => void }) => {
                                 <span className="text-sm font-bold text-white/90">{cat.title}</span>
                             </div>
                         ))}
+                    </div>
+                </div>
+
+                {/* Prize Pool Section */}
+                <div className="mb-24">
+                    <h4 className="text-2xl font-heading font-medium text-white mb-4 text-center">🎁 Prize Pool</h4>
+                    <p className="text-center text-muted text-sm mb-10">Exciting rewards for top performers</p>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                        {/* Xbox Game Pass Card */}
+                        <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-green-500/10 to-transparent border border-green-500/20 hover:border-green-500/40 transition-all duration-500 hover:scale-105 overflow-hidden">
+                            {/* Background Glow */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-green-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                            {/* 3D Icon Effect */}
+                            <div className="relative z-10 flex flex-col items-center text-center">
+                                <div className="w-20 h-20 mb-6 rounded-2xl bg-gradient-to-br from-green-400/20 to-green-600/20 flex items-center justify-center border border-green-500/30 shadow-[0_0_30px_rgba(34,197,94,0.2)] group-hover:shadow-[0_0_50px_rgba(34,197,94,0.4)] transition-all">
+                                    <svg className="w-10 h-10 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M4.102 21.033A11.947 11.947 0 0012 24a11.96 11.96 0 007.902-2.967c1.877-1.912-4.316-8.709-7.902-11.417-3.582 2.708-9.779 9.505-7.898 11.417zm11.16-14.406c2.5 2.961 7.484 10.313 6.076 12.912A11.942 11.942 0 0024 12.004a11.95 11.95 0 00-3.57-8.536 11.97 11.97 0 00-8.425-3.465c-1.124 0-2.21.155-3.238.442 3.225 1.966 6.213 4.703 6.495 6.182zm-10.521 0c.282-1.479 3.27-4.216 6.495-6.182A11.94 11.94 0 007.998.003a11.97 11.97 0 00-8.425 3.465A11.95 11.95 0 00-.002 12.004c0 2.895 1.033 5.551 2.748 7.621-1.408-2.599 3.576-9.951 6.076-12.912z" />
+                                    </svg>
+                                </div>
+                                <h5 className="text-lg font-bold text-white mb-2">Xbox Game Pass Ultimate</h5>
+                                <p className="text-sm text-green-400 font-bold mb-1">3 Months Subscription</p>
+                                <p className="text-xs text-muted">Access 100+ games</p>
+                            </div>
+                        </div>
+
+                        {/* Croma Gift Card */}
+                        <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-orange-500/10 to-transparent border border-orange-500/20 hover:border-orange-500/40 transition-all duration-500 hover:scale-105 overflow-hidden">
+                            {/* Background Glow */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-orange-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                            {/* 3D Icon Effect */}
+                            <div className="relative z-10 flex flex-col items-center text-center">
+                                <div className="w-20 h-20 mb-6 rounded-2xl bg-gradient-to-br from-orange-400/20 to-orange-600/20 flex items-center justify-center border border-orange-500/30 shadow-[0_0_30px_rgba(249,115,22,0.2)] group-hover:shadow-[0_0_50px_rgba(249,115,22,0.4)] transition-all">
+                                    <svg className="w-10 h-10 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <h5 className="text-lg font-bold text-white mb-2">Croma Gift Cards</h5>
+                                <p className="text-sm text-orange-400 font-bold mb-1">₹5,000 + ₹3,000</p>
+                                <p className="text-xs text-muted">For Winner & Runner-up</p>
+                            </div>
+                        </div>
+
+                        {/* Vasudev AI Swags */}
+                        <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/20 hover:border-purple-500/40 transition-all duration-500 hover:scale-105 overflow-hidden">
+                            {/* Background Glow */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-purple-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                            {/* 3D Icon Effect */}
+                            <div className="relative z-10 flex flex-col items-center text-center">
+                                <div className="w-20 h-20 mb-6 rounded-2xl bg-gradient-to-br from-purple-400/20 to-purple-600/20 flex items-center justify-center border border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.2)] group-hover:shadow-[0_0_50px_rgba(168,85,247,0.4)] transition-all">
+                                    <svg className="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                                    </svg>
+                                </div>
+                                <h5 className="text-lg font-bold text-white mb-2">Vasudev Swags</h5>
+                                <p className="text-sm text-purple-400 font-bold mb-1">Hoodies & More</p>
+                                <p className="text-xs text-muted">Top 3 winners</p>
+                            </div>
+                        </div>
+
+                        {/* AI Tools Credits */}
+                        <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-cyan-500/10 to-transparent border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-500 hover:scale-105 overflow-hidden">
+                            {/* Background Glow */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                            {/* 3D Icon Effect */}
+                            <div className="relative z-10 flex flex-col items-center text-center">
+                                <div className="w-20 h-20 mb-6 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-cyan-600/20 flex items-center justify-center border border-cyan-500/30 shadow-[0_0_30px_rgba(6,182,212,0.2)] group-hover:shadow-[0_0_50px_rgba(6,182,212,0.4)] transition-all">
+                                    <svg className="w-10 h-10 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                    </svg>
+                                </div>
+                                <h5 className="text-lg font-bold text-white mb-2">AI Tools Credits</h5>
+                                <p className="text-sm text-cyan-400 font-bold mb-1">Early Access</p>
+                                <p className="text-xs text-muted">Vasudev AI Suite</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
